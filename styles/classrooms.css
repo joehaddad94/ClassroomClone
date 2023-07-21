@@ -97,7 +97,7 @@
 
 .arrow-icon img {
     width: 50px;
-    margin-right: 20px;
+    margin-right: 25px;
 }
 
 .arrow-icon p {
@@ -107,4 +107,55 @@
     font-weight: 500;
     color: #5F6368;
     font-size: .875rem;
+}
+
+/* Empty Space Section */
+
+.empty-space-section {
+    text-align: center;
+}
+
+.empty-space-section img {
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+.empty-space-section .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.empty-space-section .buttons button:first-child, .empty-space-section .buttons button:last-child {
+    border: none;
+    font-size: .9375rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+
+.empty-space-section .buttons button:first-child {
+    background-color: transparent;
+    color: #1a73e8;
+    padding: 10px;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+
+.empty-space-section .buttons button:first-child:hover {
+    background-color: #1a73e813;
+}
+
+.empty-space-section .buttons button:last-child {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 22px;
 }
