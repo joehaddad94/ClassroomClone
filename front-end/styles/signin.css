@@ -64,7 +64,7 @@ img {
 }
 
 .forgot-password {
-    margin-top: 10px;
+    margin-block: 10px;
     font-size: 0.875rem;
     font-weight: semibold;
     color: #1a73e8;
@@ -144,33 +144,6 @@ img {
 .bottom-signin ul li {
     font-size: 0.75rem;
     cursor: pointer;
-}
-
-/* Sign-in password page */
-
-.signin-password-box {
-    padding-bottom: 100px;
-}
-
-.top-signin-box {
-    margin-bottom: 20px;
-}
-
-.top-signin-box div:last-child {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    margin: auto;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
 }
 
 .show-password {
