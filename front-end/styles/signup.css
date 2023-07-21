@@ -2,7 +2,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 30px;
+    padding: 0 20px;
     height: 100vh;
 }
 
@@ -11,19 +11,15 @@ img {
 }
 
 .main,
-.signup-main {
+.signin-password-main {
+    width: 100%;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-.main {
-    width: 100%;
-    max-width: 450px;
-}
-
-.signin-box,
-.signup-box {
+.signin-box {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -37,21 +33,18 @@ img {
     width: 100%;
 }
 
-.top-signin-box,
-.top-signup-box {
+.top-signin-box {
     display: flex;
     flex-direction: column;
     gap: 15px;
     text-align: center;
 }
 
-.sign-in,
-.signup {
+.sign-in {
     font-size: 1.5rem;
 }
 
-.bottom-signin-box,
-.bottom-signup-box {
+.bottom-signin-box {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -82,12 +75,10 @@ img {
     color: #1a73e8;
     font-weight: semibold;
 }
-.bottom-signin-box > div:nth-child(2),
-.bottom-signup-box > div:last-child {
+.bottom-signin-box > div:nth-child(2) {
     font-size: 0.875rem;
 }
-.bottom-signin-box > div:last-child,
-.bottom-signup-box > div:last-child {
+.bottom-signin-box > div:last-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -104,6 +95,7 @@ img {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
 }
+
 .create-account:hover {
     background-color: #1a73e81c;
     transition: all 0.3s;
@@ -113,8 +105,7 @@ img {
     -o-transition: all 0.3s;
 }
 
-.next-button button,
-.signup-button button {
+.next-button button {
     color: white;
     background-color: #1a73e8;
     border: none;
@@ -129,32 +120,27 @@ img {
     cursor: pointer;
 }
 
-.bottom-signin,
-.bottom-signup {
+.bottom-signin {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.bottom-signin > div,
-.bottom-signup > div {
+.bottom-signin > div {
     font-size: 0.75rem;
     font-weight: 500;
 }
 
-.bottom-signin i,
-.bottom-signup i {
+.bottom-signin i {
     margin-left: 40px;
 }
 
-.bottom-signin ul,
-.bottom-signup ul {
+.bottom-signin ul {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.bottom-signin ul li,
 .bottom-signin ul li {
     font-size: 0.75rem;
     cursor: pointer;
@@ -199,6 +185,7 @@ img {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
 }
+
 .signin-password-main .forgot-password:hover {
     background-color: #1a73e81c;
     transition: all 0.3s;
@@ -206,86 +193,4 @@ img {
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
-}
-
-/* Signup  */
-
-.signup-main .inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.signup-box {
-    padding: 40px;
-}
-
-.signup-main .inputs input {
-    margin-top: 10px;
-}
-
-/* .signup-main .role, */
-
-.signup-main .row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.signup-main .row label {
-    font-size: .9375rem;
-}
-
-.question-role .question div, .question-role .role > div:first-child {
-    font-size: 1rem;
-}
-
-.signup-main .question-role .role {
-    width: 50%;
-}
-
-.signup-main .question-role .role div:first-child {
-    margin-bottom: 10px;
-}
-
-select {
-    padding: 5px;
-    outline: none;
-    width: 100%;
-    height: 50px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-
-.select {
-    width: 100%;
-    height: 100%;
-}
-
-.signup-main .question input,
-.signup-main .row input {
-    padding: 15px 12px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    outline: none;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-.signup-main .question input::placeholder,
-.signup-main .row input::placeholder {
-    font-size: 1.0625rem;
-}
-
-.signup-main .login-button {
-    color: #1a73e8;
-    font-size: 1rem;
-    cursor: pointer;
 }
