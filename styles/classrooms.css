@@ -1,0 +1,89 @@
+.navbar {
+    height: 65px;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.navbar .logo img {
+    max-width: 70px;
+}
+
+.left-navbar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.left-navbar .icon,
+.right-navbar .google-apps-icon,
+.right-navbar .plus-icon {
+    padding: 15px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.left-navbar .icon:hover,
+.right-navbar .google-apps-icon:hover,
+.right-navbar .plus-icon:hover,
+.right-navbar .profile-pic:hover {
+    transition: all 0.2s;
+    background-color: #cccccc2f;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+
+.left-navbar .logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.left-navbar .logo span {
+    font-size: 1.25rem;
+    color: #5F6368;
+    font-family: "Product Sans",Arial,Helvetica,sans-serif;
+}
+
+.right-navbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.right-navbar .profile-pic {
+    width: 35px;
+    height: 35px;
+    padding: 2px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+
+.right-navbar .profile-pic img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
