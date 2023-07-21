@@ -2,6 +2,11 @@ const pages = {}
 
 pages.base_url = "Add Base URL here";
 
+let signinData = {
+    email: "mhmd",
+    password: "fa"
+}
+
 // Common Functions
 pages.print_message = (message) =>{
     console.log(message);
