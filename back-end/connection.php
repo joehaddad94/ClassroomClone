@@ -6,8 +6,8 @@ $db_name = "classroomclone_db";
 
 $mysqli = new mysqli($host, $db_user, $db_pass, $db_name);
 if (!$mysqli) {
-    die('a connection was unsuccesful');
+    die(' connection failed ');
 }
-// else{
-//     die('connected successfully');
-// }
+
+?>
+
