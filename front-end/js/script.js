@@ -181,23 +181,9 @@ pages.page_classrooms = () => {
             ))
         }
         getClasses()
-        // console.log("classes " + classes)
-        // sidebarClasses.innerHTML += `<div class="class">
-        //                 <div>F</div>
-        //                 <div class="class-data">
-        //                     <p class="class-name">
-        //                         FSW 23&24 | Soft Skills
-        //                     </p>
-        //                     <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
-        //                 </div>
-        //             </div>`;
     } catch (error) {
         console.log(error + " in loading classes")
     }
-
-    // const getClasses = async() => {     const response = await
-    // pages.getAPI(pages.base_url + "teachers-classes.php", data)
-    // console.log(response) } getClasses()
 };
 
 pages.page_forget_password = () => {
