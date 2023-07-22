@@ -156,6 +156,18 @@
     padding: 10px 22px;
 }
 
+/* Classrooms */
+
+.classrooms {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 45px;
+    /* background-color: red; */
+}
+
+
+
 /* Sidebar */
 
 .sidebar {
