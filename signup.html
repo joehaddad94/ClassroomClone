@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./front-end/styles/index.css">
         <link rel="stylesheet" href="./front-end/styles/signin.css">
+        <link rel="stylesheet" href="./front-end/styles/signup.css">
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"/>
-        <title>Signup</title>
+        <title>Sign up - Google Accounts</title>
     </head>
     <body>
         <div class="signup-main">
@@ -23,43 +24,32 @@
                 </div>
                 <div class="bottom-signup-box">
                     <div class="inputs">
-                        <!-- <div>
-                            <input type="text" placeholder="Email or phone">
-                            <p class="forgot-password">Forgot email?</p>
-                        </div>
-                        <div>
-                            <input type="text" placeholder="Enter your password">
-                            <div class="show-password">
-                                <input id="show-password-input" type="checkbox">
-                                <label for="show-password-input">Show password</label>
-                            </div>
-                        </div> -->
                         <div class="row">
                             <div class="column">
                                 <div>
-                                    <label for="">First Name</label>
+                                    <label for="first-name">First Name</label>
                                 </div>
-                                <div><input placeholder="First Name" type="text"></div>
+                                <div><input id="first-name" placeholder="First Name" type="text"></div>
                             </div>
                             <div class="column">
                                 <div>
-                                    <label for="">Last Name</label>
+                                    <label for="last-name">Last Name</label>
                                 </div>
-                                <div><input placeholder="Last Name" type="text"></div>
+                                <div><input id="last-name" placeholder="Last Name" type="text"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="column">
                                 <div>
-                                    <label for="">Email</label>
+                                    <label for="email">Email</label>
                                 </div>
-                                <div><input placeholder="Enter your email" type="email"></div>
+                                <div><input id="email" placeholder="Enter your email" type="email"></div>
                             </div>
                             <div class="column">
                                 <div>
-                                    <label for="">Password</label>
+                                    <label for="password">Password</label>
                                 </div>
-                                <div><input placeholder="Enter your password" type="password"></div>
+                                <div><input id="password" placeholder="Enter your password" type="password"></div>
                             </div>
                         </div>
                         <div class="row question-role">
@@ -76,10 +66,8 @@
                                         <option value="Teacher">Teacher</option>
                                     </select>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                     <!-- <div>
                         <p>Not your computer? Use Guest mode to sign in privately.</p>
