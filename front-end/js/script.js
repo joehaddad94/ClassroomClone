@@ -160,6 +160,7 @@ pages.page_classrooms = () => {
                 manage_profile.style.display = "block";
               }    
         })
+        
 };
 pages.page_manage=()=>{
     btnUpdate=document.getElementById('update')
