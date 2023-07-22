@@ -536,3 +536,6 @@
     color: #1c74e8;
 }
 
+.modal.hide {
+    display: none;
+}

@@ -168,8 +168,9 @@ pages.page_classrooms = () => {
         let getClasses = async() => {
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
             console.log(response.data)
-            response.data.map((item) => (
-                sidebarClasses.innerHTML += `<div class="class">
+            response
+                .data
+                .map((item) => (sidebarClasses.innerHTML += `<div class="class">
                         <div>${item.class_name[0]}</div>
                         <div class="class-data">
                             <p class="class-name">
@@ -177,13 +178,24 @@ pages.page_classrooms = () => {
                             </p>
                             <p class="class-desc">${item.section}</p>
                         </div>
-                    </div>`
-            ))
+                    </div>`))
         }
         getClasses()
     } catch (error) {
         console.log(error + " in loading classes")
     }
+
+    // modal functionlity
+
+    const modal = document.querySelector(".modal")
+    const boxModal = document.querySelector(".modal .modal-box")
+    modal.addEventListener("click", (e) => {
+        if (!boxModal.contains(e.target)) {
+            modal
+                .classList
+                .toggle("hide");
+        }
+    })
 };
 
 pages.page_forget_password = () => {
