@@ -88,6 +88,25 @@ body {
   -o-border-radius: 3px;
 }
 
+.right-navbar .create-class.hide,
+.right-navbar .join-class.hide {
+  display: none;
+}
+
+.right-navbar .create-class button,
+.right-navbar .join-class button {
+  padding: 8px 10px;
+  color: #1a73e8;
+  font-size: 0.875rem;
+  border-radius: 3px;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  cursor: pointer;
+}
+
 .right-navbar .nav-profile-pic {
   width: 40px;
   height: 40px;

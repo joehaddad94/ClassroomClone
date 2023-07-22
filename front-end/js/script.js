@@ -143,6 +143,17 @@ pages.page_classrooms = () => {
     const sidebar = document.getElementById("sidebar");
     const sidebarClasses = document.querySelector(".sidebar .classes")
     const bottom_classrooms = document.querySelector(".bottom-classrooms");
+    const joinClassButton = document.querySelector(".join-class")
+    const createClassButton = document.querySelector(".create-class")
+    const modalCreateButton = document.querySelector(".modal .buttons .create-button")
+    const modalCancelButton = document.querySelector(".modal .buttons .cancel-button")
+    const classname_input = document.getElementById("classname-input")
+    const section_input = document.getElementById("section-input");
+    const subject_input = document.getElementById("subject-input");
+    const room_input = document.getElementById("room-input");
+    const formElement = document.querySelector("form")
+
+    let userData = JSON.parse(localStorage.getItem("userData"))
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -193,7 +204,7 @@ pages.page_classrooms = () => {
                             </div>
                         </div>
                         <p>${item.room}</p>
-                        <p>Tech Department</p>
+                        <p>${userData.first_name + userData.last_name}</p>
                         <div class="profile-pic"><img
                             src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
                             alt="Profile Picture"></div>
@@ -220,7 +231,22 @@ pages.page_classrooms = () => {
                 })
         }
         getClasses()
-  
+
+        // checking for the user to set the button in the navbar
+        let userRole = JSON
+            .parse(localStorage.getItem("userData"))
+            .role_id
+
+        if (userRole === 1) {
+            joinClassButton
+                .classList
+                .add("hide")
+        } else {
+            createClassButton
+                .classList
+                .add("hide")
+        }
+
     } catch (error) {
         console.log(error + " in loading classes")
     }
@@ -255,8 +281,60 @@ pages.page_classrooms = () => {
                 .toggle("hide");
         }
     })
+    createClassButton.addEventListener('click', () => {
+        modal
+            .classList
+            .remove("hide")
+    })
+    modalCancelButton.addEventListener("click", () => {
+        modal
+            .classList
+            .add("hide")
+    })
+
+    // create class
+    
+
+
 
     
+
+    // setInterval(() => {
+    //     console.log("classname", classname);
+    //     console.log("section", section);
+    //     console.log("subject", subject);
+    //     console.log("room", room);
+    //     console.log("user_id", user_id);
+    // }, 3000)
+
+    formElement.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const classname = classname_input.value;
+        const section = section_input.value;
+        const subject = subject_input.value;
+        const room = room_input.value;
+
+        let classData = new FormData();
+        classData.append("class_name", classname);
+        classData.append("section", section);
+        classData.append("subject", subject);
+        classData.append("room", room);
+        classData.append("googlemeet_link", "");
+        classData.append("user_id", user_id);
+
+        try {
+            const createClass = async() => {
+                await pages.postAPI(pages.base_url + "create-class.php", classData);
+                modal.classList.add("hide")
+                window.location.reload()
+            };
+            createClass();
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
 };
         
 
