@@ -57,25 +57,23 @@ pages.page_index = () => {
         try {
             let response = await pages.postAPI(pages.base_url + "signin.php", data);
 
-            if (response.data.status === "user not found") {
+            if(response.data.status === "user not found") {
                 errorElement.innerText = "User not found"
                 setTimeout(() => {
                     errorElement.innerText = ""
                 }, 3000)
-            } else if (response.data.status === "wrong password") {
+            }else if(response.data.status === "wrong password") {
                 errorElement.innerText = "Wrong Password"
                 setTimeout(() => {
                     errorElement.innerText = ""
                 }, 3000)
-            } else {
-                const userObject = Object
-                    .keys(response.data)
-                    .reduce((acc, key) => {
-                        if (key !== "status") {
-                            acc[key] = response.data[key]
-                        }
-                        return acc
-                    }, {})
+            }else {
+                const userObject = Object.keys(response.data).reduce((acc, key) => {
+                    if (key !== "status") {
+                        acc[key] = response.data[key]
+                    }
+                    return acc
+                }, {})
                 localStorage.setItem("userData", JSON.stringify(userObject))
                 window.location.href = "classrooms.html"
             }
@@ -86,61 +84,52 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
-    console.log('hello')
+console.log('hello')
     const signup = document.getElementById("signup");
 
-    signup.addEventListener("click", () => {
-        const first_name = document
-            .getElementById("first_name")
-            .value;
-        const last_name = document
-            .getElementById("last_name")
-            .value;
-        const email = document
-            .getElementById("email")
-            .value;
-        const password = document
-            .getElementById("password")
-            .value;
-        const answer = document
-            .getElementById("answer")
-            .value;
+signup.addEventListener("click", () => {
+  const first_name = document.getElementById("first_name").value;
+  const last_name = document.getElementById("last_name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const answer = document.getElementById("answer").value;
 
-        const signup_select = document.getElementById("signup_select");
-        const selected_value = signup_select.value;
-        let roleValue;
+  const signup_select = document.getElementById("signup_select");
+  const selected_value = signup_select.value;
+  let roleValue;
 
-        if (selected_value === "teacher") {
-            roleValue = 1;
-        } else if (selected_value === "student") {
-            roleValue = 2;
-        } else {
-            roleValue = 2;
-        }
+  if (selected_value === "teacher") {
+    roleValue = 1;
+  } else if (selected_value === "student") {
+    roleValue = 2;
+  } else {
+    roleValue = 2; 
+  }
 
-        try {
-            const data = new FormData();
-            data.append("first_name", first_name);
-            data.append("last_name", last_name);
-            data.append("email", email);
-            data.append("password", password);
-            data.append("answer", answer);
-            data.append("role_id", roleValue);
+  try {
+    const data = new FormData();
+    data.append("first_name", first_name);
+    data.append("last_name", last_name);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("answer", answer);
+    data.append("role_id", roleValue);
 
-            fetch("http://localhost/ClassroomClone/back-end/signup.php", {
-                method: "POST",
-                body: data
-            });
-        } catch (error) {
-            console.log(error);
-        }
+    fetch("http://localhost/ClassroomClone/back-end/signup.php", {
+      method: "POST",
+      body: data,
     });
+  } catch (error) {
+    console.log(error);
+  }
+});
 }
 
+
 pages.page_classrooms = () => {
+    
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
-    const sidebarClasses = document.querySelector(".sidebar .classes")
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -156,9 +145,7 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-        })
-
-    const user_id = JSON
+        })   const user_id = JSON
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
@@ -197,11 +184,10 @@ pages.page_classrooms = () => {
 
     // const getClasses = async() => {     const response = await
     // pages.getAPI(pages.base_url + "teachers-classes.php", data)
-    // console.log(response) } getClasses()
-};
+    // console.log(response) } getClasses()};
 
 pages.page_forget_password = () => {
-
+    
     const checkButton = document.getElementById("check-button")
     const favColorInput = document.getElementById("fav-color")
 
@@ -222,16 +208,12 @@ pages.page_classrooms = async () => {
     const user_id = user.user_id
     const data = new FormData();
     data.append("user_id",user_id)
-      
     const classroom_url = pages.base_url + "teachers-classes.php"
     const response = await pages.postAPI(classroom_url,data);
-    console.log(response)
-    document.getElementById("title").innerHTML = "Hello";
-    
-    
+        
 }
 
 
 
 
-
+}
