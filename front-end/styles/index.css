@@ -15,3 +15,11 @@ ul {
 a {
     text-decoration: none;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
