@@ -117,24 +117,19 @@ pages.page_index = () => {
                     errorElement.innerText = ""
                 }, 3000)
             }else {
+                const userObject = Object.keys(response.data).reduce((acc, key) => {
+                    if (key !== "status") {
+                        acc[key] = response.data[key]
+                    }
+                    return acc
+                }, {})
+                localStorage.setItem("userData", userObject)
                 window.location.href = "/classrooms.html"
             }
         } catch (error) {
             console.error('Login error : ', error);
         }
     })
-}
-
-pages.getAPI = async(url) => {
-    try {
-        const response = await axios.post('', {
-            email_in: email_in,
-            password_in: password_in
-        });
-
-    } catch (error) {
-        console.error('Login error : ' + error);
-    }
 }
 
 pages.page_classrooms = () => {

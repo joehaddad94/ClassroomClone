@@ -25,7 +25,7 @@ if ($num_rows == 0) {
         $response['first_name'] = $first_name;
         $response['last_name'] = $last_name;
         $response['email'] = $email;
-        $response['answer'] = $answer;
+        // $response['answer'] = $answer;
         $response['role_id'] = $role_id;
 
     } else {
