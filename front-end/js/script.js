@@ -204,6 +204,7 @@ pages.page_forget_password = () => {
 
 
 
+
 pages.page_classrooms = async () => {
     const user = JSON.parse(localStorage.getItem("userData"))
     const user_id = user.user_id
@@ -212,6 +213,7 @@ pages.page_classrooms = async () => {
     const classroom_url = pages.base_url + "teachers-classes.php"
     const response = await pages.postAPI(classroom_url,data);
     console.log(response.data)
+    console.log(1)
     const bottom_classroom = document.querySelector(".bottom-classrooms")
     console.log(bottom_classroom)
     response.data.map((item) => (
