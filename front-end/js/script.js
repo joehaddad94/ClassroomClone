@@ -146,3 +146,19 @@ pages.page_classrooms = () => {
             }
         })
 };
+// pages.getUserId = () => {
+//     const userId = localStorage.getItem('userId');
+//     if(userId){
+//         console.log(userId);
+//     }else   {
+//         console.log('User ID not found in the user staorage');
+//     }
+
+//     const data = new FormData();
+//     data.append("userId" , userId);
+
+//     try {
+//         let response = await pages.postAPI(pages , data);
+
+//     }catch
+// }
