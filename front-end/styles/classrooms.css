@@ -443,3 +443,96 @@
     width: 210px;
     /* padding-right: 5px; */
 }
+
+/* MODAL */
+
+.modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    background-color: rgba(0, 0, 0, 0.459);
+}
+
+.modal-box {
+    background-color: white;
+    padding: 20px 20px 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-box .modal-header {
+    font-weight: 500;
+}
+
+.modal-box .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-box .inputs input {
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    -o-border-radius: 5px 5px 0 0;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #5f6368;
+    background-color: #cccccc54;
+    font-size: 1rem;
+}
+
+.modal-box .inputs input:focus {
+    border-bottom: 2px solid blue;
+}
+
+.modal-box .inputs input::placeholder {
+    font-size: 1rem;
+}
+
+.modal-box .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-box .buttons button {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: .875rem;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+.modal-box .buttons button:hover {
+    background-color: #cccccc3a;
+}
+
+.modal-box .buttons .create-button button {
+    color: #1c74e8;
+}
+
