@@ -47,21 +47,18 @@ pages.page_index = () => {
     const login = document.getElementById("login")
 
     login.addEventListener("click" , async() =>{
-        const email_in = document.getElementById("email_in").value 
-        const password_in = document.getElementById("password_in").value 
+        const email = document.getElementById("email_in").value 
+        const password = document.getElementById("password_in").value 
         const data = {
-            email : email_in,
-            password : password_in
+            email ,
+            password
         }
         
         try{
-            const response = await axios.post('http://localhost/ClassroomClone/back-end/signup.php' , {
-                email_in : email_in,
-                password_in : password_in                
-            });
+            const response = await axios.post('http://localhost/ClassroomClone/back-end/signin.php' , data);             
 
         } catch (error) {
-        console.error('Login error : ' + error);
+            console.error('Login error : ' ,  error);
         }
     });
 
