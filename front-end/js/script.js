@@ -46,7 +46,7 @@ pages.page_index = () => {
 
     const login = document.getElementById("login")
 
-    login.addEventListener("click" , () =>{
+    login.addEventListener("click" , async() =>{
         const email_in = document.getElementById("email_in").value 
         const password_in = document.getElementById("password_in").value 
         const data = {
@@ -54,17 +54,43 @@ pages.page_index = () => {
             password : password_in
         }
         
-    });
-    
-    pages.getAPI = async(url) => {
-            try{
-                const response = await axios.post('' , {
-                    email_in : email_in,
-                    password_in : password_in
+        try{
+            const response = await axios.post('http://localhost/ClassroomClone/back-end/signup.php' , {
+                email_in : email_in,
+                password_in : password_in                
             });
 
-            } catch (error) {
-            console.error('Login error : ' + error);
-            }
+        } catch (error) {
+        console.error('Login error : ' + error);
         }
+    });
+
+    // signup.addEventListener("click", async () => {
+    //     const first_name = document.getElementById("").value;
+    //     const last_name = document.getElementById("").value;
+    //     const email = document.getElementById("").value;
+    //     const password = document.getElementById("").value;
+    //     const question = document.getElementById("").value;
+    //     const answer = document.getElementById("").value;
+          
+    //     try {
+    //       const data = new FormData();
+    //       data.append("first_name", first_name)
+    //       data.append("last_name", last_name)
+    //       data.append("email", email)
+    //       data.append("password", password)
+    //       data.append("question", password)
+    //       data.append("answer", password)
+      
+    //       const index_url = pages.base_url + "" 
+    //       const response = await pages.postAPI(index_url, data)
+    //       console.log(response)
+    //     //   fetch("http://localhost/Login-Register/signup.php", {
+    //     //     method: "POST",
+    //     //     body: data
+    //     //   })
+    //     } catch (error) {
+    //       console.log(error)
+    //     }
+    //   })
 }
