@@ -75,7 +75,7 @@ pages.page_index = () => {
                     return acc
                 }, {})
                 localStorage.setItem("userData", JSON.stringify(userObject))
-                window.location.href = "/classrooms.html"
+                window.location.href = "classrooms.html"
             }
         } catch (error) {
             console.error('Login error : ', error);
@@ -161,19 +161,17 @@ pages.page_forget_password = () => {
 
 
 
-pages.getAPI = async (url) =>{
-    try{
-        return await axios(url)
-    }catch(error){
-        pages.print_message("Error from GET API: " + error)
-    }
-}
+
 
 
 pages.page_classrooms = async () => {
-    localStorage.getItemItem("userData", JSON.stringify(userObject))
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const data = new FormData();
+    data.append("user_id",user_id)
+      
     const classroom_url = pages.base_url + "teachers-classes.php"
-    const response = await pages.getAPI(classroom_url);
+    const response = await pages.postAPI(classroom_url,data);
     console.log(response)
     document.getElementById("title").innerHTML = "Hello";
     
