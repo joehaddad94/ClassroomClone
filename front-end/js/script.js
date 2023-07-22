@@ -80,7 +80,7 @@ pages.page_index = () => {
     });
 
     const login = document.getElementById("login")
-
+    
     login.addEventListener("click" , async() =>{
         const email = document.getElementById("email_in").value 
         const password = document.getElementById("password_in").value 
@@ -88,10 +88,10 @@ pages.page_index = () => {
             email ,
             password
         }
-        
+
         try{
             const response = await axios.post('http://localhost/ClassroomClone/back-end/signin.php' , data);             
-
+            console.log(response.data)
         } catch (error) {
             console.error('Login error : ' ,  error);
         }
