@@ -16,8 +16,8 @@
     <body>
         <div class="navbar">
             <div class="left-navbar">
-                <div class="icon">
-                    <i class="fa-solid fa-bars fa-lg"></i>
+                <div id="burgerIcon" class="icon burger-icon">
+                    <i class="fa-solid fa-bars fa-lg burger-icon"></i>
                 </div>
                 <div class="logo">
                     <img src="./front-end/assets/GoogleLogo.png" alt="Google Logo">
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="right-navbar">
-                <div class="plus-icon">
+                <div id="burgerIcon" class="plus-icon">
                     <i class="fa-solid fa-plus fa-lg"></i>
                 </div>
                 <div class="google-apps-icon">
@@ -73,9 +73,86 @@
                 <button>Join class</button>
             </div>
         </div>
+        <div id="sidebar" class="sidebar hide">
+            <div class="top-sidebar">
+                <div>
+                    <i class="fa-solid fa-house fa-lg"></i>
+                    Classes
+                </div>
+                <div>
+                    <i class="fa-regular fa-calendar fa-lg"></i>
+                    Calendar
+                </div>
+            </div>
+            <div class="middle-sidebar">
+                <p>Enrolled</p>
+                <div class="to-do">
+                    <i class="fa-solid fa-table-list fa-lg"></i>
+                    To-do
+                </div>
+                <div class="classes">
+                    <div class="class">
+                        <div>F</div>
+                        <div class="class-data">
+                            <p class="class-name">
+                                FSW 23&24 | Soft Skills
+                            </p>
+                            <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
+                        </div>
+                    </div>
+                    <div class="class">
+                        <div>F</div>
+                        <div class="class-data">
+                            <div class="class-name">
+                                FSW 23&24 | Tech
+                            </div>
+                            <p class="class-desc">Full Stack Web Development Bootcamp</p>
+                        </div>
+                    </div>
+
+                    <div class="class">
+                        <div>F</div>
+                        <div class="class-data">
+                            <p class="class-name">
+                                FSW 23&24 | Soft Skills
+                            </p>
+                            <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
+                        </div>
+                    </div>
+                    <div class="class">
+                        <div>F</div>
+                        <div class="class-data">
+                            <p class="class-name">
+                                FSW 23&24 | Soft Skills
+                            </p>
+                            <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
+                        </div>
+                    </div>
+                    <div class="class">
+                        <div>F</div>
+                        <div class="class-data">
+                            <p class="class-name">
+                                FSW 23&24 | Soft Skills
+                            </p>
+                            <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-sidebar">
+                <div>
+                    <i class="fa-solid fa-folder fa-lg"></i>
+                    Archived classes
+                </div>
+                <div>
+                    <i class="fa-solid fa-gear fa-lg"></i>
+                    Settings
+                </div>
+            </div>
+        </div>
         <script src="front-end/js/script.js"></script>
         <script>
-        pages.loadFor("classrooms")
+            pages.loadFor("classrooms");
         </script>
     </body>
 </html>
