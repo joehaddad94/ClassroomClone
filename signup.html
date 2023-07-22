@@ -33,7 +33,7 @@
                   <label for="first-name">First Name</label>
                 </div>
                 <div>
-                  <input id="first-name" placeholder="First Name" type="text" />
+                  <input id="first_name" placeholder="First Name" type="text" />
                 </div>
               </div>
               <div class="column">
@@ -41,7 +41,7 @@
                   <label for="last-name">Last Name</label>
                 </div>
                 <div>
-                  <input id="last-name" placeholder="Last Name" type="text" />
+                  <input id="last_name" placeholder="Last Name" type="text" />
                 </div>
               </div>
             </div>
@@ -73,15 +73,15 @@
             </div>
             <div class="row question-role">
               <div class="question">
-                <div>What's your favourite color?</div>
-                <input placeholder="Red" type="text" />
+                <div>What's your lucky number?</div>
+                <input id="answer" placeholder="0" type="number" />
               </div>
               <div class="role">
                 <div>Signup as :</div>
                 <div class="select">
-                  <select>
-                    <option value="Student">Student</option>
-                    <option value="Teacher">Teacher</option>
+                  <select id="signup_select">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
                   </select>
                 </div>
               </div>
@@ -89,7 +89,7 @@
           </div>
           <div>
             <div class="login-button">Login</div>
-            <div class="signup-button">
+            <div id="signup" class="signup-button">
               <button>Sign up</button>
             </div>
           </div>

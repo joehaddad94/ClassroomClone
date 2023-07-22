@@ -79,6 +79,12 @@ img {
     cursor: pointer;
 }
 
+.error {
+    color: red;
+    margin-top: 8px;
+    font-weight: semibold;
+}
+
 .learn-more a {
     color: #1a73e8;
     font-weight: semibold;
