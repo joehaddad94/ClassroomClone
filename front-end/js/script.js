@@ -199,6 +199,7 @@ pages.page_classrooms = () => {
                 manage_profile.style.display = "block";
               }    
         })
+
 };
         
 
