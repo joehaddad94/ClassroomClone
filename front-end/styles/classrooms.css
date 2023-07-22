@@ -1,3 +1,7 @@
+body {
+    min-height: 100vh;
+}
+
 .navbar {
     height: 65px;
     padding: 0 10px;
@@ -58,6 +62,10 @@
     gap: 5px;
 }
 
+.right-navbar .create-class.hide, .right-navbar .join-class.hide {
+    display: noe;
+}
+
 .right-navbar .create-class button, .right-navbar .join-class button {
     padding: 8px 10px;
     color: #1a73e8;
@@ -68,6 +76,7 @@
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
+    cursor: pointer;
 }
 
 .right-navbar .nav-profile-pic {
