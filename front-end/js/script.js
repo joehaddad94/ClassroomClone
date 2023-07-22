@@ -96,4 +96,16 @@ pages.page_index = () => {
             console.error('Login error : ' ,  error);
         }
     }
-    )}
+)}
+pages.page_classrooms = () => {
+    console.log("we are in page classrooms.html");
+    const profileBtn = document.getElementById("profile-pic") 
+    const manage_profile=document.getElementById("profile-manage");   
+    profileBtn.addEventListener("click", () =>{
+        console.log("Click profile successful");
+        manage_profile.style.visibility="visible";
+
+    })
+    // window.location.href = "signup.html"
+}
+
