@@ -156,3 +156,31 @@ pages.page_forget_password = () => {
         pages.postAPI
     })
 }
+
+
+
+
+
+pages.getAPI = async (url) =>{
+    try{
+        return await axios(url)
+    }catch(error){
+        pages.print_message("Error from GET API: " + error)
+    }
+}
+
+
+pages.page_classrooms = async () => {
+    localStorage.getItemItem("userData", JSON.stringify(userObject))
+    const classroom_url = pages.base_url + "teachers-classes.php"
+    const response = await pages.getAPI(classroom_url);
+    console.log(response)
+    document.getElementById("title").innerHTML = "Hello";
+    
+    
+}
+
+
+
+
+
