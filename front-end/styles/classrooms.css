@@ -204,6 +204,12 @@
     width: 75px;
     object-fit: cover;
 }
+.profile-p img{
+    border-radius: 50%;
+    height:50px;
+    width: 50px;
+    object-fit: cover;
+}
 .manage-account{      
     border-radius: 25px;
     display: flex;
@@ -283,6 +289,196 @@ hr{
     border-radius: 50%;
     background-color:#5b5e5d; ;
 }
+
+
+
+
+/* Classrooms */
+
+.classrooms {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 25px;
+}
+
+.top-classrooms {
+    display: flex;
+    gap: 40px;
+    font-weight: semibold;
+}
+
+.top-classrooms > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    color: #3785eb;
+    cursor: pointer;
+}
+.top-classrooms > div:hover {
+    background-color: #3785eb17;
+}
+
+.bottom-classrooms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.bottom-classrooms .class {
+    width: 18.75rem;
+    height: 18.125rem;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+.bottom-classrooms .class:hover {
+    box-shadow: 10px 10px 26px -8px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 10px 10px 26px -8px rgba(0,0,0,0.6);
+    -moz-box-shadow: 10px 10px 26px -8px rgba(0,0,0,0.6);
+}
+
+.class .assignments,
+.class .top-class {
+    padding: 15px;
+}
+
+.class .top-class {
+    height: 100px;
+}
+
+.class .assignments {
+    height: 130px;
+}
+
+.class .top-class {
+    background-image: url("https://plus.unsplash.com/premium_photo-1673697239936-c2599b0b0498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.class .top-class > *:hover {
+    text-decoration: underline;
+}
+
+.class .bottom-class {
+    padding: 5px;
+}
+
+.class .top-class {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    color: white;
+}
+
+.class .class-title i {
+    cursor: pointer;
+}
+
+.class .top-class > p {
+    font-size: 0.75rem;
+}
+
+.class .top-class .class-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.class-title p {
+    font-size: 1.125rem;
+}
+
+.class .assignments {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.assignments .assignment {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.assignments .assignment:first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+}
+
+.assignments .assignment .due-date {
+    font-size: 0.8125rem;
+    font-weight: bold;
+    color: #868686;
+}
+.assignments .assignment p:last-child {
+    font-size: 0.875rem;
+    color: #676767;
+}
+
+.class .bottom-class {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+}
+
+.class .bottom-class div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.class .bottom-class div:hover {
+    background-color: #cccccc33;
+}
+
+.profile-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: -40%;
+    right: 15px;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 
 /* Sidebar */
 
@@ -386,4 +582,95 @@ hr{
     text-overflow: ellipsis;
     width: 210px;
     /* padding-right: 5px; */
+}
+/* MODAL */
+
+.modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    background-color: rgba(0, 0, 0, 0.459);
+}
+
+.modal-box {
+    background-color: white;
+    padding: 20px 20px 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-box .modal-header {
+    font-weight: 500;
+}
+
+.modal-box .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-box .inputs input {
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    -o-border-radius: 5px 5px 0 0;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #5f6368;
+    background-color: #cccccc54;
+    font-size: 1rem;
+}
+
+.modal-box .inputs input:focus {
+    border-bottom: 2px solid blue;
+}
+
+.modal-box .inputs input::placeholder {
+    font-size: 1rem;
+}
+
+.modal-box .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-box .buttons button {
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: .875rem;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+.modal-box .buttons button:hover {
+    background-color: #cccccc3a;
+}
+
+.modal-box .buttons .create-button button {
+    color: #1c74e8;
 }
