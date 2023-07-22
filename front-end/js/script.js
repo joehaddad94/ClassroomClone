@@ -141,6 +141,7 @@ pages.page_classrooms = () => {
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
     const sidebarClasses = document.querySelector(".sidebar .classes")
+    const bottom_classrooms = document.querySelector(".bottom-classrooms");
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -170,7 +171,8 @@ pages.page_classrooms = () => {
             console.log(response.data)
             response
                 .data
-                .map((item) => (sidebarClasses.innerHTML += `<div class="class">
+                .map((item) => {
+                    sidebarClasses.innerHTML += `<div class="class">
                         <div>${item.class_name[0]}</div>
                         <div class="class-data">
                             <p class="class-name">
@@ -178,12 +180,56 @@ pages.page_classrooms = () => {
                             </p>
                             <p class="class-desc">${item.section}</p>
                         </div>
-                    </div>`))
+                    </div>`;
+
+                    bottom_classrooms.innerHTML += `<div class="class">
+                    <div class="top-class">
+                        <div class="class-title">
+                            <p>${item.class_name}</p>
+                            <div>
+                                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                            </div>
+                        </div>
+                        <p>${item.room}</p>
+                        <p>Tech Department</p>
+                        <div class="profile-pic"><img
+                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                            alt="Profile Picture"></div>
+                    </div>
+                    <div class="assignments">
+                        <div class="assignment">
+                            <p class="due-date">Due today</p>
+                            <p>11:59PM - Professional Development Plan</p>
+                        </div>
+                        <div class="assignment">
+                            <p class="due-date">Due tomorrow</p>
+                            <p>11:59PM - Planners(Time Management)</p>
+                        </div>
+                    </div>
+                    <div class="bottom-class">
+                        <div class="user-icon">
+                            <i class="fa-regular fa-user fa-lg"></i>
+                        </div>
+                        <div class="folder-icon">
+                            <i class="fa-regular fa-folder fa-lg"></i>
+                        </div>
+                    </div>
+                </div>`;
+                })
         }
         getClasses()
     } catch (error) {
         console.log(error + " in loading classes")
     }
+
+
+    // try {
+    //     const 
+    // } catch (error) {
+    //     console.log(error)
+    // }
+
+    console.log(bottom_classrooms)
 
     // modal functionlity
 
@@ -196,6 +242,8 @@ pages.page_classrooms = () => {
                 .toggle("hide");
         }
     })
+
+    
 };
 
 pages.page_forget_password = () => {
