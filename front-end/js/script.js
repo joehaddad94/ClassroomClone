@@ -123,7 +123,7 @@ pages.page_index = () => {
                     }
                     return acc
                 }, {})
-                localStorage.setItem("userData", userObject)
+                localStorage.setItem("userData", JSON.stringify(userObject))
                 window.location.href = "/classrooms.html"
             }
         } catch (error) {
