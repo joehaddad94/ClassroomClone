@@ -179,9 +179,12 @@ pages.page_classrooms = () => {
     console.log(data)
 
     try {
+        
         let getClasses = async() => {
+
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
             console.log(response.data)
+
             response
                 .data
                 .map((item) => {
@@ -195,7 +198,7 @@ pages.page_classrooms = () => {
                         </div>
                     </div>`;
 
-                    bottom_classrooms.innerHTML += `<div class="class">
+                    bottom_classrooms.innerHTML += `<a href="/classrooms?id=${item.class_id}"><div class="class">
                     <div class="top-class">
                         <div class="class-title">
                             <p>${item.class_name}</p>
@@ -227,7 +230,7 @@ pages.page_classrooms = () => {
                             <i class="fa-regular fa-folder fa-lg"></i>
                         </div>
                     </div>
-                </div>`;
+                </div></a>`;
                 })
         }
         getClasses()
@@ -292,20 +295,9 @@ pages.page_classrooms = () => {
             .add("hide")
     })
 
-    // create class
-    
-
-
-
-    
-
-    // setInterval(() => {
-    //     console.log("classname", classname);
-    //     console.log("section", section);
-    //     console.log("subject", subject);
-    //     console.log("room", room);
-    //     console.log("user_id", user_id);
-    // }, 3000)
+    // create class setInterval(() => {     console.log("classname", classname);
+    // console.log("section", section);     console.log("subject", subject);
+    // console.log("room", room);     console.log("user_id", user_id); }, 3000)
 
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -326,8 +318,12 @@ pages.page_classrooms = () => {
         try {
             const createClass = async() => {
                 await pages.postAPI(pages.base_url + "create-class.php", classData);
-                modal.classList.add("hide")
-                window.location.reload()
+                modal
+                    .classList
+                    .add("hide")
+                window
+                    .location
+                    .reload()
             };
             createClass();
         } catch (error) {
