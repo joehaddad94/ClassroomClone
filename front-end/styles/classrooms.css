@@ -2,6 +2,11 @@ body {
     min-height: 100vh;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .navbar {
     height: 65px;
     padding: 0 10px;
