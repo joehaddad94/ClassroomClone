@@ -196,7 +196,7 @@ pages.page_classrooms = () => {
                         </div>
                     </div>`;
 
-                    bottom_classrooms.innerHTML += `<a href="/classrooms/${item.class_id}"><div class="class">
+                    bottom_classrooms.innerHTML += `<a href="/classrooms?id=${item.class_id}"><div class="class">
                     <div class="top-class">
                         <div class="class-title">
                             <p>${item.class_name}</p>
