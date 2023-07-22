@@ -165,7 +165,7 @@
    position: absolute;
    top: 70px;
    right:10px;
-   height: 360px;
+   height: 340px;
    width: 412px;
    border-radius: 25px;
    display: none;
@@ -180,14 +180,16 @@
     border-radius: 25px;
     padding-top:15px;
     padding-left: 10px;
-    justify-content: center;
-    text-align: center;
+    gap: 20px;
 
 }
 .view-account{
     display: flex;
     direction: row;
     gap:20px;
+}
+.manage-acc-container{
+    height: 50%;
 }
 .email-data{
     display: flex;
@@ -206,18 +208,71 @@
     height:75px;
     width: 75px;;
 }
-.manage-account{
-    background-color: yellow;
-    height:40%;
-    width: 80%;
+.manage-account{      
     border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 60%;
+   
 }
 .manage-account a{
+    
+    padding: 5px 20px;
+    font-size: 15px;
+    border:1px solid black;
+    border-radius: 25px;
+
+   
+    border-bottom-width: 1px;
+    padding-bottom: 25px;
+
+
+    font-family: "Product Sans",Arial,Helvetica,sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: normal;
+    border-radius: 8px;
+    border: 1px solid #747775;
+    color: #1f1f1f;
+    
+    margin-bottom: 9px;
+   
+    margin-top: 8px;
+    max-width: 254px;
+    /* padding: 5px 15px; */
+    position: relative;
+    text-align: center;
+
+
 
 }
+
 .signout{
-    background-color: red;
+    display: flex;
+    flex-direction: row;
+    margin:10px;
+    margin-top: 30px;
+    height:20%;
+    border-radius: 25px;
+    padding-top:15px;
+    padding-left: 20px;
+    gap: 20px;
     
+    align-items: center;
+    
+    
+}
+.signout a{
+    text-decoration: none;
+    color:#5b5e5d;
+    font-weight: 600;
+}
+.signout img{
+    
+    height: 30px;
+    width: 30px;
 }
 .terms-policy{
     background-attachment: green;
@@ -241,6 +296,34 @@
     -moz-transition: left 0.3s ease-in-out;
     -ms-transition: left 0.3s ease-in-out;
     -o-transition: left 0.3s ease-in-out;
+}
+
+.terms-policy{
+margin: 10px;
+}
+.privacy-container{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+}
+hr{
+    background-color: #ccc;
+    height: 1;
+}
+.priv a{
+    color:#5b5e5d;
+    font-weight: 300;
+    font-family: "Product Sans",Arial,Helvetica,sans-serif;
+    text-decoration: none;
+}
+
+.dot{
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color:#5b5e5d; ;
 }
 
 .sidebar.hide {
