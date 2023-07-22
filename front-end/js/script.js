@@ -63,7 +63,7 @@ pages.page_index = () => {
             const response = await pages.postAPI(index_url, data)
             console.log(response)
             //   fetch("http://localhost/Login-Register/signup.php", {     method: "POST",
-            //   body: data   })
+            // body: data   })
         } catch (error) {
             console.log(error)
         }
@@ -107,3 +107,26 @@ pages.page_index = () => {
         }
     }
 }
+
+pages.page_classrooms = () => {
+    const burgerIcon = document.getElementById("burgerIcon");
+    const sidebar = document.getElementById("sidebar");
+
+    burgerIcon.addEventListener("click", () => {
+        sidebar
+            .classList
+            .remove("hide");
+    });
+
+    
+
+    document
+        .body
+        .addEventListener("click", (e) => {
+            if (!sidebar.classList.contains("hide") && !e.target.classList.contains("burger-icon") && !sidebar.contains(e.target)) {
+                sidebar
+                    .classList
+                    .add("hide");
+            }
+        })
+};
