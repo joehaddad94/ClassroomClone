@@ -149,10 +149,7 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-        })
-
-
-        
+        })        
         const profileBtn = document.getElementById("profile-pic") 
         const manage_profile=document.getElementById("profile-manage");   
         profileBtn.addEventListener("click", () =>{
@@ -164,3 +161,23 @@ pages.page_classrooms = () => {
               }    
         })
 };
+pages.page_manage=()=>{
+    btnUpdate=document.getElementById('update')
+    new_first_name=document.getElementById("first-name")
+    new_last_name=document.getElementById("last-name")
+    btnUpdate.addEventListener("click",()=>{
+        console.log("editing  your info will occur here")
+        console.log(new_first_name.value)
+        console.log(new_last_name.value)
+    })
+    
+
+
+
+
+
+
+
+
+
+}
