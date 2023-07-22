@@ -2,7 +2,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 30px;
+    padding: 50px 30px;
     height: 100vh;
 }
 
@@ -114,7 +114,9 @@ img {
 }
 
 .next-button button,
-.signup-button button {
+.signup-button button,
+.check-button button,
+.login-button button {
     color: white;
     background-color: #1a73e8;
     border: none;
@@ -208,3 +210,46 @@ img {
     -o-transition: all 0.3s;
 }
 
+/* Forgot Password Page */
+
+.forgot-password-page .bottom-signin-box .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.forgot-password-page .bottom-signin-box .column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.forgot-password-page .user-email {
+    font-size: .875rem;
+}
+
+.forgot-password-page .user-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    width: fit-content;
+    margin: auto;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -ms-transition: all 0.1s;
+    -o-transition: all 0.1s;
+}
+
+.forgot-password-page .user-email:hover {
+    background-color: #cccccc3a;
+}
