@@ -86,7 +86,7 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
-    console.log('hello')
+    
     const signup = document.getElementById("signup");
 
     signup.addEventListener("click", () => {
@@ -138,6 +138,7 @@ pages.page_signup = () => {
 }
 
 pages.page_classrooms = () => {
+
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
     const sidebarClasses = document.querySelector(".sidebar .classes")
@@ -156,23 +157,14 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-        })        
-        const profileBtn = document.getElementById("profile-pic") 
-        const manage_profile=document.getElementById("profile-manage");   
-        profileBtn.addEventListener("click", () =>{
-            console.log("Click profile successful");            
-            if (manage_profile.style.display !== "none") {
-                manage_profile.style.display = "none";
-              } else {
-                manage_profile.style.display = "block";
-              }    
-        })
+        })    
 
     const user_id = JSON
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
+    console.log(data)
 
     try {
         let getClasses = async() => {
@@ -191,33 +183,34 @@ pages.page_classrooms = () => {
             ))
         }
         getClasses()
-        // console.log("classes " + classes)
-        // sidebarClasses.innerHTML += `<div class="class">
-        //                 <div>F</div>
-        //                 <div class="class-data">
-        //                     <p class="class-name">
-        //                         FSW 23&24 | Soft Skills
-        //                     </p>
-        //                     <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
-        //                 </div>
-        //             </div>`;
+  
     } catch (error) {
         console.log(error + " in loading classes")
     }
 
-    // const getClasses = async() => {     const response = await
-    // pages.getAPI(pages.base_url + "teachers-classes.php", data)
-    // console.log(response) } getClasses()
+
+    const profileBtn = document.getElementById("profile-pic") 
+        const manage_profile=document.getElementById("profile-manage");   
+        profileBtn.addEventListener("click", () =>{
+            console.log("Click profile successful");            
+            if (manage_profile.style.display !== "none") {
+                manage_profile.style.display = "none";
+              } else {
+                manage_profile.style.display = "block";
+              }    
+        })
 };
+        
 
-
-pages.page_manage_account =()=>{
+pages.page_manage=()=>{
     btnUpdate=document.getElementById('update')
     
     btnUpdate.addEventListener("click",async()=>{
         console.log("editing  your info will occur here")
         new_first_name=document.getElementById("first-name").value
         new_last_name=document.getElementById("last-name").value
+        user_id=JSON.parse(localStorage.getItem("userData")).user_id
+        console.log(user_id)
         console.log(new_first_name)
         console.log(new_last_name)
         
