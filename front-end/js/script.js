@@ -152,6 +152,8 @@ pages.page_classrooms = () => {
     const room_input = document.getElementById("room-input");
     const formElement = document.querySelector("form")
 
+    let userData = JSON.parse(localStorage.getItem("userData"))
+
     burgerIcon.addEventListener("click", () => {
         sidebar
             .classList
@@ -200,7 +202,7 @@ pages.page_classrooms = () => {
                             </div>
                         </div>
                         <p>${item.room}</p>
-                        <p>Tech Department</p>
+                        <p>${userData.first_name + userData.last_name}</p>
                         <div class="profile-pic"><img
                             src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
                             alt="Profile Picture"></div>
