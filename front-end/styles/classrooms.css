@@ -155,6 +155,134 @@
     color: white;
     padding: 10px 22px;
 }
+.manage-profile{
+   background-color: rgb(243, 246, 252);
+   position: absolute;
+   top: 70px;
+   right:10px;
+   height: 340px;
+   width: 412px;
+   border-radius: 25px;
+   display: none;
+   
+}
+.manage-container{
+    display: flex;
+    flex-direction: column;
+    margin:10px;
+    background-color:white;
+    height:50%;
+    border-radius: 25px;
+    padding-top:15px;
+    padding-left: 10px;
+    gap: 20px;
+
+}
+.view-account{
+    display: flex;
+    direction: row;
+    gap:20px;
+}
+.manage-acc-container{
+    height: 50%;
+}
+.email-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:6px;
+    font-family:"Product Sans",Arial,Helvetica,sans-serif;
+    color:#444746;
+}
+.email-data .email{
+    font-weight: 200;
+    color:#5b5e5d;
+}
+.profile img{
+    border-radius: 50%;
+    height:75px;
+    width: 75px;
+    object-fit: cover;
+}
+.manage-account{      
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 60%;
+   
+}
+.manage-account a{
+    
+    padding: 5px 20px;
+    font-size: 15px;
+    border:1px solid black;
+    border-radius: 25px;   
+    border-bottom-width: 1px;
+    padding-bottom: 25px;
+    font-family: "Product Sans",Arial,Helvetica,sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: normal;
+    border-radius: 8px;
+    border: 1px solid #747775;
+    color: #1f1f1f;    
+    margin-bottom: 9px;   
+    margin-top: 8px;
+    max-width: 254px;
+    position: relative;
+    text-align: center;
+}
+
+.signout{
+    display: flex;
+    flex-direction: row;
+    margin:10px;
+    margin-top: 30px;
+    height:20%;
+    border-radius: 25px;
+    padding-top:15px;
+    padding-left: 20px;
+    gap: 20px;    
+    align-items: center;    
+}
+.signout a{
+    text-decoration: none;
+    color:#5b5e5d;
+    font-weight: 600;
+}
+.signout img{    
+    height: 30px;
+    width: 30px;
+}
+.terms-policy{
+    margin: 10px;
+}
+.privacy-container{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+}
+hr{
+    background-color: #ccc;
+    height: 1;
+}
+.priv a{
+    color:#5b5e5d;
+    font-weight: 300;
+    font-family: "Product Sans",Arial,Helvetica,sans-serif;
+    text-decoration: none;
+}
+
+.dot{
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color:#5b5e5d; ;
+}
 
 /* Classrooms */
 
@@ -361,6 +489,7 @@
     -ms-transition: left 0.3s ease-in-out;
     -o-transition: left 0.3s ease-in-out;
 }
+
 
 .sidebar.hide {
     left: -300px;

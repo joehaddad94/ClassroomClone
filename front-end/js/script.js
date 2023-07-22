@@ -156,6 +156,16 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
+        })        
+        const profileBtn = document.getElementById("profile-pic") 
+        const manage_profile=document.getElementById("profile-manage");   
+        profileBtn.addEventListener("click", () =>{
+            console.log("Click profile successful");            
+            if (manage_profile.style.display !== "none") {
+                manage_profile.style.display = "none";
+              } else {
+                manage_profile.style.display = "block";
+              }    
         })
 
     const user_id = JSON
@@ -200,12 +210,26 @@ pages.page_classrooms = () => {
     // console.log(response) } getClasses()
 };
 
-pages.page_forget_password = () => {
 
-    const checkButton = document.getElementById("check-button")
-    const favColorInput = document.getElementById("fav-color")
-
-    checkButton.addEventListener('click', () => {
-        pages.postAPI
+pages.page_manage_account =()=>{
+    btnUpdate=document.getElementById('update')
+    
+    btnUpdate.addEventListener("click",async()=>{
+        console.log("editing  your info will occur here")
+        new_first_name=document.getElementById("first-name").value
+        new_last_name=document.getElementById("last-name").value
+        console.log(new_first_name)
+        console.log(new_last_name)
+        
+        const data = new FormData();
+        data.append("new_first_name", new_first_name);
+        data.append("new_last_name", new_last_name);
+        console.log(data)
+        const manage_url = pages.base_url + "update-account.php"
+        const response = await pages.postAPI(manage_url, data)
+        console.log(response)
+        console.log(response.data.success)  
+        console.log(response.data.message)   
+       
     })
 }
