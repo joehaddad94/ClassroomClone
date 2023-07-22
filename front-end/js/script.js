@@ -144,7 +144,6 @@ pages.page_classrooms = () => {
     const bottom_classrooms = document.querySelector(".bottom-classrooms");
     const joinClassButton = document.querySelector(".join-class")
     const createClassButton = document.querySelector(".create-class")
-    const modalCreateButton = document.querySelector(".modal .buttons .create-button")
     const modalCancelButton = document.querySelector(".modal .buttons .cancel-button")
     const classname_input = document.getElementById("classname-input")
     const section_input = document.getElementById("section-input");
@@ -263,11 +262,13 @@ pages.page_classrooms = () => {
                 .toggle("hide");
         }
     })
+    
     createClassButton.addEventListener('click', () => {
         modal
             .classList
             .remove("hide")
     })
+
     modalCancelButton.addEventListener("click", () => {
         modal
             .classList

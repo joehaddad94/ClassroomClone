@@ -37,6 +37,7 @@ a {
     -o-border-radius: 50%;
     cursor: pointer;
 }
+
 .left-navbar .icon:hover,
 .right-navbar .google-apps-icon:hover,
 .right-navbar .plus-icon:hover,
@@ -372,7 +373,7 @@ a {
 .sidebar {
     height: 100vh;
     width: 300px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: white;
