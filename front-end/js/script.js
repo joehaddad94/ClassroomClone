@@ -146,3 +146,13 @@ pages.page_classrooms = () => {
             }
         })
 };
+
+pages.page_forget_password = () => {
+    
+    const checkButton = document.getElementById("check-button")
+    const favColorInput = document.getElementById("fav-color")
+
+    checkButton.addEventListener('click', () => {
+        pages.postAPI
+    })
+}
