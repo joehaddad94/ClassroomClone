@@ -27,55 +27,6 @@ pages.loadFor = (page) => {
     eval("pages.page_" + page + "();")
 }
 
-//html Pages
-
-pages.page_signup = () => {
-    const createActBtn = document.getElementById("create-account-btn")
-    console.log(createActBtn)
-    createActBtn.addEventListener("click", () => {
-        window.location.href = "signup.html"
-    })
-
-    signup.addEventListener("click", async() => {
-        const first_name = document
-            .getElementById("")
-            .value;
-        const last_name = document
-            .getElementById("")
-            .value;
-        const email = document
-            .getElementById("")
-            .value;
-        const password = document
-            .getElementById("")
-            .value;
-        const question = document
-            .getElementById("")
-            .value;
-        const answer = document
-            .getElementById("")
-            .value;
-
-        try {
-            const data = new FormData();
-            data.append("first_name", first_name)
-            data.append("last_name", last_name)
-            data.append("email", email)
-            data.append("password", password)
-            data.append("question", password)
-            data.append("answer", password)
-
-            const index_url = pages.base_url + ""
-            const response = await pages.postAPI(index_url, data)
-            console.log(response)
-            //   fetch("http://localhost/Login-Register/signup.php", {     method: "POST",
-            // body: data   })
-        } catch (error) {
-            console.log(error)
-        }
-    })
-}
-
 pages.page_index = () => {
 
     const showPasswordCheckBox = document.getElementById("show-password-input")
@@ -131,6 +82,49 @@ pages.page_index = () => {
         }
     })
 }
+
+pages.page_signup = () => {
+console.log('hello')
+    const signup = document.getElementById("signup");
+
+signup.addEventListener("click", () => {
+  const first_name = document.getElementById("first_name").value;
+  const last_name = document.getElementById("last_name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const answer = document.getElementById("answer").value;
+
+  const signup_select = document.getElementById("signup_select");
+  const selected_value = signup_select.value;
+  let roleValue;
+
+  if (selected_value === "teacher") {
+    roleValue = 1;
+  } else if (selected_value === "student") {
+    roleValue = 2;
+  } else {
+    roleValue = 2; 
+  }
+
+  try {
+    const data = new FormData();
+    data.append("first_name", first_name);
+    data.append("last_name", last_name);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("answer", answer);
+    data.append("role_id", roleValue);
+
+    fetch("http://localhost/ClassroomClone/back-end/signup.php", {
+      method: "POST",
+      body: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+}
+
 
 pages.page_classrooms = () => {
     const burgerIcon = document.getElementById("burgerIcon");
