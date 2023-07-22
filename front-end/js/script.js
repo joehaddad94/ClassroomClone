@@ -157,13 +157,7 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-        })    
-        
-        
-
-
-
-        
+        })            
         const profileBtn = document.getElementById("profile-pic") 
         const manage_profile=document.getElementById("profile-manage");   
         profileBtn.addEventListener("click", () =>{
@@ -219,28 +213,38 @@ pages.page_classrooms = () => {
 
 pages.page_manage=()=>{
     btnUpdate=document.getElementById('update')
-    
+    new_first_name=document.getElementById("first-name")
+    new_last_name=document.getElementById("last-name")
+    btnUpdate.addEventListener("click",()=>{
+
     btnUpdate.addEventListener("click",async()=>{
         console.log("editing  your info will occur here")
+        console.log(new_first_name.value)
+        console.log(new_last_name.value)
         new_first_name=document.getElementById("first-name").value
         new_last_name=document.getElementById("last-name").value
         user_id=JSON.parse(localStorage.getItem("userData")).user_id
         console.log(user_id)
+
         console.log(new_first_name)
         console.log(new_last_name)
-        
+
         const data = new FormData();
         data.append("new_first_name", new_first_name);
         data.append("new_last_name", new_last_name);
+        data.append("user_id", user_id);        
         console.log(data)
         const manage_url = pages.base_url + "update-account.php"
         const response = await pages.postAPI(manage_url, data)
         console.log(response)
         console.log(response.data.success)  
-        console.log(response.data.message)   
-    })
+        console.log(response.data.message) 
+       
 
-}
+    })}
+
+
+    )}
 
 pages.page_forget_password = () => {
 
