@@ -1,6 +1,6 @@
 const pages = {}
 
-pages.base_url = "Add Base URL here";
+pages.base_url = "http://localhost/ClassroomClone/back-end/";
 
 // Common Functions
 pages.print_message = (message) => {
@@ -32,11 +32,10 @@ pages.loadFor = (page) => {
 pages.page_signup = () => {
     const createActBtn = document.getElementById("create-account-btn")
     console.log(createActBtn)
-    createActBtn.addEventListener("click", () =>{
+    createActBtn.addEventListener("click", () => {
         window.location.href = "signup.html"
     })
 
-    
     signup.addEventListener("click", async() => {
         const first_name = document
             .getElementById("")
@@ -90,50 +89,53 @@ pages.page_index = () => {
     });
 
     const login = document.getElementById("login")
-    
-    login.addEventListener("click" , async() =>{
-        const email = document.getElementById("email_in").value 
-        const password = document.getElementById("password_in").value 
-        const data = {
-            email ,
-            password
-        }
 
-        try{
-            const response = await axios.post('http://localhost/ClassroomClone/back-end/signin.php' , data);             
-            console.log(response.data)
-        } catch (error) {
-            console.error('Login error : ' ,  error);
-        }
-    }
-    )}
-
-    login.addEventListener("click", () => {
-        const email_in = document
+    login.addEventListener("click", async() => {
+        const email = document
             .getElementById("email_in")
             .value
-        const password_in = document
+        const password = document
             .getElementById("password_in")
             .value
-        const data = {
-            email: email_in,
-            password: password_in
-        }
+        const errorElement = document.querySelector(".error")
 
-    });
+        const data = new FormData();
+        data.append("email", email);
+        data.append("password", password)
 
-    pages.getAPI = async(url) => {
         try {
-            const response = await axios.post('', {
-                email_in: email_in,
-                password_in: password_in
-            });
+            let response = await pages.postAPI(pages.base_url + "signin.php", data);
 
+            if(response.data.status === "user not found") {
+                errorElement.innerText = "User not found"
+                setTimeout(() => {
+                    errorElement.innerText = ""
+                }, 3000)
+            }else if(response.data.status === "wrong password") {
+                errorElement.innerText = "Wrong Password"
+                setTimeout(() => {
+                    errorElement.innerText = ""
+                }, 3000)
+            }else {
+                window.location.href = "/classrooms.html"
+            }
         } catch (error) {
-            console.error('Login error : ' + error);
+            console.error('Login error : ', error);
         }
-    }
+    })
+}
 
+pages.getAPI = async(url) => {
+    try {
+        const response = await axios.post('', {
+            email_in: email_in,
+            password_in: password_in
+        });
+
+    } catch (error) {
+        console.error('Login error : ' + error);
+    }
+}
 
 pages.page_classrooms = () => {
     const burgerIcon = document.getElementById("burgerIcon");
@@ -144,8 +146,6 @@ pages.page_classrooms = () => {
             .classList
             .remove("hide");
     });
-
-    
 
     document
         .body
