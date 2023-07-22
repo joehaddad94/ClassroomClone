@@ -67,6 +67,7 @@ pages.page_index = () => {
     //       console.log(error)
     //     }
     //   }) 
+    
 
     const showPasswordCheckBox = document.getElementById("show-password-input")
     
@@ -80,25 +81,19 @@ pages.page_index = () => {
 
     const login = document.getElementById("login")
 
-    login.addEventListener("click" , () =>{
-        const email_in = document.getElementById("email_in").value 
-        const password_in = document.getElementById("password_in").value 
+    login.addEventListener("click" , async() =>{
+        const email = document.getElementById("email_in").value 
+        const password = document.getElementById("password_in").value 
         const data = {
-            email : email_in,
-            password : password_in
+            email ,
+            password
         }
         
-    });
-    
-    pages.getAPI = async(url) => {
-            try{
-                const response = await axios.post('' , {
-                    email_in : email_in,
-                    password_in : password_in
-            });
+        try{
+            const response = await axios.post('http://localhost/ClassroomClone/back-end/signin.php' , data);             
 
-            } catch (error) {
-            console.error('Login error : ' + error);
-            }
+        } catch (error) {
+            console.error('Login error : ' ,  error);
         }
-}
+    }
+    )}
