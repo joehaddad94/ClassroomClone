@@ -197,6 +197,7 @@
 
 .bottom-classrooms .class {
     width: 18.75rem;
+    height: 18.125rem;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -206,6 +207,7 @@
     cursor: pointer;
     border: 1px solid #ccc;
 }
+
 .bottom-classrooms .class:hover {
     box-shadow: 10px 10px 26px -8px rgba(0,0,0,0.6);
 -webkit-box-shadow: 10px 10px 26px -8px rgba(0,0,0,0.6);
@@ -215,6 +217,14 @@
 .class .assignments,
 .class .top-class {
     padding: 15px;
+}
+
+.class .top-class {
+    height: 100px;
+}
+
+.class .assignments {
+    height: 130px;
 }
 
 .class .top-class {
