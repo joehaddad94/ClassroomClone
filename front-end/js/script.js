@@ -130,7 +130,9 @@ pages.page_signup = () => {
             fetch("http://localhost/ClassroomClone/back-end/signup.php", {
                 method: "POST",
                 body: data
+                
             });
+            window.location.href = "/index.html"
         } catch (error) {
             console.log(error);
         }
@@ -145,6 +147,7 @@ pages.page_classrooms = () => {
     const bottom_classrooms = document.querySelector(".bottom-classrooms");
     const joinClassButton = document.querySelector(".join-class")
     const createClassButton = document.querySelector(".create-class")
+    console.log(createClassButton) 
     const modalCreateButton = document.querySelector(".modal .buttons .create-button")
     const modalCancelButton = document.querySelector(".modal .buttons .cancel-button")
     const classname_input = document.getElementById("classname-input")
@@ -154,6 +157,66 @@ pages.page_classrooms = () => {
     const formElement = document.querySelector("form")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
+
+     // modal functionlity
+
+     const modal = document.querySelector(".modal")
+     const boxModal = document.querySelector(".modal .modal-box")
+     modal.addEventListener("click", (e) => {
+         if (!boxModal.contains(e.target)) {
+             modal
+                 .classList
+                 .toggle("hide");
+         }
+     })
+     createClassButton.addEventListener('click', () => {
+         console.log('clicked') 
+         modal
+             .classList
+             .remove("hide")
+     })
+ 
+     modalCancelButton.addEventListener("click", () => {
+         modal
+             .classList
+             .add("hide")
+     })
+ 
+     // create class setInterval(() => {     console.log("classname", classname);
+     // console.log("section", section);     console.log("subject", subject);
+     // console.log("room", room);     console.log("user_id", user_id); }, 3000)
+ 
+     formElement.addEventListener("submit", (e) => {
+         e.preventDefault();
+ 
+         const classname = classname_input.value;
+         const section = section_input.value;
+         const subject = subject_input.value;
+         const room = room_input.value;
+ 
+         let classData = new FormData();
+         classData.append("class_name", classname);
+         classData.append("section", section);
+         classData.append("subject", subject);
+         classData.append("room", room);
+         classData.append("googlemeet_link", "");
+         classData.append("user_id", user_id);
+ 
+         try {
+             const createClass = async() => {
+                 await pages.postAPI(pages.base_url + "create-class.php", classData);
+                 modal
+                     .classList
+                     .add("hide")
+                 window
+                     .location
+                     .reload()
+             };
+             createClass();
+         } catch (error) {
+             console.log(error);
+         }
+     });
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -183,7 +246,7 @@ pages.page_classrooms = () => {
         let getClasses = async() => {
 
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
-            console.log(response.data)
+            // console.log(response.data)
 
             response
                 .data
@@ -265,71 +328,6 @@ pages.page_classrooms = () => {
                 manage_profile.style.display = "block";
               }    
         })
-    // try {
-    //     const 
-    // } catch (error) {
-    //     console.log(error)
-    // }
-
-    console.log(bottom_classrooms)
-
-    // modal functionlity
-
-    const modal = document.querySelector(".modal")
-    const boxModal = document.querySelector(".modal .modal-box")
-    modal.addEventListener("click", (e) => {
-        if (!boxModal.contains(e.target)) {
-            modal
-                .classList
-                .toggle("hide");
-        }
-    })
-    createClassButton.addEventListener('click', () => {
-        modal
-            .classList
-            .remove("hide")
-    })
-    modalCancelButton.addEventListener("click", () => {
-        modal
-            .classList
-            .add("hide")
-    })
-
-    // create class setInterval(() => {     console.log("classname", classname);
-    // console.log("section", section);     console.log("subject", subject);
-    // console.log("room", room);     console.log("user_id", user_id); }, 3000)
-
-    formElement.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const classname = classname_input.value;
-        const section = section_input.value;
-        const subject = subject_input.value;
-        const room = room_input.value;
-
-        let classData = new FormData();
-        classData.append("class_name", classname);
-        classData.append("section", section);
-        classData.append("subject", subject);
-        classData.append("room", room);
-        classData.append("googlemeet_link", "");
-        classData.append("user_id", user_id);
-
-        try {
-            const createClass = async() => {
-                await pages.postAPI(pages.base_url + "create-class.php", classData);
-                modal
-                    .classList
-                    .add("hide")
-                window
-                    .location
-                    .reload()
-            };
-            createClass();
-        } catch (error) {
-            console.log(error);
-        }
-    });
 
 };
         
