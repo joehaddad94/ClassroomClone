@@ -158,27 +158,6 @@ pages.page_classrooms = () => {
 
     let userData = JSON.parse(localStorage.getItem("userData"))
 
-    // modal functionlity const modal = document.querySelector(".modal") const
-    // boxModal = document.querySelector(".modal .modal-box")
-    // modal.addEventListener("click", (e) => {     if
-    // (!boxModal.contains(e.target)) {         modal             .classList
-    // .toggle("hide");     } }) createClassButton.addEventListener('click', () => {
-    //     console.log('clicked')     modal         .classList .remove("hide") })
-    // modalCancelButton.addEventListener("click", () => { modal         .classList
-    //       .add("hide") }) formElement.addEventListener("submit", (e) => {
-    // e.preventDefault(); const classname = classname_input.value;     const
-    // section = section_input.value;     const subject = subject_input.value; const
-    // room = room_input.value;     let classData = new FormData();
-    // classData.append("class_name", classname);     classData.append("section",
-    // section);     classData.append("subject", subject); classData.append("room",
-    // room);     classData.append("googlemeet_link", "");
-    // classData.append("user_id", user_id);     try {         const createClass =
-    // async() => {             await pages.postAPI(pages.base_url +
-    // "create-class.php", classData);             modal                 .classList
-    //              .add("hide")             window                 .location
-    // .reload()         };         createClass();     } catch (error) {
-    // console.log(error);     } });
-
     burgerIcon.addEventListener("click", () => {
         sidebar
             .classList
@@ -202,6 +181,7 @@ pages.page_classrooms = () => {
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
+    
 
     try {
 
