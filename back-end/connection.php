@@ -13,4 +13,6 @@
     $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if (!$mysqli) {
       die(' connection failed ');
+      
     }
+?>

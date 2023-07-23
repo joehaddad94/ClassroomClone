@@ -11,6 +11,7 @@ if(isset($_POST['user_id']) && isset($_POST['class_id'])){
                                INNER JOIN classes cl ON ass.class_id = cl.class_id 
                                INNER JOIN users u ON ass.user_id = u.user_id 
                                INNER JOIN topics t ON ass.topic_id = t.topic_id 
+                               INNER JOIN grades g ON ass.grade_id = g.grade_id 
                                WHERE ass.class_id = ? AND ass.user_id = ?');
     
     $query->bind_param('ii', $class_id, $user_id);

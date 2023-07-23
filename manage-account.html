@@ -1,95 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="./front-end/styles/index.css"/>
-        <link rel="stylesheet" href="./front-end/styles/signin.css"/>
-        <link rel="stylesheet" href="./front-end/styles/signup.css"/>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"/>
-        <title>Manage - Google Accounts</title>
-    </head>
-    <body>
-        <div class="signup-main">
-            <div class="signup-box">
-                <div class="top-signup-box">
-                    <div>
-                        <img src="./front-end//assets/GoogleLogo.png" alt="Google Logo"/>
-                    </div>
-                    <div class="signup-heading">Manage your acount</div>
-                    <p>Edit your account information</p>
-                </div>
-                <div class="bottom-signup-box">
-                    <div class="inputs">
-                        <div class="row">
-                            <div class="column">
-                                <div>
-                                    <label for="first-name">First Name</label>
-                                </div>
-                                <div>
-                                    <input id="first-name" placeholder="First Name" type="text"/>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div>
-                                    <label for="last-name">Last Name</label>
-                                </div>
-                                <div>
-                                    <input id="last-name" placeholder="Last Name" type="text" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="column">
-                                <div>
-                                    <label for="email">Email</label>
-                                </div>
-                                <div>
-                                    <input id="email" placeholder="Enter your email" type="email" disabled/>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div>
-                                    <label for="password">Password</label>
-                                </div>
-                                <div>
-                                    <input id="password" placeholder="Enter your password" type="password" disabled/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row question-role">
-                            <div class="question">
-                                <div>What's your favourite color?</div>
-                                <input placeholder="Red" type="text" disabled/>
-                            </div>
-                            <div class="role">
-                                <div>Signed up as :</div>
-                                <div class="select">
-                                    <select disabled>
-                                        <option value="Student">Student</option>
-                                        <option value="Teacher">Teacher</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="change-data">                       
-                        <div class="change-button">
-                            <button id="update">Apply changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./front-end/styles/index.css" />
+    <link rel="stylesheet" href="./front-end/styles/signin.css" />
+    <link rel="stylesheet" href="./front-end/styles/signup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Manage - Google Accounts</title>
+  </head>
+  <body>
+    <div class="signup-main">
+      <div class="signup-box">
+        <div class="top-signup-box">
+          <div>
+            <img src="./front-end//assets/GoogleLogo.png" alt="Google Logo" />
+          </div>
+          <div class="signup-heading">Manage your acount</div>
+          <p>Edit your account information</p>
         </div>
-        <script src="front-end/js/axios.min.js"></script>
-        <script src="front-end/js/script.js"></script>
-        <script>
-            pages.loadFor("manage");
-        </script>
-    </body>
+        <div class="bottom-signup-box">
+          <div class="inputs">
+            <div class="row">
+              <div class="column">
+                <div>
+                  <label for="first-name">First Name</label>
+                </div>
+                <div>
+                  <input id="first-name" placeholder="First Name" type="text" />
+                </div>
+              </div>
+              <div class="column">
+                <div>
+                  <label for="last-name">Last Name</label>
+                </div>
+                <div>
+                  <input id="last-name" placeholder="Last Name" type="text" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <div>
+                  <label for="email">Email</label>
+                </div>
+                <div>
+                  <input
+                    id="email"
+                    placeholder="Enter your email"
+                    type="email"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="column">
+                <div>
+                  <label for="password">Password</label>
+                </div>
+                <div>
+                  <input
+                    id="password"
+                    placeholder="Enter your password"
+                    type="password"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row question-role">
+              <div class="question">
+                <div>What's your favourite color?</div>
+                <input placeholder="Red" type="text" disabled />
+              </div>
+              <div class="role">
+                <div>Signed up as :</div>
+                <div class="select">
+                  <select disabled>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="change-data">
+            <div class="change-button">
+              <button id="update">Apply changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="front-end/js/axios.min.js"></script>
+    <script src="front-end/js/script.js"></script>
+    <script>
+      pages.loadFor("manage_account");
+    </script>
+  </body>
 </html>

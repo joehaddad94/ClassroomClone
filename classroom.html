@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./front-end/styles/index.css">
+        <link rel="stylesheet" href="./front-end/styles/classroom.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"/>
+        <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+        <title>Classroom</title>
+    </head>
+    <body>
+        <div class="classroom-navbar">
+            <div class="left-classroom-navbar">
+                <div id="burgerIcon" class="icon burger-icon">
+                    <i class="fa-solid fa-bars fa-lg burger-icon"></i>
+                </div>
+                <div class="classroom-data">
+                    <div class="classroom-name">Test 2</div>
+                    <p class="classroom-section">section</p>
+                </div>
+            </div>
+            <div class="tabs">
+                <div>Stream</div>
+                <div>Classwork</div>
+                <div>People</div>
+            </div>
+            <div class="right-classroom-navbar">
+                <div class="settings-icon">
+                    <i class="fa-solid fa-gear fa-lg"></i>
+                </div>
+                <div>
+                    <i class="fa-solid fa-border-none fa-lg"></i>
+                </div>
+                <div class="profile-pic">
+                    <img
+                        src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                        alt="profile picture">
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="top-main">
+                <div class="customize-button">
+                    <div>
+                        <i class="fa-solid fa-pen"></i>
+                    </div>
+                    <div>Customize</div>
+                </div>
+                <div>
+                    <div class="classroom-data">
+                        <div class="classroom-name">Group Project</div>
+                        <div class="classroom-section">Section A</div>
+                    </div>
+                    <div>i</div>
+                </div>
+            </div>
+            <div class="bottom-main">
+                <div class="bottom-left-main">
+                    <div class="google-meet">
+                        <div>
+                            <div>Class code</div>
+                            <div class="icon">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="google-meet-link">nhucw3p</div>
+                            <div class="icon">
+                                <i class="fa-solid fa-expand"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assignments">
+                        <p>Upcoming</p>
+                        <p>No work due soon</p>
+                        <div>View all</div>
+                    </div>
+                </div>
+                <div class="bottom-right-main">
+                    <div id="announcement-input" class="announcement-input">
+                        <div id="first-state-announcement">
+                            <div class="profile-pic"><img
+                                src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                                alt="profile-pic"></div>
+                            <div><input placeholder="Announce something to your class" type="text"></div>
+                            <div>
+                                <i class="fa-solid fa-share-from-square"></i>
+                            </div>
+                        </div>
+                        <div id="second-state-announcement" class="announcement-post hide">
+                            <div class="text-input">
+                                <div id="editor">
+                                        <p></p>
+                                    </div>
+                                <div id="toolbar" class="toolbar">
+                                    <button class="ql-bold">Bold</button>
+                                    <button class="ql-italic">Italic</button>
+                                    <button class="ql-underline">Underline</button>
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <div class="icons">
+                                    <div class="icon">
+                                        <i class="fa-brands fa-google-drive"></i>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa-brands fa-youtube"></i>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-upload"></i>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-link"></i>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <div id="cancel-button" class="cancel-button">
+                                        <button>Cancel</button>
+                                    </div>
+                                    <div id="post-button" class="post-button">
+                                        <button>Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="announcements">
+                        <div class="announcement">
+                            <div class="announcement-top">
+                                <div>
+                                    <div class="user-data">
+                                        <div class="profile-pic"><img
+                                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                                            alt="profile-picture"></div>
+                                        <div>
+                                            <div class="name">Joe Haddad</div>
+                                            <p class="date">02:32</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                                    </div>
+                                </div>
+                                <div class="announcement-content">
+                                    Mohammad Hussein was here
+                                </div>
+                            </div>
+                            <div class="announcement-comment">
+                                <div class="profile-pic"><img
+                                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                                    alt="profile-picture"></div>
+                                <div class="comment-input"><input placeholder="Add class comment" type="text"></div>
+                                <div class="share-icon">
+                                    <i class="fa-solid fa-share"></i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="announcement">
+                            <div class="announcement-top">
+                                <div>
+                                    <div class="user-data">
+                                        <div class="profile-pic"><img
+                                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                                            alt="profile-picture"></div>
+                                        <div>
+                                            <div class="name">Joe Haddad</div>
+                                            <p class="date">02:32</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                                    </div>
+                                </div>
+                                <div class="announcement-content">
+                                    Mohammad Hussein was here
+                                </div>
+                            </div>
+                            <div class="announcement-comment">
+                                <div class="profile-pic"><img
+                                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                                    alt="profile-picture"></div>
+                                <div class="comment-input"><input placeholder="Add class comment" type="text"></div>
+                                <div class="share-icon">
+                                    <i class="fa-solid fa-share"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                var editor = new Quill('#editor', {
+                    modules: {
+                        toolbar: '#toolbar'
+                    },
+                    theme: 'snow',
+                    placeholder: "Announce something to your class"
+                });
+            </script>
+            <script src="front-end/js/axios.min.js"></script>
+            <script src="front-end/js/script.js"></script>
+            <script>
+                pages.loadFor("classroom");
+            </script>
+
+        </body>
+    </html>
