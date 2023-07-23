@@ -30,58 +30,55 @@ pages.loadFor = (page) => {
 pages.page_index = () => {
 
     const showPasswordCheckBox = document.getElementById("show-password-input")
+    const nextButton = document.getElementById("next")
+    const emailInput = document.getElementById("email")
+    const error = document.querySelector(".error")
 
-    showPasswordCheckBox.addEventListener('change', function () {
-        if (showPasswordCheckBox.checked) {
-            password_in.type = 'text';
-        } else {
-            password_in.type = 'password';
-        }
-    });
+    
 
-    const login = document.getElementById("login")
+    // const login = document.getElementById("login")
 
-    login.addEventListener("click", async() => {
-        const email = document
-            .getElementById("email_in")
-            .value
-        const password = document
-            .getElementById("password_in")
-            .value
-        const errorElement = document.querySelector(".error")
+    // login.addEventListener("click", async() => {
+    //     const email = document
+    //         .getElementById("email_in")
+    //         .value
+    //     const password = document
+    //         .getElementById("password_in")
+    //         .value
+    //     const errorElement = document.querySelector(".error")
 
-        const data = new FormData();
-        data.append("email", email);
-        data.append("password", password)
+    //     const data = new FormData();
+    //     data.append("email", email);
+    //     data.append("password", password)
 
-        try {
-            let response = await pages.postAPI(pages.base_url + "signin.php", data);
+    //     try {
+    //         let response = await pages.postAPI(pages.base_url + "signin.php", data);
 
-            if (response.data.status === "user not found") {
-                errorElement.innerText = "User not found"
-                setTimeout(() => {
-                    errorElement.innerText = ""
-                }, 3000)
-            } else if (response.data.status === "wrong password") {
-                errorElement.innerText = "Wrong Password"
-                setTimeout(() => {
-                    errorElement.innerText = ""
-                }, 3000)
-            } else {
-                const userObject = Object
-                    .keys(response.data)
-                    .reduce((acc, key) => {
-                        if (key !== "status") {
-                            acc[key] = response.data[key]
-                        }
-                        return acc
-                    }, {})
-                localStorage.setItem("userData", JSON.stringify(userObject))
-                window.location.href = "classrooms.html"
-            }
-        } catch (error) {
-            console.error('Login error : ', error);
-        }
+    //         if (response.data.status === "user not found") {
+    //             errorElement.innerText = "User not found"
+    //             setTimeout(() => {
+    //                 errorElement.innerText = ""
+    //             }, 3000)
+    //         } else if (response.data.status === "wrong password") {
+    //             errorElement.innerText = "Wrong Password"
+    //             setTimeout(() => {
+    //                 errorElement.innerText = ""
+    //             }, 3000)
+    //         } else {
+    //             const userObject = Object
+    //                 .keys(response.data)
+    //                 .reduce((acc, key) => {
+    //                     if (key !== "status") {
+    //                         acc[key] = response.data[key]
+    //                     }
+    //                     return acc
+    //                 }, {})
+    //             localStorage.setItem("userData", JSON.stringify(userObject))
+    //             window.location.href = "classrooms.html"
+    //         }
+    //     } catch (error) {
+    //         console.error('Login error : ', error);
+    //     }
     })
 }
 
@@ -165,7 +162,7 @@ pages.page_classrooms = () => {
     // .toggle("hide");     } }) createClassButton.addEventListener('click', () => {
     //     console.log('clicked')     modal         .classList .remove("hide") })
     // modalCancelButton.addEventListener("click", () => { modal         .classList
-    //       .add("hide") }) formElement.addEventListener("submit", (e) => {
+    //      .add("hide") }) formElement.addEventListener("submit", (e) => {
     // e.preventDefault(); const classname = classname_input.value;     const
     // section = section_input.value;     const subject = subject_input.value; const
     // room = room_input.value;     let classData = new FormData();
@@ -175,7 +172,7 @@ pages.page_classrooms = () => {
     // classData.append("user_id", user_id);     try {         const createClass =
     // async() => {             await pages.postAPI(pages.base_url +
     // "create-class.php", classData);             modal                 .classList
-    //              .add("hide")             window                 .location
+    //             .add("hide")             window                 .location
     // .reload()         };         createClass();     } catch (error) {
     // console.log(error);     } });
 
@@ -321,11 +318,17 @@ pages.page_teacher_stream = () => {
             .classList
             .add("text-area")
 
-    cancelButton.addEventListener("click", () => {
-        secondStateAnnoucnement.classList.add("hide")
-        firstStateAnnouncement.classList.remove("hide")
-        annoucementInput.classList.remove("text-area")
-    })
+        cancelButton.addEventListener("click", () => {
+            secondStateAnnoucnement
+                .classList
+                .add("hide")
+            firstStateAnnouncement
+                .classList
+                .remove("hide")
+            annoucementInput
+                .classList
+                .remove("text-area")
+        })
     })
 
     pages.page_forget_password = () => {
@@ -419,12 +422,16 @@ pages.page_teacher_classwork = () => {
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
-        assignmentModal.classList.add("hide")
+        assignmentModal
+            .classList
+            .add("hide")
     })
 
     // open assignment
     createAssignmentButton.addEventListener("click", (e) => {
-        assignmentModal.classList.remove("hide")
+        assignmentModal
+            .classList
+            .remove("hide")
     })
 
     createButton.addEventListener("click", (e) => {
@@ -462,7 +469,9 @@ pages.page_teacher_classwork = () => {
     })
 
     topicCancelButton.addEventListener("click", (e) => {
-        topicModal.classList.add("hide")
+        topicModal
+            .classList
+            .add("hide")
     })
 
 }
