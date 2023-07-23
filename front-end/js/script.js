@@ -180,11 +180,13 @@ pages.page_classrooms = () => {
 const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
 let link = ""
 if (userRole == 1){
-    link = "/teacher-stream"
+    link = "/teacher_stream.html"
 } else {
-    link = "/student-stream"
+    link = "/student_stream.html"
 }
-console.log(link)
+
+let redirect = document.querySelector("#redirect")
+console.log(redirect)
 
 const displayClasses = async (apiUrl) => {
     
@@ -209,7 +211,7 @@ const displayClasses = async (apiUrl) => {
                     </div>
             </div>`;
 
-            bottom_classrooms.innerHTML += `<a href="${link}?id=${item.class_id}"><div class="class">
+            bottom_classrooms.innerHTML += `<a href="${link}?id=${item.class_id}" class="class-link"><div class="class">
             <div class="top-class">
                 <div class="class-title">
                   <p>${item.class_name}</p>
@@ -265,6 +267,16 @@ if (userRole == 1) {
     const studentClassesUrl = pages.base_url + "student-classes.php";
     displayClasses(studentClassesUrl);
 }
+
+// const classLinks = document.querySelectorAll(".class-link");
+// classLinks.forEach((linkElement) => {
+//     linkElement.addEventListener("click", (event) => {
+//         event.preventDefault();
+//         const href = linkElement.getAttribute("href");
+//         window.location.href = href; 
+//     });
+// });
+
 
 
     // modal functionlity
