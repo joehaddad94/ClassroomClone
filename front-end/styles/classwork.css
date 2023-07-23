@@ -247,6 +247,10 @@
     display: none;
 }
 
+.add-topic-modal.show {
+    position: fixed;
+}
+
 .add-topic-modal .box {
     display: flex;
     flex-direction: column;
