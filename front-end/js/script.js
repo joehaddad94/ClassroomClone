@@ -57,27 +57,25 @@ pages.page_index = () => {
         try {
             let response = await pages.postAPI(pages.base_url + "signin.php", data);
 
-            if (response.data.status === "user not found") {
+            if(response.data.status === "user not found") {
                 errorElement.innerText = "User not found"
                 setTimeout(() => {
                     errorElement.innerText = ""
                 }, 3000)
-            } else if (response.data.status === "wrong password") {
+            }else if(response.data.status === "wrong password") {
                 errorElement.innerText = "Wrong Password"
                 setTimeout(() => {
                     errorElement.innerText = ""
                 }, 3000)
-            } else {
-                const userObject = Object
-                    .keys(response.data)
-                    .reduce((acc, key) => {
-                        if (key !== "status") {
-                            acc[key] = response.data[key]
-                        }
-                        return acc
-                    }, {})
+            }else {
+                const userObject = Object.keys(response.data).reduce((acc, key) => {
+                    if (key !== "status") {
+                        acc[key] = response.data[key]
+                    }
+                    return acc
+                }, {})
                 localStorage.setItem("userData", JSON.stringify(userObject))
-                window.location.href = "/classrooms.html"
+                window.location.href = "classrooms.html"
             }
         } catch (error) {
             console.error('Login error : ', error);
@@ -86,47 +84,42 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
+<<<<<<< HEAD
     
+=======
+console.log('hello')
+>>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
     const signup = document.getElementById("signup");
 
-    signup.addEventListener("click", () => {
-        const first_name = document
-            .getElementById("first_name")
-            .value;
-        const last_name = document
-            .getElementById("last_name")
-            .value;
-        const email = document
-            .getElementById("email")
-            .value;
-        const password = document
-            .getElementById("password")
-            .value;
-        const answer = document
-            .getElementById("answer")
-            .value;
+signup.addEventListener("click", () => {
+  const first_name = document.getElementById("first_name").value;
+  const last_name = document.getElementById("last_name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const answer = document.getElementById("answer").value;
 
-        const signup_select = document.getElementById("signup_select");
-        const selected_value = signup_select.value;
-        let roleValue;
+  const signup_select = document.getElementById("signup_select");
+  const selected_value = signup_select.value;
+  let roleValue;
 
-        if (selected_value === "teacher") {
-            roleValue = 1;
-        } else if (selected_value === "student") {
-            roleValue = 2;
-        } else {
-            roleValue = 2;
-        }
+  if (selected_value === "teacher") {
+    roleValue = 1;
+  } else if (selected_value === "student") {
+    roleValue = 2;
+  } else {
+    roleValue = 2; 
+  }
 
-        try {
-            const data = new FormData();
-            data.append("first_name", first_name);
-            data.append("last_name", last_name);
-            data.append("email", email);
-            data.append("password", password);
-            data.append("answer", answer);
-            data.append("role_id", roleValue);
+  try {
+    const data = new FormData();
+    data.append("first_name", first_name);
+    data.append("last_name", last_name);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("answer", answer);
+    data.append("role_id", roleValue);
 
+<<<<<<< HEAD
             fetch("http://localhost/ClassroomClone/back-end/signup.php", {
                 method: "POST",
                 body: data
@@ -136,10 +129,21 @@ pages.page_signup = () => {
         } catch (error) {
             console.log(error);
         }
+=======
+    fetch("http://localhost/ClassroomClone/back-end/signup.php", {
+      method: "POST",
+      body: data,
+>>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
     });
+  } catch (error) {
+    console.log(error);
+  }
+});
 }
 
+
 pages.page_classrooms = () => {
+<<<<<<< HEAD
 
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
@@ -217,6 +221,11 @@ pages.page_classrooms = () => {
              console.log(error);
          }
      });
+=======
+    
+    const burgerIcon = document.getElementById("burgerIcon");
+    const sidebar = document.getElementById("sidebar");
+>>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -232,9 +241,14 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
+<<<<<<< HEAD
         })    
 
     const user_id = JSON
+=======
+        }) 
+          const user_id = JSON
+>>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
@@ -317,6 +331,7 @@ pages.page_classrooms = () => {
         console.log(error + " in loading classes")
     }
 
+<<<<<<< HEAD
 
     const profileBtn = document.getElementById("profile-pic") 
         const manage_profile=document.getElementById("profile-manage");   
@@ -356,3 +371,85 @@ pages.page_manage=()=>{
        
     })
 }
+=======
+    // const getClasses = async() => {     const response = await
+    // pages.getAPI(pages.base_url + "teachers-classes.php", data)
+    // console.log(response) } getClasses()};
+
+pages.page_forget_password = () => {
+    
+    const checkButton = document.getElementById("check-button")
+    const favColorInput = document.getElementById("fav-color")
+
+    checkButton.addEventListener('click', () => {
+        pages.postAPI
+    })
+}
+
+
+
+
+
+
+
+
+
+pages.page_classrooms = async () => {
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const data = new FormData();
+    data.append("user_id",user_id)
+    const classroom_url = pages.base_url + "teachers-classes.php"
+    const response = await pages.postAPI(classroom_url,data);
+    console.log(response.data)
+    console.log(1)
+    const bottom_classroom = document.querySelector(".bottom-classrooms")
+    console.log(bottom_classroom)
+    response.data.map((item) => (
+        bottom_classroom.innerHTML += `         
+        <div class="class">
+        <div class="top-class">
+          <div class="class-title">
+            <p>${item.class_name}</p>
+            <div>
+              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+          </div>
+          <p>Full Stack Web Development Bootcamp</p>
+          <p>Tech Department</p>
+          <div class="profile-pic">
+            <img
+              src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+              alt="Profile Picture"
+            />
+          </div>
+        </div>
+        <div class="assignments">
+          <div class="assignment">
+            <p class="due-date">Due today</p>
+            <p>11:59PM - Professional Development Plan</p>
+          </div>
+          <div class="assignment">
+            <p class="due-date">Due tomorrow</p>
+            <p>11:59PM - Planners(Time Management)</p>
+          </div>
+        </div>
+        <div class="bottom-class">
+          <div class="user-icon">
+            <i class="fa-regular fa-user fa-lg"></i>
+          </div>
+          <div class="folder-icon">
+            <i class="fa-regular fa-folder fa-lg"></i>
+          </div>
+        </div>
+      </div>
+      `
+    ))
+        
+}
+
+
+
+
+}
+>>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
