@@ -301,7 +301,7 @@ pages.page_classrooms = () => {
     });
 };
 
-pages.page_classroom = () => {
+pages.page_teacher_classroom = () => {
 
     const annoucementInput = document.getElementById("announcement-input")
     const firstStateAnnouncement = document.getElementById("first-state-announcement")
@@ -400,7 +400,7 @@ pages.page_classroom = () => {
 
 };
 
-pages.page_classwork = () => {
+pages.page_teacher_classwork = () => {
     const createButton = document.getElementById("create-button")
     const dropDown = document.getElementById("drop-down")
     const topicModal = document.getElementById("topic-modal")

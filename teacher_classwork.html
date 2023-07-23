@@ -12,9 +12,81 @@
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"/>
+        <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
         <title>Classwork</title>
     </head>
     <body>
+        <!-- ASSIGNMENT MODAL -->
+        <div class="modal-assignment">
+            <div class="modal-assignment-header">
+                <div class="modal-assignment-header-left">
+                    <div>
+                        <i class="fa-solid fa-x"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-table-list"></i>
+                    </div>
+                    <div>Assignment</div>
+                </div>
+                <div class="assign-button">
+                    <button>Assign</button>
+                </div>
+            </div>
+            <div class="modal-assignment-bottom">
+                <div class="modal-assignment-main">
+                    <div class="modal-assignment-input">
+                        <input placeholder="Title" type="text">
+                        <div class="text-input">
+                            <div id="editor">
+                                <p></p>
+                            </div>
+                            <div id="toolbar" class="toolbar">
+                                <button class="ql-bold">Bold</button>
+                                <button class="ql-italic">Italic</button>
+                                <button class="ql-underline">Underline</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-assignment-attachments">
+                        <h4>Attach</h4>
+                        <div class="attachments">
+                            <div>
+                                <div class="icon">icon</div>
+                                <div>Drive</div>
+                            </div>
+                            <div>
+                                <div class="icon">icon</div>
+                                <div>Youtube</div>
+                            </div>
+                            <div>
+                                <div class="icon">icon</div>
+                                <div>Create</div>
+                            </div>
+                            <div>
+                                <div class="icon">icon</div>
+                                <div>Upload</div>
+                            </div>
+                            <div>
+                                <div class="icon">icon</div>
+                                <div>Link</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="assignment-sidebar">
+                    <div>
+                        <div>For</div>
+                        <input placeholder="Group Project" type="text">
+                    </div>
+                    <div>
+                        <div>Due</div>
+                        <input placeholder="No due date" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TOPIC MODAL -->
         <div id="topic-modal" class="add-topic-modal hide">
             <div id="topic-box" class="box">
                 <p>Add topic</p>
@@ -159,10 +231,19 @@
                 </div>
             </div>
         </div>
+        <script>
+            var editor = new Quill('#editor', {
+                modules: {
+                    toolbar: '#toolbar'
+                },
+                theme: 'snow',
+                placeholder: "Announce something to your class"
+            });
+        </script>
         <script src="front-end/js/axios.min.js"></script>
         <script src="front-end/js/script.js"></script>
         <script>
-            pages.loadFor("classwork");
+            pages.loadFor("teacher_classwork");
         </script>
     </body>
 </html>
