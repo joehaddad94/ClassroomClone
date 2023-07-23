@@ -3,11 +3,20 @@ include('connection.php');
 
 $topic_name = $_POST['topic_name'];
 
-$query = $mysqli -> prepare('insert into topics (topic_name) values (?)');
-$query->bind_param('s',$topic_name);
-$query->execute();
-if ($query->execute()) {
-    echo "Topic saved successfully!";
+$checkQuery = $mysqli->prepare('SELECT topic_id FROM topics WHERE topic_name = ?');
+$checkQuery->bind_param('s', $topic_name);
+$checkQuery->execute();
+$checkResult = $checkQuery->get_result();
+
+if ($checkResult->num_rows > 0) {
+    echo "Error: Topic already exists!";
 } else {
-    echo "Error: " . $query->error;
+    $insertQuery = $mysqli->prepare('insert into topics (topic_name) values (?)');
+    $insertQuery->bind_param('s', $topic_name);
+
+    if ($insertQuery->execute()) {
+        echo "Topic saved successfully!";
+    } else {
+        echo "Error: " . $insertQuery->error;
+    }
 }
