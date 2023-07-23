@@ -84,11 +84,7 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
-<<<<<<< HEAD
     
-=======
-console.log('hello')
->>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
     const signup = document.getElementById("signup");
 
 signup.addEventListener("click", () => {
@@ -119,7 +115,6 @@ signup.addEventListener("click", () => {
     data.append("answer", answer);
     data.append("role_id", roleValue);
 
-<<<<<<< HEAD
             fetch("http://localhost/ClassroomClone/back-end/signup.php", {
                 method: "POST",
                 body: data
@@ -129,21 +124,12 @@ signup.addEventListener("click", () => {
         } catch (error) {
             console.log(error);
         }
-=======
-    fetch("http://localhost/ClassroomClone/back-end/signup.php", {
-      method: "POST",
-      body: data,
->>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
     });
-  } catch (error) {
-    console.log(error);
-  }
-});
 }
 
 
 pages.page_classrooms = () => {
-<<<<<<< HEAD
+    console.log("classroom page")
 
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
@@ -186,10 +172,6 @@ pages.page_classrooms = () => {
              .add("hide")
      })
  
-     // create class setInterval(() => {     console.log("classname", classname);
-     // console.log("section", section);     console.log("subject", subject);
-     // console.log("room", room);     console.log("user_id", user_id); }, 3000)
- 
      formElement.addEventListener("submit", (e) => {
          e.preventDefault();
  
@@ -221,11 +203,6 @@ pages.page_classrooms = () => {
              console.log(error);
          }
      });
-=======
-    
-    const burgerIcon = document.getElementById("burgerIcon");
-    const sidebar = document.getElementById("sidebar");
->>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -241,26 +218,20 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-<<<<<<< HEAD
         })    
 
+    //Display Classes in classrooms    
     const user_id = JSON
-=======
-        }) 
-          const user_id = JSON
->>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
-    console.log(data)
 
     try {
         
         let getClasses = async() => {
 
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
-            // console.log(response.data)
 
             response
                 .data
@@ -331,7 +302,6 @@ pages.page_classrooms = () => {
         console.log(error + " in loading classes")
     }
 
-<<<<<<< HEAD
 
     const profileBtn = document.getElementById("profile-pic") 
         const manage_profile=document.getElementById("profile-manage");   
@@ -371,85 +341,4 @@ pages.page_manage=()=>{
        
     })
 }
-=======
-    // const getClasses = async() => {     const response = await
-    // pages.getAPI(pages.base_url + "teachers-classes.php", data)
-    // console.log(response) } getClasses()};
 
-pages.page_forget_password = () => {
-    
-    const checkButton = document.getElementById("check-button")
-    const favColorInput = document.getElementById("fav-color")
-
-    checkButton.addEventListener('click', () => {
-        pages.postAPI
-    })
-}
-
-
-
-
-
-
-
-
-
-pages.page_classrooms = async () => {
-    const user = JSON.parse(localStorage.getItem("userData"))
-    const user_id = user.user_id
-    const data = new FormData();
-    data.append("user_id",user_id)
-    const classroom_url = pages.base_url + "teachers-classes.php"
-    const response = await pages.postAPI(classroom_url,data);
-    console.log(response.data)
-    console.log(1)
-    const bottom_classroom = document.querySelector(".bottom-classrooms")
-    console.log(bottom_classroom)
-    response.data.map((item) => (
-        bottom_classroom.innerHTML += `         
-        <div class="class">
-        <div class="top-class">
-          <div class="class-title">
-            <p>${item.class_name}</p>
-            <div>
-              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-            </div>
-          </div>
-          <p>Full Stack Web Development Bootcamp</p>
-          <p>Tech Department</p>
-          <div class="profile-pic">
-            <img
-              src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-              alt="Profile Picture"
-            />
-          </div>
-        </div>
-        <div class="assignments">
-          <div class="assignment">
-            <p class="due-date">Due today</p>
-            <p>11:59PM - Professional Development Plan</p>
-          </div>
-          <div class="assignment">
-            <p class="due-date">Due tomorrow</p>
-            <p>11:59PM - Planners(Time Management)</p>
-          </div>
-        </div>
-        <div class="bottom-class">
-          <div class="user-icon">
-            <i class="fa-regular fa-user fa-lg"></i>
-          </div>
-          <div class="folder-icon">
-            <i class="fa-regular fa-folder fa-lg"></i>
-          </div>
-        </div>
-      </div>
-      `
-    ))
-        
-}
-
-
-
-
-}
->>>>>>> 72d745fe853455c795fd1e7e1da1f2bfb9dd3d5e
