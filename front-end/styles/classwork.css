@@ -339,6 +339,15 @@
     height: 100vh;
     z-index: 99999;
     overflow: hidden;
+    transition: all 0.1s ease;
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -ms-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+}
+
+.modal-assignment.hide {
+    display: none;
 }
 
 .modal-assignment-header {

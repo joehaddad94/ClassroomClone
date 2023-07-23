@@ -411,9 +411,21 @@ pages.page_teacher_classwork = () => {
     const dropDown = document.getElementById("drop-down")
     const topicModal = document.getElementById("topic-modal")
     const createTopicButton = document.getElementById("create-topic-button");
+    const createAssignmentButton = document.getElementById("create-assignment-button")
     const boxTopicModal = document.getElementById("topic-box");
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
-    
+    const assignmentModal = document.getElementById("modal-assignment");
+    const closeAssignmentButton = document.getElementById("close-assignment")
+
+    // close assignment
+    closeAssignmentButton.addEventListener("click", (e) => {
+        assignmentModal.classList.add("hide")
+    })
+
+    // open assignment
+    createAssignmentButton.addEventListener("click", (e) => {
+        assignmentModal.classList.remove("hide")
+    })
 
     createButton.addEventListener("click", (e) => {
         if (!dropDown.contains(e.target)) {
