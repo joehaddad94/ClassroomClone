@@ -105,9 +105,10 @@
             <div class="modal hide">
                 <div class="modal-box">
                     <div class="modal-header">Create class</div>
-                    <div class="inputs">
+                    <form>
+                        <div class="inputs">
                         <div>
-                            <input id="classname-input" placeholder="Class name (required)" type="text">
+                            <input required id="classname-input" placeholder="Class name (required)" type="text">
                         </div>
                         <div>
                             <input id="section-input" placeholder="Section" type="text">
@@ -127,6 +128,7 @@
                             <button>Create</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
             <script src="front-end/js/axios.min.js"></script>
@@ -135,4 +137,4 @@
                 pages.loadFor("classrooms");
             </script>
         </body>
-    </html>
+    </html>
