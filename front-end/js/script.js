@@ -86,7 +86,7 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
-    console.log('hello')
+    
     const signup = document.getElementById("signup");
 
     signup.addEventListener("click", () => {
@@ -138,6 +138,7 @@ pages.page_signup = () => {
 }
 
 pages.page_classrooms = () => {
+
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
     const sidebarClasses = document.querySelector(".sidebar .classes")
@@ -167,13 +168,14 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-        })
+        })    
 
     const user_id = JSON
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
+    console.log(data)
 
     try {
         
@@ -307,6 +309,7 @@ pages.page_classrooms = () => {
         }
     });
 };
+        
 
 pages.page_classroom = () => {
 
