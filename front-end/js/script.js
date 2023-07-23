@@ -247,7 +247,7 @@ pages.page_manage=()=>{
         console.log(response.data.message) 
         new_fname=response.data.new_fname
         new_lname=response.data.new_lname
-        console.log("updated ",new_fname," ",new_lname)      
+        console.log("updated ",new_fname," ",new_lname)     
 
     })}
 

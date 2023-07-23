@@ -14,8 +14,7 @@ if(isset($_POST["new_first_name"]) && $_POST["new_last_name"] != "" && $_POST["u
     $response["message"]="successfully connected!";
     $response["new_fname"]=$new_first_namex;
     $response["new_lname"]=$new_last_namex;
-
-    
+      
     echo json_encode($response);
     return;
 }else{
