@@ -29,57 +29,51 @@ pages.loadFor = (page) => {
 
 pages.page_index = () => {
 
-    const showPasswordCheckBox = document.getElementById("show-password-input")
-    const nextButton = document.getElementById("next")
+    const nextButton = document.querySelector(".next-button")
     const emailInput = document.getElementById("email")
     const error = document.querySelector(".error")
 
-    
+    nextButton.addEventListener("click", async() => {
+        const emailData = emailInput.value;
+        const data = new FormData()
+        data.append("email", emailData)
+
+        if (emailData !== "") {
+            const response = await axios.post(pages.base_url + "check-email.php", data);
+            if (response.data.status === "Failure") {
+                error
+                    .classList
+                    .remove("hide")
+                setTimeout(() => {
+                    error
+                        .classList
+                        .add("hide");
+                }, 3000)
+            } else {
+                localStorage.setItem("userEmail", JSON.stringify(emailData))
+                window.location.href = "signin-password.html"
+            }
+        }
+    })
 
     // const login = document.getElementById("login")
-
-    // login.addEventListener("click", async() => {
-    //     const email = document
-    //         .getElementById("email_in")
-    //         .value
-    //     const password = document
-    //         .getElementById("password_in")
-    //         .value
-    //     const errorElement = document.querySelector(".error")
-
-    //     const data = new FormData();
-    //     data.append("email", email);
-    //     data.append("password", password)
-
-    //     try {
-    //         let response = await pages.postAPI(pages.base_url + "signin.php", data);
-
-    //         if (response.data.status === "user not found") {
-    //             errorElement.innerText = "User not found"
-    //             setTimeout(() => {
-    //                 errorElement.innerText = ""
-    //             }, 3000)
-    //         } else if (response.data.status === "wrong password") {
-    //             errorElement.innerText = "Wrong Password"
-    //             setTimeout(() => {
-    //                 errorElement.innerText = ""
-    //             }, 3000)
-    //         } else {
-    //             const userObject = Object
-    //                 .keys(response.data)
-    //                 .reduce((acc, key) => {
-    //                     if (key !== "status") {
-    //                         acc[key] = response.data[key]
-    //                     }
-    //                     return acc
-    //                 }, {})
-    //             localStorage.setItem("userData", JSON.stringify(userObject))
-    //             window.location.href = "classrooms.html"
-    //         }
-    //     } catch (error) {
-    //         console.error('Login error : ', error);
-    //     }
-    })
+    // login.addEventListener("click", async() => {     const email = document
+    // .getElementById("email_in")         .value     const password = document
+    // .getElementById("password_in")         .value     const errorElement =
+    // document.querySelector(".error")     const data = new FormData();
+    // data.append("email", email);     data.append("password", password)     try {
+    //   let response = await pages.postAPI(pages.base_url + "signin.php", data);
+    //   if (response.data.status === "user not found") { errorElement.innerText =
+    // "User not found"             setTimeout(() => { errorElement.innerText = ""
+    //           }, 3000)         } else if (response.data.status === "wrong
+    // password") { errorElement.innerText = "Wrong Password" setTimeout(() => {
+    //        errorElement.innerText = ""             }, 3000)         } else {
+    //       const userObject = Object .keys(response.data)
+    // .reduce((acc, key) => {           if (key !== "status") {
+    //     acc[key] = response.data[key]             }                     return
+    // acc }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
+    // window.location.href = "classrooms.html"         }     } catch (error) {
+    // console.error('Login error : ', error);     } })
 }
 
 pages.page_signup = () => {
@@ -154,27 +148,6 @@ pages.page_classrooms = () => {
     const formElement = document.querySelector("form")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
-
-    // modal functionlity const modal = document.querySelector(".modal") const
-    // boxModal = document.querySelector(".modal .modal-box")
-    // modal.addEventListener("click", (e) => {     if
-    // (!boxModal.contains(e.target)) {         modal             .classList
-    // .toggle("hide");     } }) createClassButton.addEventListener('click', () => {
-    //     console.log('clicked')     modal         .classList .remove("hide") })
-    // modalCancelButton.addEventListener("click", () => { modal         .classList
-    //      .add("hide") }) formElement.addEventListener("submit", (e) => {
-    // e.preventDefault(); const classname = classname_input.value;     const
-    // section = section_input.value;     const subject = subject_input.value; const
-    // room = room_input.value;     let classData = new FormData();
-    // classData.append("class_name", classname);     classData.append("section",
-    // section);     classData.append("subject", subject); classData.append("room",
-    // room);     classData.append("googlemeet_link", "");
-    // classData.append("user_id", user_id);     try {         const createClass =
-    // async() => {             await pages.postAPI(pages.base_url +
-    // "create-class.php", classData);             modal                 .classList
-    //             .add("hide")             window                 .location
-    // .reload()         };         createClass();     } catch (error) {
-    // console.log(error);     } });
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -331,17 +304,6 @@ pages.page_teacher_stream = () => {
         })
     })
 
-    pages.page_forget_password = () => {
-
-        const checkButton = document.getElementById("check-button")
-        const favColorInput = document.getElementById("fav-color")
-
-        checkButton.addEventListener('click', () => {
-            pages.postAPI
-
-        })
-    }
-
     pages.page_classrooms = async() => {
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
@@ -474,6 +436,57 @@ pages.page_teacher_classwork = () => {
             .add("hide")
     })
 
+}
+
+pages.page_signin_password = () => {
+    const showPasswordCheckBox = document.getElementById("show-password-input");
+    const passwordInput = document.getElementById("password_input")
+    const loginButton = document.getElementById("login-button")
+    let error = document.querySelector(".error")
+
+    showPasswordCheckBox.addEventListener("change", function () {
+        if (showPasswordCheckBox.checked) {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    });
+
+    let userEmail = JSON.parse(localStorage.getItem("userEmail"))
+
+    loginButton.addEventListener('click', async() => {
+
+        let password = passwordInput.value;
+
+        let data = new FormData();
+        data.append("email", userEmail);
+        data.append("password", password);
+
+        let response = await axios.post(pages.base_url + "signin.php", data)
+        console.log(response.data)
+        if (response.data.status === "wrong password") {
+            error
+                .classList
+                .remove("hide")
+            setTimeout(() => {
+                error
+                    .classList
+                    .add("hide")
+            }, 3000)
+        } else {
+            const userObject = Object
+                .keys(response.data)
+                .reduce((acc, key) => {
+                    if (key !== "status") {
+                        acc[key] = response.data[key];
+                    }
+                    return acc;
+                }, {});
+            localStorage.removeItem('userEmail')
+            localStorage.setItem("userData", JSON.stringify(userObject))
+            window.location.href = "classrooms.html"
+        }
+    })
 }
 
 pages.page_forget_password = () => {
