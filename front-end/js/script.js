@@ -84,11 +84,7 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
-<<<<<<< HEAD
-console.log('hello')
-=======
     
->>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
     const signup = document.getElementById("signup");
 
 signup.addEventListener("click", () => {
@@ -119,25 +115,93 @@ signup.addEventListener("click", () => {
     data.append("answer", answer);
     data.append("role_id", roleValue);
 
-    fetch("http://localhost/ClassroomClone/back-end/signup.php", {
-      method: "POST",
-      body: data,
+            fetch("http://localhost/ClassroomClone/back-end/signup.php", {
+                method: "POST",
+                body: data
+                
+            });
+            window.location.href = "/index.html"
+        } catch (error) {
+            console.log(error);
+        }
     });
-  } catch (error) {
-    console.log(error);
-  }
-});
 }
 
 
 pages.page_classrooms = () => {
-<<<<<<< HEAD
-    
-=======
+    console.log("classroom page")
 
->>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
+    const sidebarClasses = document.querySelector(".sidebar .classes")
+    const bottom_classrooms = document.querySelector(".bottom-classrooms");
+    const joinClassButton = document.querySelector(".join-class")
+    const createClassButton = document.querySelector(".create-class")
+    const modalCreateButton = document.querySelector(".modal .buttons .create-button")
+    const modalCancelButton = document.querySelector(".modal .buttons .cancel-button")
+    const classname_input = document.getElementById("classname-input")
+    const section_input = document.getElementById("section-input");
+    const subject_input = document.getElementById("subject-input");
+    const room_input = document.getElementById("room-input");
+    const formElement = document.querySelector("form")
+
+    let userData = JSON.parse(localStorage.getItem("userData"))
+
+     // modal functionlity
+
+     const modal = document.querySelector(".modal")
+     const boxModal = document.querySelector(".modal .modal-box")
+     modal.addEventListener("click", (e) => {
+         if (!boxModal.contains(e.target)) {
+             modal
+                 .classList
+                 .toggle("hide");
+         }
+     })
+     createClassButton.addEventListener('click', () => {
+         console.log('clicked') 
+         modal
+             .classList
+             .remove("hide")
+     })
+ 
+     modalCancelButton.addEventListener("click", () => {
+         modal
+             .classList
+             .add("hide")
+     })
+ 
+     formElement.addEventListener("submit", (e) => {
+         e.preventDefault();
+ 
+         const classname = classname_input.value;
+         const section = section_input.value;
+         const subject = subject_input.value;
+         const room = room_input.value;
+ 
+         let classData = new FormData();
+         classData.append("class_name", classname);
+         classData.append("section", section);
+         classData.append("subject", subject);
+         classData.append("room", room);
+         classData.append("googlemeet_link", "");
+         classData.append("user_id", user_id);
+ 
+         try {
+             const createClass = async() => {
+                 await pages.postAPI(pages.base_url + "create-class.php", classData);
+                 modal
+                     .classList
+                     .add("hide")
+                 window
+                     .location
+                     .reload()
+             };
+             createClass();
+         } catch (error) {
+             console.log(error);
+         }
+     });
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -153,26 +217,28 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
-<<<<<<< HEAD
-        }) 
-          const user_id = JSON
-=======
         })    
 
-    const user_id = JSON
->>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
+
+    //Display Classes in classrooms    
+
+       const user_id = JSON
+
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
-    console.log(data)
 
     try {
+        
         let getClasses = async() => {
+
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
-            console.log(response.data)
-            response.data.map((item) => (
-                sidebarClasses.innerHTML += `<div class="class">
+
+            response
+                .data
+                .map((item) => {
+                    sidebarClasses.innerHTML += `<div class="class">
                         <div>${item.class_name[0]}</div>
                         <div class="class-data">
                             <p class="class-name">
@@ -181,7 +247,7 @@ pages.page_classrooms = () => {
                             <p class="class-desc">${item.section}</p>
                         </div>
                     </div>`
-            ))
+                })
         }
         getClasses()
   
@@ -189,19 +255,6 @@ pages.page_classrooms = () => {
         console.log(error + " in loading classes")
     }
 
-<<<<<<< HEAD
-    // const getClasses = async() => {     const response = await
-    // pages.getAPI(pages.base_url + "teachers-classes.php", data)
-    // console.log(response) } getClasses()};
-
-pages.page_forget_password = () => {
-    
-    const checkButton = document.getElementById("check-button")
-    const favColorInput = document.getElementById("fav-color")
-
-    checkButton.addEventListener('click', () => {
-        pages.postAPI
-=======
 
     const profileBtn = document.getElementById("profile-pic") 
         const manage_profile=document.getElementById("profile-manage");   
@@ -238,7 +291,16 @@ pages.page_manage=()=>{
         console.log(response.data.success)  
         console.log(response.data.message)   
        
->>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
+    })
+
+pages.page_forget_password = () => {
+    
+    const checkButton = document.getElementById("check-button")
+    const favColorInput = document.getElementById("fav-color")
+
+    checkButton.addEventListener('click', () => {
+        pages.postAPI
+
     })
 }
 
@@ -305,6 +367,26 @@ pages.page_classrooms = async () => {
 }
 
 
+    const profileBtn = document.getElementById("profile-pic") 
+        const manage_profile=document.getElementById("profile-manage");   
+        profileBtn.addEventListener("click", () =>{
+            console.log("Click profile successful");            
+            if (manage_profile.style.display !== "none") {
+                manage_profile.style.display = "none";
+              } else {
+                manage_profile.style.display = "block";
+              }    
+        })
 
+};
 
+pages.page_forget_password = () => {
+
+    const checkButton = document.getElementById("check-button")
+    const favColorInput = document.getElementById("fav-color")
+
+    checkButton.addEventListener('click', () => {
+        pages.postAPI
+    })
 }
+
