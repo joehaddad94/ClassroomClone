@@ -5,3 +5,181 @@
 .tabs div:nth-child(2) {
     border-bottom: 5px solid black;
 }
+
+.classwork-content {
+    display: flex;
+    gap: 100px;
+    width: 100%;
+    /* max-width: 77%; */
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 30px;
+}
+
+.topics-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    width: 150px;
+}
+
+.topics-section > p {
+    color: #03988f;
+    padding: 15px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.topics-section div {
+    display: flex;
+    flex-direction: column;
+    font-size: .875rem;
+    color: #737373;
+    cursor: pointer;
+}
+
+.topics-section div p {
+    padding: 15px 12px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    width: 100%;
+}
+
+.topics-section > p:hover, .topics-section div p:hover {
+    background-color: #007a830a;
+}
+
+/* classwork right */
+
+.classwork-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 820px;
+    flex: 9;
+}
+
+.classwork-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.classwork-header .button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    color: white;
+    background-color: #007b83;
+    cursor: pointer;
+}
+
+.classwork-header .apps {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.apps div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #007b83;
+    padding: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+    font-size: .875rem;
+    font-weight: bold;
+}
+
+.apps div:hover {
+    background-color: #007a830a;
+}
+
+.classwork-content .topics {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.classwork-content .topics .topic {
+    display: flex;
+    flex-direction: column;
+}
+
+.classwork-content .topics .topic .topic-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #007b83;
+    color: #007b83;
+    font-size: 1.2rem;
+}
+
+.classwork-content .topic .topic-name {
+    font-size: 1.5625rem;
+    font-weight: bold;
+}
+
+.classwork-content .topic .assignments {
+    display: flex;
+    flex-direction: column;
+}
+
+.classwork-content .topic .assignments .assignment {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.classwork-content .topic .assignment .assignment-data {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.classwork-content .assignment-data div:first-child {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #007b83;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.classwork-content .assignment-data .assignment-name {
+    font-size: .9375rem;
+}
+
+.classwork-content .assignment .date {
+    color: #737373;
+    font-size: .75rem;
+}

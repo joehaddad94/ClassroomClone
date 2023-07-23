@@ -8,7 +8,7 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .left-classroom-navbar, .tabs, .right-classroom-navbar {
