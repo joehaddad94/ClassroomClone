@@ -438,6 +438,8 @@ pages.page_classroom = () => {
 pages.page_classwork = () => {
     const createButton = document.getElementById("create-button")
     const dropDown = document.getElementById("drop-down")
+    const topicModal = document.getElementById("topic-modal")
+    const createTopicButton = document.getElementById(".create-topic-button");
 
     createButton.addEventListener("click", () => {
         dropDown.classList.toggle("hide")
@@ -449,6 +451,10 @@ pages.page_classwork = () => {
             dropDown.classList.add("hide")
         }
     })
+
+    // topicModal.addEventListener("click", (e) => {
+    //     if
+    // })
 
 }
 
