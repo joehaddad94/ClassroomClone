@@ -19,12 +19,9 @@ if(isset($_POST['user_id']) && $_POST['class_id']!=""){
         $response[] = $row;
           }
         }
-
-
     }else {
     $response['message'] = 'not found';
 }
-
 echo json_encode($response);
 
 ?>
