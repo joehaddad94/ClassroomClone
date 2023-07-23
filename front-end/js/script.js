@@ -84,7 +84,11 @@ pages.page_index = () => {
 }
 
 pages.page_signup = () => {
+<<<<<<< HEAD
 console.log('hello')
+=======
+    
+>>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
     const signup = document.getElementById("signup");
 
 signup.addEventListener("click", () => {
@@ -127,7 +131,11 @@ signup.addEventListener("click", () => {
 
 
 pages.page_classrooms = () => {
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
 
@@ -145,12 +153,19 @@ pages.page_classrooms = () => {
                     .classList
                     .add("hide");
             }
+<<<<<<< HEAD
         }) 
           const user_id = JSON
+=======
+        })    
+
+    const user_id = JSON
+>>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
+    console.log(data)
 
     try {
         let getClasses = async() => {
@@ -169,20 +184,12 @@ pages.page_classrooms = () => {
             ))
         }
         getClasses()
-        // console.log("classes " + classes)
-        // sidebarClasses.innerHTML += `<div class="class">
-        //                 <div>F</div>
-        //                 <div class="class-data">
-        //                     <p class="class-name">
-        //                         FSW 23&24 | Soft Skills
-        //                     </p>
-        //                     <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
-        //                 </div>
-        //             </div>`;
+  
     } catch (error) {
         console.log(error + " in loading classes")
     }
 
+<<<<<<< HEAD
     // const getClasses = async() => {     const response = await
     // pages.getAPI(pages.base_url + "teachers-classes.php", data)
     // console.log(response) } getClasses()};
@@ -194,6 +201,44 @@ pages.page_forget_password = () => {
 
     checkButton.addEventListener('click', () => {
         pages.postAPI
+=======
+
+    const profileBtn = document.getElementById("profile-pic") 
+        const manage_profile=document.getElementById("profile-manage");   
+        profileBtn.addEventListener("click", () =>{
+            console.log("Click profile successful");            
+            if (manage_profile.style.display !== "none") {
+                manage_profile.style.display = "none";
+              } else {
+                manage_profile.style.display = "block";
+              }    
+        })
+};
+        
+
+pages.page_manage=()=>{
+    btnUpdate=document.getElementById('update')
+    
+    btnUpdate.addEventListener("click",async()=>{
+        console.log("editing  your info will occur here")
+        new_first_name=document.getElementById("first-name").value
+        new_last_name=document.getElementById("last-name").value
+        user_id=JSON.parse(localStorage.getItem("userData")).user_id
+        console.log(user_id)
+        console.log(new_first_name)
+        console.log(new_last_name)
+        
+        const data = new FormData();
+        data.append("new_first_name", new_first_name);
+        data.append("new_last_name", new_last_name);
+        console.log(data)
+        const manage_url = pages.base_url + "update-account.php"
+        const response = await pages.postAPI(manage_url, data)
+        console.log(response)
+        console.log(response.data.success)  
+        console.log(response.data.message)   
+       
+>>>>>>> 5c412e93eadf5881d623beaa435cf6ade8f50825
     })
 }
 
