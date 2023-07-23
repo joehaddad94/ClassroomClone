@@ -10,11 +10,6 @@ if(isset($_POST["new_first_name"]) && $_POST["new_last_name"] != "" && $_POST["u
     $query = $mysqli->prepare('update users set first_name=?,last_name=? where user_id=?');
     $query->bind_param('ssi', $new_first_namex,$new_last_namex,$user_idx);
     $query->execute();
-
-    // $query->store_result();
-    // $query->bind_result($user_idx, $new_first_namex,$new_last_namex);
-    // $query->fetch();
-
     $response["success"] = "you made it ".$user_idx." -". $new_first_namex." ! ";
     $response["message"]="successfully connected!";
     $response["new_fname"]=$new_first_namex;

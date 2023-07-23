@@ -22,7 +22,7 @@ pages.postAPI = async(api_url, api_data) => {
         pages.print_message("Error from Linking (POST)" + error)
     }
 }
-pages.puttAPI = async(api_url, api_data) => {
+pages.putAPI = async(api_url, api_data) => {
     try {
         return await axios.put(api_url, api_data);
     } catch (error) {
@@ -241,12 +241,12 @@ pages.page_manage=()=>{
         data.append("user_id", user_id);        
         console.log(data)
         const manage_url = pages.base_url + "update-account.php"
-        const response = await pages.puttAPI(manage_url, data)
-        console.log(response)
+        const response = await pages.postAPI(manage_url, data)
+        console.log(response.data)
         console.log(response.data.success)  
         console.log(response.data.message) 
         new_fname=response.data.new_fname
-        new_lname=resonse.data.new_lname
+        new_lname=response.data.new_lname
         console.log("updated ",new_fname," ",new_lname)      
 
     })}
