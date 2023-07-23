@@ -137,7 +137,6 @@ pages.page_classrooms = () => {
     const bottom_classrooms = document.querySelector(".bottom-classrooms");
     const joinClassButton = document.querySelector(".join-class")
     const createClassButton = document.querySelector(".create-class")
-    console.log(createClassButton) 
     const modalCreateButton = document.querySelector(".modal .buttons .create-button")
     const modalCancelButton = document.querySelector(".modal .buttons .cancel-button")
     const classname_input = document.getElementById("classname-input")
@@ -315,30 +314,14 @@ pages.page_classrooms = () => {
         })
 
 };
-        
 
-pages.page_manage=()=>{
-    btnUpdate=document.getElementById('update')
-    
-    btnUpdate.addEventListener("click",async()=>{
-        console.log("editing  your info will occur here")
-        new_first_name=document.getElementById("first-name").value
-        new_last_name=document.getElementById("last-name").value
-        user_id=JSON.parse(localStorage.getItem("userData")).user_id
-        console.log(user_id)
-        console.log(new_first_name)
-        console.log(new_last_name)
-        
-        const data = new FormData();
-        data.append("new_first_name", new_first_name);
-        data.append("new_last_name", new_last_name);
-        console.log(data)
-        const manage_url = pages.base_url + "update-account.php"
-        const response = await pages.postAPI(manage_url, data)
-        console.log(response)
-        console.log(response.data.success)  
-        console.log(response.data.message)   
-       
+pages.page_forget_password = () => {
+
+    const checkButton = document.getElementById("check-button")
+    const favColorInput = document.getElementById("fav-color")
+
+    checkButton.addEventListener('click', () => {
+        pages.postAPI
     })
 }
 
