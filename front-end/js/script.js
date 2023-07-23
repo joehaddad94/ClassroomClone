@@ -317,8 +317,6 @@ pages.page_classroom = () => {
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
 
-    console.log(postButton)
-
     firstStateAnnouncement.addEventListener('click', () => {
         firstStateAnnouncement.classList.add("hide")
         secondStateAnnoucnement.classList.remove("hide")
