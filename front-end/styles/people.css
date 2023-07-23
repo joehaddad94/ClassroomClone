@@ -1,0 +1,53 @@
+.tabs div:first-child {
+    border-bottom: 0 !important;
+}
+
+.tabs div:last-child {
+    border-bottom: 5px solid black;
+}
+
+.people-content {
+    width: 100%;
+    padding: 0 20px;
+    max-width: 780px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.teacher {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-title, .teacher-title {
+    padding: 20px;
+    border-bottom: 1px solid #737373;
+}
+
+.student-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.teacher-title, .student-title > div:first-child {
+    font-size: 2.1875rem;
+}
+
+.teacher-data, .student {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+}
+
+.student:not(:last-of-type) {
+    border-bottom: 1px solid #ccc;
+}
+
+.teacher-name, .student-name {
+    color: #3c4043;
+    font-size: 1.0625rem;
+}

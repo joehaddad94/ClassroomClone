@@ -1,14 +1,22 @@
 body {
-    padding-bottom: 100px;
+    padding-bottom: 40px;
 }
 
 .classroom-navbar {
-    height: 80px;
+    height: 79px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 30px;
+    background-color: white;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    /* box-shadow: 0px 5px 24px -2px rgba(0,0,0,0.92);
+-webkit-box-shadow: 0px 5px 24px -2px rgba(0,0,0,0.92);
+-moz-box-shadow: 0px 5px 24px -2px rgba(0,0,0,0.92); */
 }
 
 .left-classroom-navbar, .tabs, .right-classroom-navbar {
@@ -66,6 +74,7 @@ body {
     -moz-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
+    font-size: 1rem;
 }
 
 .classroom-navbar .tabs div:hover {
@@ -114,7 +123,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
     padding: 0 30px;
 }
