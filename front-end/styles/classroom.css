@@ -1,9 +1,9 @@
 body {
-    padding-bottom: 100px;
+    padding-bottom: 40px;
 }
 
 .classroom-navbar {
-    height: 80px;
+    height: 79px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -74,6 +74,7 @@ body {
     -moz-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
+    font-size: 1rem;
 }
 
 .classroom-navbar .tabs div:hover {

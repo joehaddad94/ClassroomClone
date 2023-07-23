@@ -21,10 +21,19 @@
     flex-direction: column;
 }
 
-.title {
+.student-title, .teacher-title {
     padding: 20px;
     border-bottom: 1px solid #737373;
-    font-size: 1.875rem;
+}
+
+.student-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.teacher-title, .student-title > div:first-child {
+    font-size: 2.1875rem;
 }
 
 .teacher-data, .student {
