@@ -140,7 +140,7 @@ pages.page_signup = () => {
 }
 
 pages.page_classrooms = () => {
-    console.log("classroom page")
+
 
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
@@ -158,6 +158,7 @@ pages.page_classrooms = () => {
 
     let userData = JSON.parse(localStorage.getItem("userData"))
 
+
     burgerIcon.addEventListener("click", () => {
         sidebar
             .classList
@@ -174,55 +175,102 @@ pages.page_classrooms = () => {
             }
         })
 
-    //Display Classes in classrooms
 
     const user_id = JSON
         .parse(localStorage.getItem("userData"))
         .user_id
     const data = new FormData();
     data.append("user_id", user_id);
+// Function to fetch and display classes
+const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
+let link = ""
+if (userRole == 1){
+    link = "/teacher-stream"
+} else {
+    link = "/student-stream"
+}
+console.log(link)
+
+const displayClasses = async (apiUrl) => {
     
 
     try {
+        const user_id = JSON.parse(localStorage.getItem("userData")).user_id;
+        const data = new FormData();
+        data.append("user_id", user_id);
 
-        let getClasses = async() => {
+        const response = await pages.postAPI(apiUrl, data);
+        const bottom_classrooms = document.querySelector(".bottom-classrooms");
 
-            let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
+        response.data.forEach((item) => {
+            sidebarClasses.innerHTML += `
+            <div class="class">
+                <div>${item.class_name[0]}</div>
+                    <div class="class-data">
+                        <p class="class-name">
+                            ${item.class_name}
+                        </p>
+                        <p class="class-desc">${item.section}</p>
+                    </div>
+            </div>`;
 
-            response
-                .data
-                .map((item) => {
-                    sidebarClasses.innerHTML += `<div class="class">
-                        <div>${item.class_name[0]}</div>
-                        <div class="class-data">
-                            <p class="class-name">
-                                ${item.class_name}
-                            </p>
-                            <p class="class-desc">${item.section}</p>
+            bottom_classrooms.innerHTML += `<a href="${link}?id=${item.class_id}"><div class="class">
+            <div class="top-class">
+                <div class="class-title">
+                  <p>${item.class_name}</p>
+              <div>
+              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                </div>
+            </div>
+            <p>${item.room || ""}</p>
+            <p>${userData.first_name + userData.last_name}</p>
+            <div class="profile-pic"><img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="Profile Picture"></div>
+            </div>
+                <div class="assignments">
+                    <div class="assignment">
+                    <p class="due-date">Due today</p>
+                    <p>11:59PM - Professional Development Plan</p>
+                    </div>
+                    <div class="assignment">
+                        <p class="due-date">Due tomorrow</p>
+                        <p>11:59PM - Planners(Time Management)</p>
+                    </div>
+                    </div>
+                    <div class="bottom-class">
+                        <div class="user-icon">
+                            <i class="fa-regular fa-user fa-lg"></i>
                         </div>
-                    </div>`
-                })
-        }
-        getClasses()
+                        <div class="folder-icon">
+                            <i class="fa-regular fa-folder fa-lg"></i>
+                        </div>
+                    </div>
+                </div></a>`;
+        });
 
         // checking for the user to set the button in the navbar
-        let userRole = JSON
-            .parse(localStorage.getItem("userData"))
-            .role_id
-
+        const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
         if (userRole === 1) {
-            joinClassButton
-                .classList
-                .add("hide")
+            joinClassButton.classList.add("hide");
         } else {
-            createClassButton
-                .classList
-                .add("hide")
+            createClassButton.classList.add("hide");
         }
-
     } catch (error) {
-        console.log(error + " in loading classes")
+        console.log("Error in loading classes:", error);
     }
+};
+
+// Call the function for teacher or student view
+
+if (userRole == 1) {
+    const teacherClassesUrl = pages.base_url + "teachers-classes.php";
+    displayClasses(teacherClassesUrl);
+} else {
+    const studentClassesUrl = pages.base_url + "student-classes.php";
+    displayClasses(studentClassesUrl);
+}
+
 
     // modal functionlity
 
