@@ -84,8 +84,8 @@
                     </div>
                 </div>
                 <div class="bottom-right-main">
-                    <div class="announcement-input text-area">
-                        <!-- <div>
+                    <div id="announcement-input" class="announcement-input">
+                        <div id="first-state-announcement">
                             <div class="profile-pic"><img
                                 src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
                                 alt="profile-pic"></div>
@@ -93,12 +93,9 @@
                             <div>
                                 <i class="fa-solid fa-share-from-square"></i>
                             </div>
-                        </div> -->
-                        <div>
+                        </div>
+                        <div id="second-state-announcement" class="announcement-post hide">
                             <div class="text-input">
-                                <!-- <textarea placeholder="Announce something to your class">
-                                    
-                                </textarea> -->
                                 <div id="editor">
                                         <p></p>
                                     </div>
@@ -124,10 +121,10 @@
                                     </div>
                                 </div>
                                 <div class="buttons">
-                                    <div class="cancel-button">
+                                    <div id="cancel-button" class="cancel-button">
                                         <button>Cancel</button>
                                     </div>
-                                    <div class="post-button">
+                                    <div id="post-button" class="post-button">
                                         <button>Post</button>
                                     </div>
                                 </div>
@@ -201,11 +198,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Create the editor container -->
-            <!-- <div id="editor">
-                <p>Hello World!</p>
-            </div> -->
 
             <script>
                 var editor = new Quill('#editor', {

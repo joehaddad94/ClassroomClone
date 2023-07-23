@@ -275,10 +275,6 @@ pages.page_classrooms = () => {
             .add("hide")
     })
 
-    // create class setInterval(() => {     console.log("classname", classname);
-    // console.log("section", section);     console.log("subject", subject);
-    // console.log("room", room);     console.log("user_id", user_id); }, 3000)
-
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -310,8 +306,32 @@ pages.page_classrooms = () => {
             console.log(error);
         }
     });
-
 };
+
+pages.page_classroom = () => {
+
+    const annoucementInput = document.getElementById("announcement-input")
+    const firstStateAnnouncement = document.getElementById("first-state-announcement")
+    const secondStateAnnoucnement = document.getElementById("second-state-announcement")
+    const cancelButton = document.querySelector("#second-state-announcement .buttons .cancel-button")
+    const postButton = document.querySelector(".post-button")
+    const editor = document.querySelector("#editor p")
+
+    console.log(postButton)
+
+    firstStateAnnouncement.addEventListener('click', () => {
+        firstStateAnnouncement.classList.add("hide")
+        secondStateAnnoucnement.classList.remove("hide")
+        annoucementInput.classList.add("text-area")
+    })
+
+    cancelButton.addEventListener("click", () => {
+        firstStateAnnouncement.classList.remove("hide");
+        secondStateAnnoucnement.classList.add("hide");
+        annoucementInput.classList.remove("text-area");
+    })
+
+}
 
 pages.page_forget_password = () => {
 
