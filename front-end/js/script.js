@@ -301,7 +301,7 @@ pages.page_classrooms = () => {
     });
 };
 
-pages.page_teacher_classroom = () => {
+pages.page_teacher_stream = () => {
 
     const annoucementInput = document.getElementById("announcement-input")
     const firstStateAnnouncement = document.getElementById("first-state-announcement")
@@ -320,6 +320,12 @@ pages.page_teacher_classroom = () => {
         annoucementInput
             .classList
             .add("text-area")
+
+    cancelButton.addEventListener("click", () => {
+        secondStateAnnoucnement.classList.add("hide")
+        firstStateAnnouncement.classList.remove("hide")
+        annoucementInput.classList.remove("text-area")
+    })
     })
 
     pages.page_forget_password = () => {
@@ -407,6 +413,7 @@ pages.page_teacher_classwork = () => {
     const createTopicButton = document.getElementById("create-topic-button");
     const boxTopicModal = document.getElementById("topic-box");
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
+    
 
     createButton.addEventListener("click", (e) => {
         if (!dropDown.contains(e.target)) {

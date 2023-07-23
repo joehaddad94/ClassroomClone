@@ -18,10 +18,10 @@
     </head>
     <body>
         <!-- ASSIGNMENT MODAL -->
-        <div class="modal-assignment">
+        <div id="modal-assignmet" class="modal-assignment">
             <div class="modal-assignment-header">
                 <div class="modal-assignment-header-left">
-                    <div>
+                    <div class="x-icon">
                         <i class="fa-solid fa-x"></i>
                     </div>
                     <div>
@@ -36,12 +36,22 @@
             <div class="modal-assignment-bottom">
                 <div class="modal-assignment-main">
                     <div class="modal-assignment-input">
-                        <input placeholder="Title" type="text">
-                        <div class="text-input">
+                        <input class="assignment-title" placeholder="Title" type="text">
+                        <!-- <div class="text-input">
                             <div id="editor">
                                 <p></p>
                             </div>
                             <div id="toolbar" class="toolbar">
+                                <button class="ql-bold">Bold</button>
+                                <button class="ql-italic">Italic</button>
+                                <button class="ql-underline">Underline</button>
+                            </div>
+                        </div> -->
+                        <div class="text-input">
+                            <div id="editor" style="border: none;">
+                                <p></p>
+                            </div>
+                            <div id="toolbar" class="toolbar" style="border: none">
                                 <button class="ql-bold">Bold</button>
                                 <button class="ql-italic">Italic</button>
                                 <button class="ql-underline">Underline</button>
@@ -52,23 +62,33 @@
                         <h4>Attach</h4>
                         <div class="attachments">
                             <div>
-                                <div class="icon">icon</div>
+                                <div class="icon">
+                                    <i class="fa-brands fa-google-drive"></i>
+                                </div>
                                 <div>Drive</div>
                             </div>
                             <div>
-                                <div class="icon">icon</div>
+                                <div class="icon">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </div>
                                 <div>Youtube</div>
                             </div>
                             <div>
-                                <div class="icon">icon</div>
+                                <div class="icon">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
                                 <div>Create</div>
                             </div>
                             <div>
-                                <div class="icon">icon</div>
+                                <div class="icon">
+                                    <i class="fa-solid fa-upload"></i>
+                                </div>
                                 <div>Upload</div>
                             </div>
                             <div>
-                                <div class="icon">icon</div>
+                                <div class="icon">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
                                 <div>Link</div>
                             </div>
                         </div>

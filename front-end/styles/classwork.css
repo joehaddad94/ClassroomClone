@@ -327,3 +327,170 @@
     background-color: #007a8318;
 }
 
+/* ASSIGNMENT MODAL */
+
+.modal-assignment {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+.modal-assignment-header {
+    padding: 10px 15px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-assignment-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-assignment-header-left > div:not(:last-child) {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal-assignment-header-left > div:not(:last-child):hover {
+    background-color: #73737349;
+}
+
+.modal-assignment-header .assign-button button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    background-color: #007b83;
+    color: white;
+    font-size: .9375rem;
+    cursor: pointer;
+}
+
+.modal-assignment-bottom {
+    display: flex;
+    height: 100%;
+}
+
+.modal-assignment-main {
+    width: 100%;
+    padding: 30px;
+    background-color: #f8f9fa;
+}
+
+.modal-assignment-input, .modal-assignment-attachments {
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.modal-assignment-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-assignment-input .assignment-title, .modal-assignment-input .text-input {
+    padding: 20px 15px;
+    background-color: #f8f9fa;
+    outline: none;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    -o-border-radius: 5px 5px 0 0;
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-assignment-input .text-input {
+
+}
+
+#editor {
+    padding: 0;
+    min-height: 100px;
+}
+
+.toolbar {
+    border: none;
+}
+
+.modal-assignment-attachments {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.modal-assignment-attachments .attachments {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.modal-assignment-attachments .attachments > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-assignment-attachments .attachments > div .icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.assignment-sidebar {
+    width: 450px;
+    z-index: 99999 !important;
+    overflow: hidden !important;
+    background-color: white;
+    padding: 30px;
+}
+
+.assignment-sidebar > div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
