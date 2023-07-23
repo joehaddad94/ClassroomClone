@@ -31,3 +31,35 @@ if ($email_exists == 0) {
 
 
 echo json_encode($response);
+
+
+//  try {
+//         let getClasses = async() => {
+//             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
+//             console.log(response.data)
+//             response.data.map((item) => (
+//                 sidebarClasses.innerHTML += `<div class="class">
+//                         <div>${item.class_name[0]}</div>
+//                         <div class="class-data">
+//                             <p class="class-name">
+//                                 ${item.class_name}
+//                             </p>
+//                             <p class="class-desc">${item.section}</p>
+//                         </div>
+//                     </div>`
+//             ))
+//         }
+//         getClasses()
+//         // console.log("classes " + classes)
+//         // sidebarClasses.innerHTML += `<div class="class">
+//         //                 <div>F</div>
+//         //                 <div class="class-data">
+//         //                     <p class="class-name">
+//         //                         FSW 23&24 | Soft Skills
+//         //                     </p>
+//         //                     <p class="class-desc">Full Stack Web Development Bootcamp from here</p>
+//         //                 </div>
+//         //             </div>`;
+//     } catch (error) {
+//         console.log(error + " in loading classes")
+//     }

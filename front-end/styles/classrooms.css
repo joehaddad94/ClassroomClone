@@ -399,22 +399,22 @@ a {
 /* Sidebar */
 
 .sidebar {
-  height: 100vh;
-  width: 300px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-  box-shadow: 4px 0 13px 0 rgba(0, 0, 0, 0.11);
-  -webkit-box-shadow: 4px 0 13px 0 rgba(0, 0, 0, 0.11);
-  -moz-box-shadow: 4px 0 13px 0 rgba(0, 0, 0, 0.18);
-  transition: left 0.3s ease-in-out;
-  -webkit-transition: left 0.3s ease-in-out;
-  -moz-transition: left 0.3s ease-in-out;
-  -ms-transition: left 0.3s ease-in-out;
-  -o-transition: left 0.3s ease-in-out;
+    height: 100vh;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 4px 0 13px 0 rgba(0,0,0,0.11);
+    -webkit-box-shadow: 4px 0 13px 0 rgba(0,0,0,0.11);
+    -moz-box-shadow: 4px 0 13px 0 rgba(0,0,0,0.18);
+    transition: left 0.3s ease-in-out;
+    -webkit-transition: left 0.3s ease-in-out;
+    -moz-transition: left 0.3s ease-in-out;
+    -ms-transition: left 0.3s ease-in-out;
+    -o-transition: left 0.3s ease-in-out;
 }
 
 .sidebar.hide {
