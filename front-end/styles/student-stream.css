@@ -1,0 +1,45 @@
+/* <div class="google-meet">
+                        <div>
+                            <div><div><img src="./front-end/assets/logo_meet_2020q4_color_2x_web_96dp.png" alt="Google Meet"></div><div>Meet</div></div>
+                            <div class="icon">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <button>Join</button>
+                        </div>
+                    </div> */
+
+.google-meet {
+    display: flex;
+    flex-direction: column;
+    gap: 10px !important;
+}
+
+.google-meet-top > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.google-meet-logo {
+    width: 25px;
+    height: 25px;
+}
+
+.google-meet-logo img {
+    width: 100%;
+}
+
+.google-meet button {
+    border-radius: 5px;
+    padding: 8px 10px;
+    background-color: black;
+    color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
