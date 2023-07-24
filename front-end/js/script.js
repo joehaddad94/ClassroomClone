@@ -183,6 +183,7 @@ const displayClasses = async (apiUrl) => {
 
     try {
         const user_id = JSON.parse(localStorage.getItem("userData")).user_id;
+        console.log(user_id)
         const data = new FormData();
         data.append("user_id", user_id);
 
@@ -714,6 +715,33 @@ pages.page_teacher_classwork = () => {
             .add("hide")
     })
 
+    //add topic
+    const add_topic = document.getElementById('add-button');
+    add_topic.addEventListener('click', async() => {
+        const topic_name = document.querySelector('#topic-area').innerHTML;
+        console.log(topic_name)
+
+        try {
+            const data = new FormData();
+            data.append('topic_name' , topic_name);
+            let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    })
+
+    add_topic.addEventListener('click', async () => {
+      const topic_name = document.querySelector('#topic-area').value;   
+      try {
+        const data = new FormData();
+        data.append('topic_name', topic_name);
+        let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
 }
 
 pages.page_signin_password = () => {
@@ -993,5 +1021,4 @@ pages.page_student_stream=async()=>{
         window.open(link)
     })
 }
-
 
