@@ -626,6 +626,7 @@ pages.page_teacher_stream = () => {
         <div class="class">
         <div class="top-class">
           <div class="class-title">
+
             <p>${item.class_name}</p>
             <div>
               <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
@@ -675,6 +676,44 @@ pages.page_teacher_stream = () => {
     // })
 
 };
+
+                
+pages.page_student_stream =  async ()  =>{
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const class_id = 8;            
+    const data = new FormData();
+    data.append("user_id", user_id)
+    data.append("class_id",class_id);
+    const classroom_url = pages.base_url + "return_ass_ann.php"
+    const response = await pages.postAPI(classroom_url, data);
+    console.log(response.data)
+    const assignment = document.querySelector(".announcements")
+   
+    response.data.map((item) => (assignment.innerHTML += `   
+    <div class="announcement">
+    <div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${item.title}</div>
+                    <p class="date">${item.due_date}</p>
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+                ${item.instructions}
+        </div>
+    </div>     
+
+  `))
+}
 
 pages.page_teacher_classwork = () => {
     const createButton = document.getElementById("create-button")
@@ -793,6 +832,8 @@ pages.page_signin_password = () => {
         }
     })
 }
+
+
 
 pages.page_forget_password = () => {
 
