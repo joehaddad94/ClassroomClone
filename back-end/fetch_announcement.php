@@ -5,7 +5,7 @@ include('connection.php');
 $class_id = $_POST['class_id'];
 
 
-$query = $mysqli->prepare('SELECT * FROM classes WHERE class_id = ?');
+$query = $mysqli->prepare('SELECT * FROM announcements JOIN classes ON announcements.class_id = classes.class_id  WHERE classes.class_id = ? ORDER BY announcement_id DESC');
 $query->bind_param('i', $class_id);
 $query->execute();
 
