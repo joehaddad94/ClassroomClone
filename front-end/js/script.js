@@ -342,13 +342,63 @@ if (userRole == 1) {
 };
 
 pages.page_teacher_stream = () => {
+    const user = JSON.parse(localStorage.getItem("userData"))
+        const user_id = user.user_id
+        const first_name = user.first_name
+        const last_name = user.last_name
+        console.log(first_name)
+        console.log(last_name)
 
     //Get query Parameter
     const queryParamsString = window.location.search;
-    console.log(queryParamsString)
     const queryParams = new URLSearchParams(queryParamsString);
-    const q = queryParams.get('id');
-    console.log(q);   
+    const class_id = queryParams.get('id');
+    console.log(class_id);
+    
+    //Load announcements
+    document.addEventListener('DOMContentLoaded', async function() {
+        const data_class_id = new FormData();
+        data_class_id.append("class_id", class_id);
+
+        const class_url = pages.base_url + "fetch_announcement.php"
+        const response = await pages.postAPI(class_url, data_class_id);
+        const description = response.data[0].description
+        console.log(response)
+        console.log(description)
+
+        const announcement = document.querySelector(".announcement")
+        console.log(announcement)
+        announcement.innerHTML += `<div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${first_name} ${last_name}</div>
+                    <!--<p class="date">02:32</p>-->
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+            ${description}
+        </div>
+    </div>
+    <div class="announcement-comment">
+        <div class="profile-pic"><img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="profile-picture"></div>
+        <div class="comment-input"><input placeholder="Add class comment" type="text"></div>
+        <div class="share-icon">
+            <i class="fa-solid fa-share"></i>
+        </div>
+    </div>` 
+
+
+    });
 
     //Create announcement functionality and design
     const annoucementInput = document.getElementById("announcement-input")
@@ -392,14 +442,15 @@ pages.page_teacher_stream = () => {
     pages.page_classrooms = async() => {
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
+
         const data = new FormData();
         data.append("user_id", user_id)
+
         const classroom_url = pages.base_url + "teachers-classes.php"
         const response = await pages.postAPI(classroom_url, data);
-        console.log(response.data)
-        console.log(1)
+        
         const bottom_classroom = document.querySelector(".bottom-classrooms")
-        console.log(bottom_classroom)
+        
         response
             .data
             .map((item) => (bottom_classroom.innerHTML += `         
