@@ -36,31 +36,49 @@
                 <!-- <div class="settings-icon">
                     <i class="fa-solid fa-gear fa-lg"></i>
                 </div> -->
-                <div>
-                    <i class="fa-solid fa-border-none fa-lg"></i>
-                </div>
-                <div class="profile-pic">
-                    <img
-                        src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-                        alt="profile picture">
-                </div>
-            </div>
+        <div>
+          <i class="fa-solid fa-border-none fa-lg"></i>
         </div>
-        <div class="main" style="margin-top: 20px;">
-            <div class="top-main">
-                <!-- <div class="customize-button">
+        <div class="profile-pic">
+          <img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="profile picture"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="main" style="margin-top: 20px">
+      <div class="top-main">
+        <!-- <div class="customize-button">
                     <div>
                         <i class="fa-solid fa-pen"></i>
                     </div>
                     <div>Customize</div>
                 </div> -->
-                <div style="margin-top: auto;">
-                    <div class="classroom-data">
-                        <div class="classroom-name">Group Project</div>
-                        <div class="classroom-section">Section A</div>
-                    </div>
-                    <div style="visibility: hidden;">i</div>
+        <div style="margin-top: auto">
+          <div class="classroom-data">
+            <div class="classroom-name">Group Project</div>
+            <div class="classroom-section">Section A</div>
+          </div>
+          <div style="visibility: hidden">i</div>
+        </div>
+      </div>
+      <div class="bottom-main">
+        <div class="bottom-left-main">
+          <div class="google-meet">
+            <div class="google-meet-top">
+              <div>
+                <div class="google-meet-logo">
+                  <img
+                    src="./front-end/assets/logo_meet_2020q4_color_2x_web_96dp.png"
+                    alt="Google Meet"
+                  />
                 </div>
+                <div>Meet</div>
+              </div>
+              <div class="icon">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
             </div>
             <div class="bottom-main">
                 <div class="bottom-left-main">
@@ -135,7 +153,8 @@
                         </div>
 
                     </div> -->
-                    <div class="announcements">
+          <div class="announcements"></div>
+          <!--
                         <div class="announcement">
                             <div class="announcement-top">
                                 <div>
@@ -156,47 +175,24 @@
                                     Mohammad Hussein was here
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+        </div>
+      </div>
+    </div>
 
-                        <div class="announcement">
-                            <div class="announcement-top">
-                                <div>
-                                    <div class="user-data">
-                                        <div class="profile-pic"><img
-                                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-                                            alt="profile-picture"></div>
-                                        <div>
-                                            <div class="name">Joe Haddad</div>
-                                            <p class="date">02:32</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-                                    </div>
-                                </div>
-                                <div class="announcement-content">
-                                    Mohammad Hussein was here
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                var editor = new Quill('#editor', {
-                    modules: {
-                        toolbar: '#toolbar'
-                    },
-                    theme: 'snow',
-                    placeholder: "Announce something to your class"
-                });
-            </script>
-            <script src="front-end/js/axios.min.js"></script>
-            <script src="front-end/js/script.js"></script>
-            <script>
-                pages.loadFor("student_stream");
-            </script>
-
-        </body>
-    </html>
+    <script>
+      var editor = new Quill("#editor", {
+        modules: {
+          toolbar: "#toolbar",
+        },
+        theme: "snow",
+        placeholder: "Announce something to your class",
+      });
+    </script>
+    <script src="front-end/js/axios.min.js"></script>
+    <script src="front-end/js/script.js"></script>
+    <script>
+      pages.loadFor("student_stream");
+    </script>
+  </body>
+</html>
