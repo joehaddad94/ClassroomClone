@@ -529,6 +529,41 @@ pages.page_teacher_people=async()=>{
         '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
         '</div>';
     }
+
+
+    const data_s = new FormData();
+    data_s.append("class_id",class_id);
+   let student_info=document.getElementById('student')
+    // const teacher_name=document.getElementById('tname')
+
+    const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
+    console.log(response_s.data)
+    datay=response_s.data
+    var result_s = [];
+    for (var i = 0, len = datay.length; i < len; i++)
+    {
+        var res_s = datay[i];
+        result_s.push({
+            'first_name':res_s.first_name,
+            'last_name':res_s.last_name,
+            
+        });
+        console.log(res_s)
+        console.log(res_s.first_name+" "+res_s.last_name)
+        student_info.innerHTML += '<div class="student">' +
+        '<div class="profile-pic">' +
+        '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+        '</div>' +
+        '<div class="student-name">' + res_s.first_name +" "+res_s.last_name+ '</div>' +
+        '</div>';
+    }
+
+
+
+
+
+
+
     
 
 }
