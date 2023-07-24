@@ -602,3 +602,19 @@ for (let i = 0; i < numRows; i++) {
     '</div>';
     }  
 }
+pages.page_student_stream=async()=>{
+
+    const class_id=1     
+    btn_join=document.getElementById('btnJoin')
+    const data = new FormData();    
+    data.append("class_id",class_id);    
+    const response = await pages.postAPI(pages.base_url + "get-google-meet-link.php", data);
+    console.log(response.data)
+    var link=response.data[0]
+    console.log("link :",link)
+    btn_join.addEventListener('click',()=>{
+        window.open(link)
+    })
+    }
+
+
