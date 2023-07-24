@@ -29,60 +29,50 @@ pages.loadFor = (page) => {
 
 pages.page_index = () => {
 
-    const showPasswordCheckBox = document.getElementById("show-password-input")
+    const nextButton = document.querySelector(".next-button")
+    const emailInput = document.getElementById("email")
+    const error = document.querySelector(".error")
 
-    showPasswordCheckBox.addEventListener('change', function () {
-        if (showPasswordCheckBox.checked) {
-            password_in.type = 'text';
-        } else {
-            password_in.type = 'password';
-        }
-    });
+    nextButton.addEventListener("click", async() => {
+        const emailData = emailInput.value;
+        const data = new FormData()
+        data.append("email", emailData)
 
-    const login = document.getElementById("login")
-
-    login.addEventListener("click", async() => {
-        const email = document
-            .getElementById("email_in")
-            .value
-        const password = document
-            .getElementById("password_in")
-            .value
-        const errorElement = document.querySelector(".error")
-
-        const data = new FormData();
-        data.append("email", email);
-        data.append("password", password)
-
-        try {
-            let response = await pages.postAPI(pages.base_url + "signin.php", data);
-
-            if (response.data.status === "user not found") {
-                errorElement.innerText = "User not found"
+        if (emailData !== "") {
+            const response = await axios.post(pages.base_url + "check-email.php", data);
+            if (response.data.status === "Failure") {
+                error
+                    .classList
+                    .remove("hide")
                 setTimeout(() => {
-                    errorElement.innerText = ""
-                }, 3000)
-            } else if (response.data.status === "wrong password") {
-                errorElement.innerText = "Wrong Password"
-                setTimeout(() => {
-                    errorElement.innerText = ""
+                    error
+                        .classList
+                        .add("hide");
                 }, 3000)
             } else {
-                const userObject = Object
-                    .keys(response.data)
-                    .reduce((acc, key) => {
-                        if (key !== "status") {
-                            acc[key] = response.data[key]
-                        }
-                        return acc
-                    }, {})
-                localStorage.setItem("userData", JSON.stringify(userObject))
-                window.location.href = "classrooms.html"
+                localStorage.setItem("userEmail", JSON.stringify(emailData))
+                window.location.href = "signin_password.html"
             }
-        } catch (error) {
-            console.error('Login error : ', error);
         }
     })
+
+    // const login = document.getElementById("login")
+    // login.addEventListener("click", async() => {     const email = document
+    // .getElementById("email_in")         .value     const password = document
+    // .getElementById("password_in")         .value     const errorElement =
+    // document.querySelector(".error")     const data = new FormData();
+    // data.append("email", email);     data.append("password", password)     try {
+    // let response = await pages.postAPI(pages.base_url + "signin.php", data); if
+    // (response.data.status === "user not found") { errorElement.innerText = "User
+    // not found"             setTimeout(() => { errorElement.innerText = "" },
+    // 3000)         } else if (response.data.status === "wrong password") {
+    // errorElement.innerText = "Wrong Password" setTimeout(() => {
+    // errorElement.innerText = ""             }, 3000)         } else { const
+    // userObject = Object .keys(response.data) .reduce((acc, key) => {    if (key
+    // !== "status") {     acc[key] = response.data[key]             }    return acc
+    // }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
+    // window.location.href = "classrooms.html" }     } catch (error) {
+    // console.error('Login error : ', error);     } })
 }
 
 pages.page_signup = () => {
@@ -153,10 +143,11 @@ pages.page_classrooms = () => {
     const section_input = document.getElementById("section-input");
     const subject_input = document.getElementById("subject-input");
     const room_input = document.getElementById("room-input");
+    const googleMeetLinkInput = document.getElementById("googleMeetLink-input");
     const formElement = document.querySelector("form")
+    const signoutElement = document.getElementById("sign-out")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
-
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -284,7 +275,7 @@ if (userRole == 1) {
 
 
 
-    // modal functionlity
+    // create class modal functionlity
 
     const modal = document.querySelector(".modal")
     const boxModal = document.querySelector(".modal .modal-box")
@@ -308,6 +299,20 @@ if (userRole == 1) {
             .add("hide")
     })
 
+    // function to create class code
+    function generateRandomCode() {
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let code = "";
+        const codeLength = 7;
+
+        for (let i = 0; i < codeLength; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            code += characters.charAt(randomIndex);
+        }
+
+        return code;
+    }
+
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -315,30 +320,90 @@ if (userRole == 1) {
         const section = section_input.value;
         const subject = subject_input.value;
         const room = room_input.value;
+        const googleMeetLink = googleMeetLinkInput.value;
+        const classCode = generateRandomCode();
 
         let classData = new FormData();
         classData.append("class_name", classname);
         classData.append("section", section);
         classData.append("subject", subject);
         classData.append("room", room);
-        classData.append("googlemeet_link", "");
+        classData.append("googlemeet_link", googleMeetLink);
+        classData.append("class_code", classCode);
         classData.append("user_id", user_id);
 
         try {
             const createClass = async() => {
-                await pages.postAPI(pages.base_url + "create-class.php", classData);
+                const response = await pages.postAPI(pages.base_url + "create-class.php", classData);
+                console.log(response.data);
                 modal
                     .classList
-                    .add("hide")
+                    .add("hide");
                 window
                     .location
-                    .reload()
+                    .reload();
             };
             createClass();
         } catch (error) {
             console.log(error);
         }
     });
+
+    // manage account modal functionality
+    const profileBtn = document.getElementById("profile-pic");
+    const manageAccountModal = document.getElementById("manage-account-modal");
+    const manageAccountButton = document.querySelector(".manage-account-button")
+
+    profileBtn.addEventListener('click', () => {
+        manageAccountModal
+            .classList
+            .remove("hide")
+    })
+
+    manageAccountButton.addEventListener("click", () => {
+        window.location.href = "manage_account.html"
+    })
+
+    document
+        .body
+        .addEventListener("click", (e) => {
+            if (!manageAccountModal.classList.contains("hide") && !profileBtn.contains(e.target) && !manageAccountModal.contains(e.target)) {
+                manageAccountModal
+                    .classList
+                    .add("hide");
+            }
+        });
+
+    // sign Out functionality
+    signoutElement.addEventListener("click", () => {
+        localStorage.removeItem("userData")
+        window.location.href = "index.html"
+    })
+
+    // join class modal functionality
+    const joinClassModal = document.getElementById("join-class-modal")
+    const closeJoinModalButton = document.querySelector(".close-join-class-icon");
+    const joinClassName = document.querySelector(".join-class-modal-bottom .name");
+    const joinClassEmail = document.querySelector(".join-class-modal-bottom .email");
+
+    let userEmail = JSON.parse(localStorage.getItem("userData")).email
+    let userName = JSON.parse(localStorage.getItem("userData")).first_name + " " + JSON.parse(localStorage.getItem("userData")).last_name
+
+    joinClassName.innerText = userName
+    joinClassEmail.innerText = userEmail
+
+    joinClassButton.addEventListener("click", () => {
+        joinClassModal
+            .classList
+            .remove("hide")
+        document.body.classList.add("no-overflow")
+    })
+
+    closeJoinModalButton.addEventListener("click", () => {
+        joinClassModal.classList.add("hide")
+        document.body.classList.remove("no-overflow");
+    })
+
 };
 
 pages.page_teacher_stream = () => {
@@ -496,11 +561,17 @@ pages.page_teacher_stream = () => {
             .classList
             .add("text-area")
 
-    cancelButton.addEventListener("click", () => {
-        secondStateAnnoucnement.classList.add("hide")
-        firstStateAnnouncement.classList.remove("hide")
-        annoucementInput.classList.remove("text-area")
-    })
+        cancelButton.addEventListener("click", () => {
+            secondStateAnnoucnement
+                .classList
+                .add("hide")
+            firstStateAnnouncement
+                .classList
+                .remove("hide")
+            annoucementInput
+                .classList
+                .remove("text-area")
+        })
 
     
     })
@@ -519,15 +590,14 @@ pages.page_teacher_stream = () => {
     pages.page_classrooms = async() => {
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
-
         const data = new FormData();
         data.append("user_id", user_id)
-
         const classroom_url = pages.base_url + "teachers-classes.php"
         const response = await pages.postAPI(classroom_url, data);
-        
+        console.log(response.data)
+        console.log(1)
         const bottom_classroom = document.querySelector(".bottom-classrooms")
-        
+        console.log(bottom_classroom)
         response
             .data
             .map((item) => (bottom_classroom.innerHTML += `         
@@ -597,12 +667,16 @@ pages.page_teacher_classwork = () => {
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
-        assignmentModal.classList.add("hide")
+        assignmentModal
+            .classList
+            .add("hide")
     })
 
     // open assignment
     createAssignmentButton.addEventListener("click", (e) => {
-        assignmentModal.classList.remove("hide")
+        assignmentModal
+            .classList
+            .remove("hide")
     })
 
     createButton.addEventListener("click", (e) => {
@@ -640,17 +714,162 @@ pages.page_teacher_classwork = () => {
     })
 
     topicCancelButton.addEventListener("click", (e) => {
-        topicModal.classList.add("hide")
+        topicModal
+            .classList
+            .add("hide")
     })
 
 }
 
+pages.page_signin_password = () => {
+    const showPasswordCheckBox = document.getElementById("show-password-input");
+    const passwordInput = document.getElementById("password_input")
+    const loginButton = document.getElementById("login-button")
+    let error = document.querySelector(".error")
+
+    showPasswordCheckBox.addEventListener("change", function () {
+        if (showPasswordCheckBox.checked) {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    });
+
+    let userEmail = JSON.parse(localStorage.getItem("userEmail"))
+
+    loginButton.addEventListener('click', async() => {
+
+        let password = passwordInput.value;
+
+        let data = new FormData();
+        data.append("email", userEmail);
+        data.append("password", password);
+
+        let response = await axios.post(pages.base_url + "signin.php", data)
+        console.log(response.data)
+        if (response.data.status === "wrong password") {
+            error
+                .classList
+                .remove("hide")
+            setTimeout(() => {
+                error
+                    .classList
+                    .add("hide")
+            }, 3000)
+        } else {
+            const userObject = Object
+                .keys(response.data)
+                .reduce((acc, key) => {
+                    if (key !== "status") {
+                        acc[key] = response.data[key];
+                    }
+                    return acc;
+                }, {});
+            localStorage.removeItem('userEmail')
+            localStorage.setItem("userData", JSON.stringify(userObject))
+            window.location.href = "classrooms.html"
+        }
+    })
+}
+
 pages.page_forget_password = () => {
 
+    const userEmail = JSON.parse(localStorage.getItem('userEmail'))
+    const emailElement = document.querySelector(".email")
+    const answerInput = document.getElementById("fav-color")
     const checkButton = document.getElementById("check-button")
-    const favColorInput = document.getElementById("fav-color")
+    const changePasswordButton = document.getElementById("change-password-button")
+    const answerError = document.querySelector(".answer-error")
+    const passwordsError = document.querySelector(".passwords-error")
+    const passwordInput = document.getElementById("password")
+    const confirmPasswordInput = document.getElementById("confirm-password")
 
-    checkButton.addEventListener('click', () => {
-        pages.postAPI
+    emailElement.innerText = userEmail
+
+    checkButton.addEventListener("click", async() => {
+        console.log("checked")
+        let answer = answerInput.value
+
+        if (answer !== "") {
+            let data = new FormData();
+            data.append("email", userEmail);
+            data.append("answer", answer);
+
+            let response = await axios.post(pages.base_url + "check-answer.php", data);
+            console.log(response.data);
+            if (response.data.answer_check === "Wrong answer") {
+                answerError
+                    .classList
+                    .remove("hide")
+                setTimeout(() => {
+                    answerError
+                        .classList
+                        .add("hide")
+                }, 3000)
+            } else {
+                answerInput.value = ""
+                answerInput.disabled = true
+                checkButton
+                    .classList
+                    .add("hide")
+                changePasswordButton
+                    .classList
+                    .remove("hide")
+                passwordInput.disabled = false
+                confirmPasswordInput.disabled = false
+            }
+        }
     })
+
+    changePasswordButton.addEventListener("click", async() => {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            passwordsError
+                .classList
+                .remove("hide")
+            setTimeout(() => {
+                passwordsError
+                    .classList
+                    .add("hide")
+            }, 3000)
+        } else {
+            let data = new FormData()
+            data.append("email", userEmail)
+            data.append("new password", passwordInput.value)
+
+            let response = await axios.post(pages.base_url + "change-password.php", data)
+            window.location.href = "index.html"
+        }
+    })
+
+}
+
+pages.page_manage_account = () => {
+    const emailElement = document.querySelector(".email");
+    const firstNameElement = document.getElementById("first-name");
+    const lastNameElement = document.getElementById("last-name");
+    const applyChangesButton = document.getElementById("apply-changes-button");
+
+    let user_id = JSON
+        .parse(localStorage.getItem("userData"))
+        .user_id;
+    let user_email = JSON
+        .parse(localStorage.getItem("userData"))
+        .email;
+    emailElement.innerText = user_email;
+
+    applyChangesButton.addEventListener("click", async() => {
+        let firstName = firstNameElement.value;
+        let lastName = lastNameElement.value;
+
+        let data = new FormData()
+        data.append("user_id", user_id)
+        data.append("new_first_name", firstName)
+        data.append("new_last_name", lastName)
+
+        if (firstName !== "" || lastName !== "") {
+            let response = await axios.post(pages.base_url + "update-account.php", data)
+            localStorage.setItem("userData", JSON.stringify(response.data))
+            window.location.href = "classrooms.html"
+        }
+    });
 }
