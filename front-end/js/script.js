@@ -382,8 +382,14 @@ if (userRole == 1) {
     const joinClassName = document.querySelector(".join-class-modal-bottom .name");
     const joinClassEmail = document.querySelector(".join-class-modal-bottom .email");
 
-    let userEmail = JSON.parse(localStorage.getItem("userData")).email
-    let userName = JSON.parse(localStorage.getItem("userData")).first_name + " " + JSON.parse(localStorage.getItem("userData")).last_name
+    let userEmail = JSON
+        .parse(localStorage.getItem("userData"))
+        .email
+    let userName = JSON
+        .parse(localStorage.getItem("userData"))
+        .first_name + " " + JSON
+        .parse(localStorage.getItem("userData"))
+        .last_name
 
     joinClassName.innerText = userName
     joinClassEmail.innerText = userEmail
@@ -392,12 +398,20 @@ if (userRole == 1) {
         joinClassModal
             .classList
             .remove("hide")
-        document.body.classList.add("no-overflow")
+        document
+            .body
+            .classList
+            .add("no-overflow")
     })
 
     closeJoinModalButton.addEventListener("click", () => {
-        joinClassModal.classList.add("hide")
-        document.body.classList.remove("no-overflow");
+        joinClassModal
+            .classList
+            .add("hide")
+        document
+            .body
+            .classList
+            .remove("no-overflow");
     })
 
 };
@@ -637,16 +651,16 @@ pages.page_teacher_stream = () => {
 
     }
 
-    // const profileBtn = document.getElementById("profile-pic")
-    // const manage_profile = document.getElementById("profile-manage");
-    // profileBtn.addEventListener("click", () => {
-    //     console.log("Click profile successful");
-    //     if (manage_profile.style.display !== "none") {
-    //         manage_profile.style.display = "none";
-    //     } else {
-    //         manage_profile.style.display = "block";
-    //     }
-    // })
+    const profileBtn = document.getElementById("profile-pic")
+    const manage_profile = document.getElementById("profile-manage");
+    profileBtn.addEventListener("click", () => {
+        console.log("Click profile successful");
+        if (manage_profile.style.display !== "none") {
+            manage_profile.style.display = "none";
+        } else {
+            manage_profile.style.display = "block";
+        }
+    })
 
 };
 
@@ -742,6 +756,63 @@ pages.page_teacher_classwork = () => {
       }
     });
 
+    // assignment sidebar
+    const dropdownToggle = document.getElementById("dropdownToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const dropDownClasses = document.getElementById("dropdownMenu")
+    const userId = JSON
+        .parse(localStorage.getItem("userData"))
+        .user_id
+
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+
+    const data = new FormData()
+    data.append("user_id", userId)
+
+    // get the classes and display them
+    try {
+        let getClasses = async() => {
+            let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data)
+            response.data.map((item, index) => {
+                dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input type="checkbox" value=${item.class_name}>
+                                            ${item.class_name}</label>
+                                    </div>`;
+            })
+            console.log(response.data)
+        }
+        getClasses()
+    } catch (error) {
+        console.log(error)
+    }
+
+    // get the topics fo the class and display them
+    
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (i === 0) {
+            checkboxes[i].checked = true;
+            dropdownToggle.innerHTML = `<div>${checkboxes[i].value}</div><div><i class="fa-solid fa-caret-down"></i></div>`;
+        } else {
+            checkboxes.checked = false;
+        }
+    }
+
+    dropdownToggle.addEventListener("click", () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block"
+            ? "none"
+            : "block";
+    });
+
+    dropdownMenu.addEventListener("click", (e) => {
+        const checkedValues = [];
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            }
+        });
+        console.log(checkedValues);
+    });
 }
 
 pages.page_signin_password = () => {

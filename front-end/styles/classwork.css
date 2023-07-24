@@ -1,7 +1,6 @@
 .tabs div:first-child {
     border-bottom: 0 !important;
 }
-
 .tabs div:nth-child(2) {
     border-bottom: 5px solid black;
 }
@@ -38,7 +37,7 @@
 .topics-section div {
     display: flex;
     flex-direction: column;
-    font-size: .875rem;
+    font-size: 0.875rem;
     color: #737373;
     cursor: pointer;
 }
@@ -52,8 +51,8 @@
     -o-border-radius: 5px;
     width: 100%;
 }
-
-.topics-section > p:hover, .topics-section div p:hover {
+.topics-section > p:hover,
+.topics-section div p:hover {
     background-color: #007a830a;
 }
 
@@ -104,14 +103,14 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     color: black;
-    box-shadow: 0px 5px 24px -2px rgba(0, 0, 0, 0.322);
-    -webkit-box-shadow: 0px 5px 24px -2px rgba(0, 0, 0, 0.356);
-    -moz-box-shadow: 0px 5px 24px -2px rgba(0, 0, 0, 0.37);
-    transition: visibility .1s ease;
-    -webkit-transition: visibility .1s ease;
-    -moz-transition: visibility .1s ease;
-    -ms-transition: visibility .1s ease;
-    -o-transition: visibility .1s ease;
+    box-shadow: 0 5px 24px -2px rgba(0, 0, 0, 0.322);
+    -webkit-box-shadow: 0 5px 24px -2px rgba(0, 0, 0, 0.356);
+    -moz-box-shadow: 0 5px 24px -2px rgba(0, 0, 0, 0.37);
+    transition: visibility 0.1s ease;
+    -webkit-transition: visibility 0.1s ease;
+    -moz-transition: visibility 0.1s ease;
+    -ms-transition: visibility 0.1s ease;
+    -o-transition: visibility 0.1s ease;
 }
 
 .classwork-header .list.hide {
@@ -126,13 +125,12 @@
     padding: 15px 20px;
     gap: 40px;
 }
-
 .classwork-header .list .list-item:hover {
     background-color: #cccccc44;
 }
 
 .classwork-header .list .list-item .icon {
-    color: #007b83
+    color: #007b83;
 }
 
 .classwork-header .apps {
@@ -153,10 +151,9 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     cursor: pointer;
-    font-size: .875rem;
+    font-size: 0.875rem;
     font-weight: bold;
 }
-
 .apps div:hover {
     background-color: #007a830a;
 }
@@ -205,7 +202,6 @@
     align-items: center;
     gap: 20px;
 }
-
 .classwork-content .assignment-data div:first-child {
     width: 40px;
     height: 40px;
@@ -222,12 +218,12 @@
 }
 
 .classwork-content .assignment-data .assignment-name {
-    font-size: .9375rem;
+    font-size: 0.9375rem;
 }
 
 .classwork-content .assignment .date {
     color: #737373;
-    font-size: .75rem;
+    font-size: 0.75rem;
 }
 
 .add-topic-modal {
@@ -283,7 +279,6 @@
     -ms-transition: all 0.15s linear;
     -o-transition: all 0.15s linear;
 }
-
 .add-topic-modal input:focus {
     border-bottom: 3px solid #007b83;
 }
@@ -293,7 +288,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
-    font-size: .875rem;
+    font-size: 0.875rem;
     margin-top: 20px;
 }
 
@@ -306,23 +301,20 @@
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     background-color: transparent;
-    font-size: .875rem;
+    font-size: 0.875rem;
     cursor: pointer;
-    transition: all .2s linear;
-    -webkit-transition: all .2s linear;
-    -moz-transition: all .2s linear;
-    -ms-transition: all .2s linear;
-    -o-transition: all .2s linear;
+    transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
 }
-
 .add-topic-modal button:first-of-type:hover {
     background-color: #7373733b;
 }
-
 .add-topic-modal button:last-of-type {
     color: #007b83;
 }
-
 .add-topic-modal button:last-child:hover {
     background-color: #007a8318;
 }
@@ -364,7 +356,6 @@
     align-items: center;
     gap: 10px;
 }
-
 .modal-assignment-header-left > div:not(:last-child) {
     width: 50px;
     height: 50px;
@@ -378,7 +369,6 @@
     -o-border-radius: 50%;
     cursor: pointer;
 }
-
 .modal-assignment-header-left > div:not(:last-child):hover {
     background-color: #73737349;
 }
@@ -393,7 +383,7 @@
     -o-border-radius: 3px;
     background-color: #007b83;
     color: white;
-    font-size: .9375rem;
+    font-size: 0.9375rem;
     cursor: pointer;
 }
 
@@ -408,7 +398,8 @@
     background-color: #f8f9fa;
 }
 
-.modal-assignment-input, .modal-assignment-attachments {
+.modal-assignment-attachments,
+.modal-assignment-input {
     background-color: white;
     padding: 30px;
     border: 1px solid #ccc;
@@ -427,7 +418,8 @@
     gap: 20px;
 }
 
-.modal-assignment-input .assignment-title, .modal-assignment-input .text-input {
+.modal-assignment-input .assignment-title,
+.modal-assignment-input .text-input {
     padding: 20px 15px;
     background-color: #f8f9fa;
     outline: none;
@@ -442,8 +434,7 @@
 }
 
 .modal-assignment-input .text-input {
-
-}
+    }
 
 #editor {
     padding: 0;
@@ -496,10 +487,167 @@
     overflow: hidden !important;
     background-color: white;
     padding: 30px;
+    overflow: auto;
 }
 
 .assignment-sidebar > div {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+
+
+
+
+/* DROPDOWNS */
+
+.dropdowns {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 40px;
+}
+
+.dropdown-menu {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    max-height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.dropdown-item {
+    width: 200px;
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-toggle {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    z-index: 1;
+    cursor: pointer;
+    width: 90%;
+}
+
+.dropdown-menu label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.dropdown-title {
+    margin-bottom: 10px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item label {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.dropdown-item input {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+}
+
+.dropdown-toggle {
+    padding: 10px;
+    background-color: #cccccc41;
+    color: #6e6e6e;
+    font-size: 1rem;
+    width: 90%;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* DUE DATE SIDEBAR SECTION */
+
+.due-date-section {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.due-date-section input {
+    background-color: #cccccc41;
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+#dateInput {
+    user-select: none;
+    cursor: pointer;
+}
+
+/* TOPICS SECTION */
+
+.topics-sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    font-size: 1rem;
+}
+
+.topics-sidebar-section select {
+    padding: 15px;
+    border: none;
+    outline: none;
+    background-color: #cccccc41;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
 }

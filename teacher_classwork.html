@@ -95,13 +95,38 @@
                     </div>
                 </div>
                 <div class="assignment-sidebar">
-                    <div>
-                        <div>For</div>
-                        <input placeholder="Group Project" type="text">
-                    </div>
-                    <div>
-                        <div>Due</div>
-                        <input placeholder="No due date" type="text">
+                    <div class="dropdowns">
+                        <div class="dropdown">
+                            <div class="dropdown-title">For</div>
+                            <div class="classes-dropdown">
+                                <button class="dropdown-toggle" id="dropdownToggle"></button>
+                                <div class="dropdown-menu" id="dropdownMenu">
+                                    <div class="dropdown-item">
+                                        <label><input disabled checked type="checkbox" value="option1">
+                                            Option 1</label>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <label><input type="checkbox" value="option2">
+                                            Option 2</label>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <label><input type="checkbox" value="option3">
+                                            Option 3</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="due-date-section">
+                            <label for="dateInput">Due</label>
+                            <input type="date" id="dateInput">
+                        </div>
+                        <div class="topics-sidebar-section">
+                            <label for="topics">Topic</label>
+                            <select id="topics">
+                                <option value="UIX">UIX</option>
+                                <option value="Soft Skills">Soft Skills</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,7 +187,7 @@
                             <i class="fa-solid fa-plus"></i>
                         </div>
                         <div>Create</div>
-                        <div  id="drop-down" class="list hide">
+                        <div id="drop-down" class="list hide">
                             <div id="create-assignment-button" class="list-item">
                                 <div class="icon">
                                     <i class="fa-solid fa-clipboard-list fa-xl"></i>
