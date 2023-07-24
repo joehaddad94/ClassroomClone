@@ -588,16 +588,29 @@ pages.page_teacher_classwork = () => {
     const boxTopicModal = document.getElementById("topic-box");
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
     const assignmentModal = document.getElementById("modal-assignment");
-    const closeAssignmentButton = document.getElementById("close-assignment")
-
+    const closeAssignmentButton = document.getElementById("close-assignment");
+    
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
         assignmentModal.classList.add("hide")
-    })
+    });
 
     // open assignment
     createAssignmentButton.addEventListener("click", (e) => {
         assignmentModal.classList.remove("hide")
+        
+        // Initialize components
+        let assignButton = document.getElementById("assign-button");
+        
+        assignButton.addEventListener("click", (e) => {
+            let assignmentTitle = document.getElementById("assignment-title-input");
+            let assignmentText = document.getElementById("elementId").InnerHtml;
+            console.log(document.querySelector("#editor"));
+            console.log(assignmentTitle.value);
+
+            console.log(assignmentText);
+        });
+        
     })
 
     createButton.addEventListener("click", (e) => {
@@ -636,4 +649,8 @@ pages.page_teacher_classwork = () => {
     topicCancelButton.addEventListener("click", (e) => {
         topicModal.classList.add("hide")
     })
+
 }
+
+
+
