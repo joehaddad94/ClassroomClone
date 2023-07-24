@@ -359,8 +359,14 @@ pages.page_classrooms = () => {
     const joinClassName = document.querySelector(".join-class-modal-bottom .name");
     const joinClassEmail = document.querySelector(".join-class-modal-bottom .email");
 
-    let userEmail = JSON.parse(localStorage.getItem("userData")).email
-    let userName = JSON.parse(localStorage.getItem("userData")).first_name + " " + JSON.parse(localStorage.getItem("userData")).last_name
+    let userEmail = JSON
+        .parse(localStorage.getItem("userData"))
+        .email
+    let userName = JSON
+        .parse(localStorage.getItem("userData"))
+        .first_name + " " + JSON
+        .parse(localStorage.getItem("userData"))
+        .last_name
 
     joinClassName.innerText = userName
     joinClassEmail.innerText = userEmail
@@ -369,12 +375,20 @@ pages.page_classrooms = () => {
         joinClassModal
             .classList
             .remove("hide")
-        document.body.classList.add("no-overflow")
+        document
+            .body
+            .classList
+            .add("no-overflow")
     })
 
     closeJoinModalButton.addEventListener("click", () => {
-        joinClassModal.classList.add("hide")
-        document.body.classList.remove("no-overflow");
+        joinClassModal
+            .classList
+            .add("hide")
+        document
+            .body
+            .classList
+            .remove("no-overflow");
     })
 
 };
@@ -488,6 +502,37 @@ pages.page_teacher_classwork = () => {
         topicModal
             .classList
             .add("hide")
+    })
+
+    // assignment sidebar
+    const dropdownToggle = document.getElementById("dropdownToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]')
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (i === 0) {
+            checkboxes[i].checked = true
+            dropdownToggle.innerHTML = `<div>${checkboxes[i].value}</div><div><i class="fa-solid fa-caret-down"></i></div>`;
+        } else {
+            checkboxes.checked = false
+        }
+    }
+
+    dropdownToggle.addEventListener("click", () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block"
+            ? "none"
+            : "block"
+    })
+
+    dropdownMenu.addEventListener("click", (e) => {
+        const checkedValues = [];
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            }
+        });
+        console.log(checkedValues)
     })
 
 }
