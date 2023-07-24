@@ -164,6 +164,33 @@ pages.page_classrooms = () => {
                     .add("hide");
             }
         })
+        const classCodeInput = document.getElementById('class-code');
+        const joinButton = document.querySelector('.join-class-modal-header .join-class-button button');
+      
+        classCodeInput.addEventListener('input', function() {
+          const inputValue = classCodeInput.value.trim();
+          if (inputValue !== '') {
+            joinButton.removeAttribute('disabled');
+            joinButton.classList.add('active');
+          } else {
+            joinButton.setAttribute('disabled', 'disabled');
+            joinButton.classList.remove('active');
+          }
+        });
+        const button_join = document.getElementById('button_join')
+        button_join.addEventListener('click', async() => {
+            const class_code = document.querySelector('#class-code').value;
+            try {
+                const data = new FormData();
+                data.append('class_code',class_code)
+                let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/class_code.php', data);
+            } catch (error) {
+                console.log(error);
+            }
+        })
+    
+        
+ 
 
 
 // Function to fetch and display classes
@@ -181,7 +208,6 @@ const displayClasses = async (apiUrl) => {
 
     try {
         const user_id = JSON.parse(localStorage.getItem("userData")).user_id;
-        console.log(user_id)
         const data = new FormData();
         data.append("user_id", user_id);
 
@@ -327,7 +353,6 @@ if (userRole == 1) {
         classData.append("googlemeet_link", googleMeetLink);
         classData.append("class_code", classCode);
         classData.append("user_id", user_id);
-        console.log(classData)
 
         try {
             const createClass = async() => {
