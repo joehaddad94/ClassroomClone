@@ -185,11 +185,13 @@ pages.page_classrooms = () => {
 const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
 let link = ""
 if (userRole == 1){
-    link = "/teacher-stream"
+    link = "/teacher_stream.html"
 } else {
-    link = "/student-stream"
+    link = "/student_stream.html"
 }
-console.log(link)
+
+let redirect = document.querySelector("#redirect")
+console.log(redirect)
 
 const displayClasses = async (apiUrl) => {
     
@@ -214,7 +216,7 @@ const displayClasses = async (apiUrl) => {
                     </div>
             </div>`;
 
-            bottom_classrooms.innerHTML += `<a href="${link}?id=${item.class_id}"><div class="class">
+            bottom_classrooms.innerHTML += `<a href="${link}?id=${item.class_id}" class="class-link"><div class="class">
             <div class="top-class">
                 <div class="class-title">
                   <p>${item.class_name}</p>
@@ -270,6 +272,16 @@ if (userRole == 1) {
     const studentClassesUrl = pages.base_url + "student-classes.php";
     displayClasses(studentClassesUrl);
 }
+
+// const classLinks = document.querySelectorAll(".class-link");
+// classLinks.forEach((linkElement) => {
+//     linkElement.addEventListener("click", (event) => {
+//         event.preventDefault();
+//         const href = linkElement.getAttribute("href");
+//         window.location.href = href; 
+//     });
+// });
+
 
 
     // modal functionlity
@@ -331,6 +343,14 @@ if (userRole == 1) {
 
 pages.page_teacher_stream = () => {
 
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    console.log(queryParamsString)
+    const queryParams = new URLSearchParams(queryParamsString);
+    const q = queryParams.get('id');
+    console.log(q);   
+
+    //Create announcement functionality and design
     const annoucementInput = document.getElementById("announcement-input")
     const firstStateAnnouncement = document.getElementById("first-state-announcement")
     const secondStateAnnoucnement = document.getElementById("second-state-announcement")
@@ -354,6 +374,8 @@ pages.page_teacher_stream = () => {
         firstStateAnnouncement.classList.remove("hide")
         annoucementInput.classList.remove("text-area")
     })
+
+    
     })
 
     pages.page_forget_password = () => {
@@ -421,16 +443,16 @@ pages.page_teacher_stream = () => {
 
     }
 
-    const profileBtn = document.getElementById("profile-pic")
-    const manage_profile = document.getElementById("profile-manage");
-    profileBtn.addEventListener("click", () => {
-        console.log("Click profile successful");
-        if (manage_profile.style.display !== "none") {
-            manage_profile.style.display = "none";
-        } else {
-            manage_profile.style.display = "block";
-        }
-    })
+    // const profileBtn = document.getElementById("profile-pic")
+    // const manage_profile = document.getElementById("profile-manage");
+    // profileBtn.addEventListener("click", () => {
+    //     console.log("Click profile successful");
+    //     if (manage_profile.style.display !== "none") {
+    //         manage_profile.style.display = "none";
+    //     } else {
+    //         manage_profile.style.display = "block";
+    //     }
+    // })
 
 };
 
