@@ -13,7 +13,40 @@
             referrerpolicy="no-referrer"/>
         <title>Classrooms</title>
     </head>
-    <body>
+    <body >
+        <!-- MANAGE ACCOUNT MODAL -->
+        <div id="manage-account-modal" class="manage-account-modal hide">
+            <div class="manage-account-modal-top">
+                <div class="content-box">
+                    <div class="user-data">
+                        <div class="image"><img
+                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                            alt="profile picture"></div>
+                        <div>
+                            <div class="user-name">Mhmd Hussein</div>
+                            <div class="user-email">mohammad.hussein377@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="manage-account-button">
+                        <button>Manage your google account</button>
+                    </div>
+                </div>
+            </div>
+            <div id="sign-out" class="sign-out">
+                <div>
+                    <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                </div>
+                <div>Sign out</div>
+            </div>
+            <div class="bottom">
+                <span>Privacy policy</span>
+                <span class="dot">
+                    <i class="fa-solid fa-circle"></i>
+                </span>
+                <span>Terms of service</span>
+            </div>
+        </div>
+        <!-- NAVBAR -->
         <div class="navbar">
             <div class="left-navbar">
                 <div id="burgerIcon" class="icon burger-icon">
@@ -28,7 +61,7 @@
                 <!-- <div class="plus-icon">
                     <i class="fa-solid fa-plus fa-lg"></i>
                 </div> -->
-                <div class="join-class">
+                <div id="join-class-button" class="join-class">
                     <button >Join class</button>
                 </div>
                 <div class="create-class">
@@ -37,9 +70,10 @@
                 <div class="google-apps-icon">
                     <i class="fa-solid fa-border-none fa-lg"></i>
                 </div>
-                <div class="nav-profile-pic"><img
+                <div id="profile-pic" class="nav-profile-pic"><img
                     src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-                    alt="profile picture"></div>
+                    alt="profile picture">
+                </div>
             </div>
         </div>
         <!-- <div class="arrow-icon">
@@ -101,35 +135,96 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- MODAL -->
+
+            <!--Crate Class MODAL -->
             <div class="modal hide">
                 <div class="modal-box">
                     <div class="modal-header">Create class</div>
                     <form>
                         <div class="inputs">
-                        <div>
-                            <input required id="classname-input" placeholder="Class name (required)" type="text">
+                            <div>
+                                <input
+                                    required
+                                    id="classname-input"
+                                    placeholder="Class name (required)"
+                                    type="text">
+                            </div>
+                            <div>
+                                <input
+                                    required
+                                    id="googleMeetLink-input"
+                                    placeholder="Google meet link (required)"
+                                    type="text">
+                            </div>
+                            <div>
+                                <input id="section-input" placeholder="Section" type="text">
+                            </div>
+                            <div>
+                                <input id="subject-input" placeholder="Subject" type="text">
+                            </div>
+                            <div>
+                                <input id="room-input" placeholder="Room" type="text">
+                            </div>
                         </div>
-                        <div>
-                            <input id="section-input" placeholder="Section" type="text">
+                        <div class="buttons">
+                            <div class="cancel-button">
+                                <button>Cancel</button>
+                            </div>
+                            <div class="create-button">
+                                <button>Create</button>
+                            </div>
                         </div>
-                        <div>
-                            <input id="subject-input" placeholder="Subject" type="text">
-                        </div>
-                        <div>
-                            <input id="room-input" placeholder="Room" type="text">
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <div class="cancel-button">
-                            <button>Cancel</button>
-                        </div>
-                        <div class="create-button">
-                            <button>Create</button>
-                        </div>
-                    </div>
                     </form>
+                </div>
+            </div>
+            <!-- JOIN CLASS MODAL -->
+            <div id="join-class-modal" class="join-class-modal hide">
+                <div class="join-class-modal-header">
+                    <div class="left">
+                        <div class="close-join-class-icon">
+                            <i class="fa-solid fa-x"></i>
+                        </div>
+                        <div>Join class
+                        </div>
+                    </div>
+                    <div class="join-class-button">
+                        <button disabled class="disabled">Join</button>
+                    </div>
+                </div>
+                <div class="join-class-modal-bottom">
+                    <div class="content">
+                        <div class="user-data">
+                            <p>You're currently signed in as</p>
+                            <div class="user">
+                                <div class="user-profile-pic"><img
+                                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                                    alt="profile picture">
+                                </div>
+                                <div class="name-email">
+                                    <p class="name">Mhmd Hussein</p>
+                                    <p class="email">mohammad.hussein377@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="class-code">
+                            <div>
+                                <div>Class code</div>
+                                <p>Ask your teacher for the class code, then enter it here</p>
+                            </div>
+                            <div class="class-code-input"><input id="class-code" placeholder="Class code" type="text"></div>
+                            <div class="class-code-error hide">Couldn't found the class</div>
+                        </div>
+                        <div class="instructions">
+                            <p>To sign in with a class code</p>
+                            <ul>
+                                <li>Use an authorized account</li>
+                                <li>Use a class code with 5-7 letters or numbers, and no spaces or symbols</li>
+                            </ul>
+                            <p>if you have trouble joining the class, go to the
+                                <span>Help Center article</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <script src="front-end/js/axios.min.js"></script>

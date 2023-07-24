@@ -11,14 +11,14 @@
             integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"/>
-        <title>Forget Password - Google Accounts</title>
+        <title>Manage Account - Google Accounts</title>
     </head>
     <body>
         <div class="main forgot-password-page">
             <div class="signin-box">
                 <div class="top-signin-box">
                     <div><img src="./front-end/assets/GoogleLogo.png" alt="Google Logo"></div>
-                    <div class="verify-heading">Verify it's you</div>
+                    <div class="verify-heading">Manage Account</div>
                     <div class="user-email">
                         <i class="fa-solid fa-user"></i>
                         <div class="email"></div>
@@ -29,37 +29,20 @@
                     <div class="inputs">
                         <div class="column">
                             <div>
-                                <label for="fav-color">What's your lucky number?</label>
+                                <label for="first-name">First Name</label>
                             </div>
-                            <div><input id="fav-color" placeholder="Enter your favourite color?" type="text"></div>
-                        </div>
-                        <p class="answer-error hide">Your answer is wrong</p>
-                        <div class="column">
-                            <div>
-                                <label for="password">Password</label>
-                            </div>
-                            <div><input required id="password" placeholder="Enter your password" type="password" disabled></div>
+                            <div><input required id="first-name" placeholder="Enter your first name" type="text"></div>
                         </div>
                         <div class="column">
                             <div>
-                                <label for="confirm-password">Confirm Password</label>
+                                <label for="last-name">Last Name</label>
                             </div>
-                            <div><input
-                                required
-                                id="confirm-password"
-                                placeholder="Confirm your password"
-                                type="password"
-                                disabled></div>
+                            <div><input required id="last-name" placeholder="Enter your last name" type="text"></div>
                         </div>
-                        <p class="passwords-error hide">Passwords don't match</p>
                     </div>
                     <div>
-                        <!-- <div class="create-account">Check</div> -->
-                        <div id="check-button" class="check-button">
-                            <button>Check</button>
-                        </div>
-                        <div id="change-password-button" class="change-password-button hide">
-                            <button>Change Password</button>
+                        <div id="apply-changes-button" class="check-button">
+                            <button>Apply changes</button>
                         </div>
                     </div>
                 </div>
@@ -78,7 +61,7 @@
         <script src="front-end/js/axios.min.js"></script>
         <script src="front-end/js/script.js"></script>
         <script>
-            pages.loadFor("forget_password")
+            pages.loadFor("manage_account")
         </script>
     </body>
 </html>
