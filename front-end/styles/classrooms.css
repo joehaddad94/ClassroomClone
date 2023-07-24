@@ -241,6 +241,7 @@ a {
   padding: 15px 60px;
   justify-content: flex-start;
   gap: 40px;
+  cursor: pointer;
 }
 
 .manage-account-modal .bottom {

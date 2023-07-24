@@ -145,6 +145,7 @@ pages.page_classrooms = () => {
     const room_input = document.getElementById("room-input");
     const googleMeetLinkInput = document.getElementById("googleMeetLink-input");
     const formElement = document.querySelector("form")
+    const signoutElement = document.getElementById("sign-out")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
 
@@ -336,15 +337,17 @@ pages.page_classrooms = () => {
         window.location.href = "manage_account.html"
     })
 
-    // document
-    //     .body
-    //     .addEventListener("click", (e) => {
-    //         if (!manageAccountModal.classList.contains("hide") && !e.target.classList.contains("nav-profile-pic") && !manageAccountModal.contains(e.target)) {
-    //             manageAccountModal
-    //                 .classList
-    //                 .add("hide");
-    //         }
-    //     });
+    // document     .body     .addEventListener("click", (e) => {         if
+    // (!manageAccountModal.classList.contains("hide") &&
+    // !e.target.classList.contains("nav-profile-pic") &&
+    // !manageAccountModal.contains(e.target)) {             manageAccountModal
+    //            .classList                 .add("hide");         }     });
+
+    // sign Out functionality
+    signoutElement.addEventListener("click", () => {
+        localStorage.removeItem("userData")
+        window.location.href = "index.html"
+    })
 
 };
 
@@ -514,8 +517,7 @@ pages.page_signin_password = () => {
 
 pages.page_forget_password = () => {
 
-    const userEmail = JSON
-        .parse(localStorage.getItem('userEmail'))
+    const userEmail = JSON.parse(localStorage.getItem('userEmail'))
     const emailElement = document.querySelector(".email")
     const answerInput = document.getElementById("fav-color")
     const checkButton = document.getElementById("check-button")
@@ -585,10 +587,22 @@ pages.page_forget_password = () => {
 }
 
 pages.page_manage_account = () => {
-    
+    const emailElement = document.querySelector(".email");
+    const firstNameElement = document.getElementById("first-name");
+    const lastNameElement = document.getElementById("last-name");
+    const applyChangesButton = document.getElementById("apply-changes-button");
 
+    emailElement.innerText = userEmail;
+    let userEmail = JSON
+        .parse(localStorage.getItem("userData"))
+        .email;
 
-    
+    applyChangesButton.addEventListener("click", () => {
+        let firstName = firstNameElement.value;
+        let lastName = lastNameElement.value;
+
+        if (firstName !== "" || lastName !== "") {}
+    });
 
     console.log(userEmail)
 }
