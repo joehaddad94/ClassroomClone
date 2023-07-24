@@ -175,8 +175,6 @@ if (userRole == 1){
     link = "/student_stream.html"
 }
 
-// let redirect = document.querySelector("#redirect")
-
 
 const displayClasses = async (apiUrl) => {
     
@@ -195,8 +193,9 @@ const displayClasses = async (apiUrl) => {
             sidebarClasses.innerHTML += `
             <div class="class">
                 <div>${item.class_name[0]}</div>
-                    <div class="class-data">
+                    <div <a href="${link}?id=${item.class_id}" class="class-data">
                         <p class="class-name">
+                        <a href="${link}?id=${item.class_id}"
                             ${item.class_name}
                         </p>
                         <p class="class-desc">${item.section}</p>
@@ -311,7 +310,8 @@ if (userRole == 1) {
 
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        const user = JSON.parse(localStorage.getItem("userData"))
+        const user_id = user.user_id
         const classname = classname_input.value;
         const section = section_input.value;
         const subject = subject_input.value;
@@ -327,6 +327,7 @@ if (userRole == 1) {
         classData.append("googlemeet_link", googleMeetLink);
         classData.append("class_code", classCode);
         classData.append("user_id", user_id);
+        console.log(classData)
 
         try {
             const createClass = async() => {
@@ -425,6 +426,19 @@ pages.page_teacher_stream = () => {
     const cancelButton = document.querySelector("#second-state-announcement .buttons .cancel-button")
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
+
+    //tabs
+        
+        const classwork = document.getElementById("classwork-tab")
+        const peopleTab = document.getElementById("people-tab")
+
+        classwork.addEventListener('click', () =>{
+            window.location.href= `/teacher_classwork.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_people.html?id=${class_idParam}`   
+        } )
 
     const user = JSON.parse(localStorage.getItem("userData"))
         const user_idStorage = user.user_id
@@ -586,6 +600,8 @@ pages.page_teacher_stream = () => {
     
     })
 
+   
+
     pages.page_forget_password = () => {
 
         const checkButton = document.getElementById("check-button")
@@ -665,6 +681,28 @@ pages.page_teacher_stream = () => {
 };
 
 pages.page_teacher_classwork = () => {
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const peopleTab = document.getElementById("people-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/teacher_stream.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/teacher_people.html?id=${class_idParam}`   
+        } )
+
+
     const createButton = document.getElementById("create-button")
     const dropDown = document.getElementById("drop-down")
     const topicModal = document.getElementById("topic-modal")
@@ -968,6 +1006,27 @@ pages.page_manage_account = () => {
     });
 }
 pages.page_teacher_people=async()=>{
+
+     //Get query Parameter
+     const queryParamsString = window.location.search;
+     const queryParams = new URLSearchParams(queryParamsString);
+     const class_idParam = queryParams.get('id');
+     console.log(class_idParam);
+
+        const streamTab = document.getElementById("stream-id")
+        const classworkTab = document.getElementById("classwork-id")
+        console.log(classworkTab);
+
+        streamTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_stream.html?id=${class_idParam}`   
+        } )
+
+        classworkTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_classwork.html?id=${class_idParam}`
+        console.log('clicked');
+
+        } )
+    
     // const user_id = JSON
     // .parse(localStorage.getItem("userData"))
     // .user_id
@@ -1025,6 +1084,26 @@ for (let i = 0; i < numRows; i++) {
 
 
 pages.page_student_people=async()=>{
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const classworkTab = document.getElementById("classwork-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_stream.html?id=${class_idParam}`   
+        } )
+
+        classworkTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_classwork.html?id=${class_idParam}`   
+        } )
     // const user_id = JSON
     // .parse(localStorage.getItem("userData"))
     // .user_id
@@ -1080,16 +1159,59 @@ for (let i = 0; i < numRows; i++) {
 }
 pages.page_student_stream=async()=>{
 
-    const class_id=1     
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const classworkTab = document.getElementById("classwork-id")
+        const peopleTab = document.getElementById("people-id")
+
+        classworkTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_classwork.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_people.html?id=${class_idParam}`   
+        } )
+
+    const class_id=class_idParam    
     btn_join=document.getElementById('btnJoin')
     const data = new FormData();    
     data.append("class_id",class_id);    
     const response = await pages.postAPI(pages.base_url + "get-google-meet-link.php", data);
     console.log(response.data)
-    var link=response.data[0]
+    let link=response.data[0]
     console.log("link :",link)
     btn_join.addEventListener('click',()=>{
         window.open(link)
     })
+}
+
+pages.page_student_classwork=async()=>{
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const peopleTab = document.getElementById("people-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_stream.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_people.html?id=${class_idParam}`   
+        } )
 }
 
