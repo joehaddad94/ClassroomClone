@@ -304,14 +304,6 @@ pages.page_classrooms = () => {
         classData.append("class_code", classCode);
         classData.append("user_id", user_id);
 
-        console.log("class_name", classname);
-        console.log("section", section);
-        console.log("subject", subject);
-        console.log("room", room);
-        console.log("googlemeet_link", googleMeetLink);
-        console.log("class_code", classCode);
-        console.log("user_id", user_id);
-
         try {
             const createClass = async() => {
                 const response = await pages.postAPI(pages.base_url + "create-class.php", classData);
@@ -319,13 +311,41 @@ pages.page_classrooms = () => {
                 modal
                     .classList
                     .add("hide");
-                window.location.reload();
+                window
+                    .location
+                    .reload();
             };
             createClass();
         } catch (error) {
             console.log(error);
         }
     });
+
+    // manage account modal functionality
+    const profileBtn = document.getElementById("profile-pic");
+    const manageAccountModal = document.getElementById("manage-account-modal");
+    const manageAccountButton = document.querySelector(".manage-account-button")
+
+    profileBtn.addEventListener('click', () => {
+        manageAccountModal
+            .classList
+            .remove("hide")
+    })
+
+    manageAccountButton.addEventListener("click", () => {
+        window.location.href = "manage_account.html"
+    })
+
+    // document
+    //     .body
+    //     .addEventListener("click", (e) => {
+    //         if (!manageAccountModal.classList.contains("hide") && !e.target.classList.contains("nav-profile-pic") && !manageAccountModal.contains(e.target)) {
+    //             manageAccountModal
+    //                 .classList
+    //                 .add("hide");
+    //         }
+    //     });
+
 };
 
 pages.page_teacher_stream = () => {
@@ -519,16 +539,24 @@ pages.page_forget_password = () => {
 
             let response = await axios.post(pages.base_url + "check-answer.php", data);
             console.log(response.data);
-            if(response.data.answer_check === "Wrong answer") {
-                answerError.classList.remove("hide")
+            if (response.data.answer_check === "Wrong answer") {
+                answerError
+                    .classList
+                    .remove("hide")
                 setTimeout(() => {
-                    answerError.classList.add("hide")
+                    answerError
+                        .classList
+                        .add("hide")
                 }, 3000)
-            }else {
+            } else {
                 answerInput.value = ""
                 answerInput.disabled = true
-                checkButton.classList.add("hide")
-                changePasswordButton.classList.remove("hide")
+                checkButton
+                    .classList
+                    .add("hide")
+                changePasswordButton
+                    .classList
+                    .remove("hide")
                 passwordInput.disabled = false
                 confirmPasswordInput.disabled = false
             }
@@ -536,12 +564,16 @@ pages.page_forget_password = () => {
     })
 
     changePasswordButton.addEventListener("click", async() => {
-        if(passwordInput.value !== confirmPasswordInput.value) {
-            passwordsError.classList.remove("hide")
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            passwordsError
+                .classList
+                .remove("hide")
             setTimeout(() => {
-                passwordsError.classList.add("hide")
+                passwordsError
+                    .classList
+                    .add("hide")
             }, 3000)
-        }else {
+        } else {
             let data = new FormData()
             data.append("email", userEmail)
             data.append("new password", passwordInput.value)
