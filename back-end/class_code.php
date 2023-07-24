@@ -7,7 +7,7 @@ $query = $mysqli->prepare('INSERT INTO enroll (class_id, user_id)
 SELECT class_id, user_id
 FROM classes
 WHERE class_code = ?');
-$query->bind_param('i', $class_code);
+$query->bind_param('s', $class_code);
 
 $response = array();
 

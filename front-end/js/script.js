@@ -141,7 +141,6 @@ pages.page_signup = () => {
 
 pages.page_classrooms = () => {
 
-
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
     const sidebarClasses = document.querySelector(".sidebar .classes")
@@ -190,8 +189,8 @@ if (userRole == 1){
     link = "/student_stream.html"
 }
 
-let redirect = document.querySelector("#redirect")
-console.log(redirect)
+// let redirect = document.querySelector("#redirect")
+
 
 const displayClasses = async (apiUrl) => {
     
@@ -203,6 +202,7 @@ const displayClasses = async (apiUrl) => {
 
         const response = await pages.postAPI(apiUrl, data);
         const bottom_classrooms = document.querySelector(".bottom-classrooms");
+        // console.log(response)
 
         response.data.forEach((item) => {
             sidebarClasses.innerHTML += `
@@ -342,8 +342,17 @@ if (userRole == 1) {
 };
 
 pages.page_teacher_stream = () => {
+
+    const annoucementInput = document.getElementById("announcement-input")
+    const announcements = document.querySelector(".announcements")
+    const firstStateAnnouncement = document.getElementById("first-state-announcement")
+    const secondStateAnnoucnement = document.getElementById("second-state-announcement")
+    const cancelButton = document.querySelector("#second-state-announcement .buttons .cancel-button")
+    const postButton = document.querySelector(".post-button")
+    const editor = document.querySelector("#editor p")
+
     const user = JSON.parse(localStorage.getItem("userData"))
-        const user_id = user.user_id
+        const user_idStorage = user.user_id
         const first_name = user.first_name
         const last_name = user.last_name
         console.log(first_name)
@@ -352,23 +361,23 @@ pages.page_teacher_stream = () => {
     //Get query Parameter
     const queryParamsString = window.location.search;
     const queryParams = new URLSearchParams(queryParamsString);
-    const class_id = queryParams.get('id');
-    console.log(class_id);
-    
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+     
     //Load announcements
     document.addEventListener('DOMContentLoaded', async function() {
         const data_class_id = new FormData();
-        data_class_id.append("class_id", class_id);
+        data_class_id.append("class_id", class_idParam);
 
         const class_url = pages.base_url + "fetch_announcement.php"
         const response = await pages.postAPI(class_url, data_class_id);
-        const description = response.data[0].description
-        console.log(response)
-        console.log(description)
 
-        const announcement = document.querySelector(".announcement")
-        console.log(announcement)
-        announcement.innerHTML += `<div class="announcement-top">
+        response
+            .data
+            .map((item) => (announcements.innerHTML +=
+        `<div class="announcement">
+        <div class="announcement-top">
         <div>
             <div class="user-data">
                 <div class="profile-pic"><img
@@ -384,7 +393,7 @@ pages.page_teacher_stream = () => {
             </div>
         </div>
         <div class="announcement-content">
-            ${description}
+            ${item.description}
         </div>
     </div>
     <div class="announcement-comment">
@@ -395,19 +404,87 @@ pages.page_teacher_stream = () => {
         <div class="share-icon">
             <i class="fa-solid fa-share"></i>
         </div>
-    </div>` 
+    </div>
+    </div>`
+            ));
 
-
+    const classCode_url = pages.base_url + "get-class-info.php"   
+    const response_classCode = await pages.postAPI(classCode_url,data_class_id)
+    const class_code = response_classCode.data[0].class_code;
+    document.getElementById("class_code").innerHTML = class_code;
     });
 
-    //Create announcement functionality and design
-    const annoucementInput = document.getElementById("announcement-input")
-    const firstStateAnnouncement = document.getElementById("first-state-announcement")
-    const secondStateAnnoucnement = document.getElementById("second-state-announcement")
-    const cancelButton = document.querySelector("#second-state-announcement .buttons .cancel-button")
-    const postButton = document.querySelector(".post-button")
-    const editor = document.querySelector("#editor p")
+    
+    // Add announcement functionality
+    postButton.addEventListener("click",async () => {
 
+        const description = document.querySelector("#editor p").innerHTML;
+        const class_id = class_idParam;
+        
+        if(description != "<br>"){
+            try {
+                const data = new FormData();
+                data.append("description",description);
+                data.append("class_id",class_id);
+                
+                const classCode_url = pages.base_url + "add_announcement.php"   
+                const response_classCode = await pages.postAPI(classCode_url,data)
+                
+
+                const class_url = pages.base_url + "fetch_announcement.php"
+                const response = await pages.postAPI(class_url, data);
+                console.log(response)
+
+                response
+                .data
+                .map((item) => (announcements.innerHTML +=
+        `<div class="announcement">
+        <div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${first_name} ${last_name}</div>
+                    <!--<p class="date">02:32</p>-->
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+            ${item.description}
+        </div>
+    </div>
+    <div class="announcement-comment">
+        <div class="profile-pic"><img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="profile-picture"></div>
+        <div class="comment-input"><input placeholder="Add class comment" type="text"></div>
+        <div class="share-icon">
+            <i class="fa-solid fa-share"></i>
+        </div>
+    </div>
+    </div>`
+
+    
+            ));
+            secondStateAnnoucnement.classList.add("hide")
+            firstStateAnnouncement.classList.remove("hide")
+            annoucementInput.classList.remove("text-area")
+            editor.innerHTML=""
+            window.location.href= `/teacher_stream.html?id=${class_idParam}`
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+
+    })
+
+    //Create announcement functionality and design
     firstStateAnnouncement.addEventListener('click', () => {
         firstStateAnnouncement
             .classList
