@@ -13,7 +13,7 @@
             referrerpolicy="no-referrer"/>
         <title>Classrooms</title>
     </head>
-    <body>
+    <body class="no-overflow">
         <!-- MANAGE ACCOUNT MODAL -->
         <div id="manage-account-modal" class="manage-account-modal hide">
             <div class="manage-account-modal-top">
@@ -177,20 +177,20 @@
                 </div>
             </div>
             <!-- JOIN CLASS MODAL -->
-            <div class="create-class-modal">
-                <div class="create-class-modal-header">
-                    <div>
-                        <div class="close-create-class-icon">
+            <div class="join-class-modal">
+                <div class="join-class-modal-header">
+                    <div class="left">
+                        <div class="close-join-class-icon">
                             <i class="fa-solid fa-x"></i>
                         </div>
-                        <div>Join
+                        <div>Join class
                         </div>
                     </div>
                     <div class="join-class-button">
-                        <button>Join class</button>
+                        <button disabled class="disabled">Join</button>
                     </div>
                 </div>
-                <div class="create-class-modal-bottom">
+                <div class="join-class-modal-bottom">
                     <div class="content">
                         <div class="user-data">
                             <p>You're currently signed in as</p>
@@ -199,19 +199,22 @@
                                     src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
                                     alt="profile picture">
                                 </div>
-                                <div class="user-data">
-                                    <p>Mhmd Hussein</p>
-                                    <p>mohammad.hussein377@gmail.com</p>
+                                <div class="name-email">
+                                    <p class="name">Mhmd Hussein</p>
+                                    <p class="email">mohammad.hussein377@gmail.com</p>
                                 </div>
                             </div>
                         </div>
                         <div class="class-code">
-                            <div>Class code</div>
-                            <p>Ask your teacher for the class code, then enter it here</p>
+                            <div>
+                                <div>Class code</div>
+                                <p>Ask your teacher for the class code, then enter it here</p>
+                            </div>
                             <div class="class-code-input"><input id="class-code" placeholder="Class code" type="text"></div>
+                            <div class="class-code-error hide">Couldn't found the class</div>
                         </div>
-                        <div>
-                            <p>to sign in with a class code</p>
+                        <div class="instructions">
+                            <p>To sign in with a class code</p>
                             <ul>
                                 <li>Use an authorized account</li>
                                 <li>Use a class code with 5-7 letters or numbers, and no spaces or symbols</li>
