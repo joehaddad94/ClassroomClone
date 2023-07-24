@@ -312,7 +312,7 @@ pages.page_teacher_stream = () => {
 
     document.addEventListener('DOMContentLoaded',async function(){
         const data = new FormData();
-        data.append("class_id",8)
+        data.append("class_id",9)
         const response = await pages.postAPI("http://localhost/ClassroomClone/back-end/get-class-info.php",data)
         const class_code = response.data[0].class_code;
         document.getElementById("class_code").innerHTML = class_code;
