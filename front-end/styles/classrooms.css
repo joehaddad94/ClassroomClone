@@ -142,6 +142,136 @@ a {
   cursor: pointer;
 }
 
+/* MANAGE ACCOUNT MODAL */
+
+.manage-account-modal {
+  position: absolute;
+  background-color: #007a83;
+  top: 70px;
+  right: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  z-index: 999;
+  transition: all .1s ease;
+  -webkit-transition: all .1s ease;
+  -moz-transition: all .1s ease;
+  -ms-transition: all .1s ease;
+  -o-transition: all .1s ease;
+}
+
+.manage-account-modal.hide {
+  visibility: hidden;
+}
+
+.manage-account-modal-top {
+  padding: 10px 10px 0 10px;
+}
+
+.manage-account-modal .content-box {
+  padding: 15px 20px 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.manage-account-modal .content-box .user-data {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.manage-account-modal .content-box .user-data .user-email {
+  font-size: .75rem;
+  color: rgba(0, 0, 0, 0.582);
+  letter-spacing: .6px;
+}
+
+.manage-account-modal .content-box .user-data > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.manage-account-modal .content-box .manage-account-button {
+  text-align: right;
+}
+
+.manage-account-modal .content-box .manage-account-button button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.manage-account-modal .content-box .manage-account-button button:hover {
+  background-color: #7373732f;
+}
+
+.manage-account-modal .content-box .user-data .image {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  overflow: hidden;
+}
+
+.manage-account-modal .content-box .user-data .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.manage-account-modal .sign-out {
+  display: flex;
+  align-items: center;
+  padding: 15px 60px;
+  justify-content: flex-start;
+  gap: 40px;
+  cursor: pointer;
+  color: white;
+}
+
+.manage-account-modal .bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+  color: white;
+}
+
+.manage-account-modal .bottom .dot {
+  font-size: .3125rem;
+}
+
+
+
+
+
+
+
 .arrow-icon {
   width: 100%;
   height: 100%;
@@ -595,7 +725,7 @@ a {
   display: none;
 }
 
-/* MODAL */
+/* Create Class MODAL */
 
 .modal {
   width: 100vw;
@@ -689,4 +819,227 @@ a {
 
 .modal.hide {
   display: none;
+}
+
+
+/* JOIN CLASS MODAL */
+
+.join-class-modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  overflow-y: hidden;
+}
+
+.join-class-modal.hide {
+  display: none;
+}
+
+body.no-overflow {
+  overflow-y: hidden;
+}
+
+.join-class-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.join-class-modal-header .left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.close-join-class-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  cursor: pointer;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+}
+
+.close-join-class-icon:hover {
+  background-color: #cccccc36;
+}
+
+.join-class-modal-header .left > div:last-child {
+  font-size: 1.5rem;
+  color: #a6a8a9;;
+}
+
+.join-class-modal-header .join-class-button button.disabled {
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  background-color: #e7e8e8;
+  color: #a6a8a9;
+}
+
+.join-class-modal-header .join-class-button button.active {
+  background-color: #1a73e8;
+  color: white;
+  cursor: pointer;
+}
+
+.join-class-modal-bottom {
+  padding: 20px;
+}
+
+.join-class-modal-bottom .content {
+  width: 100%;
+  max-width: 550px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.join-class-modal-bottom .content .user-data, .join-class-modal-bottom .content .class-code {
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.join-class-modal-bottom .content .user-data .user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.join-class-modal-bottom .name-email {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.join-class-modal-bottom .name-email .name {
+  font-size: .9375rem;
+}
+
+.join-class-modal-bottom .name-email .email {
+  font-size: .8125rem;
+  color: #737373;
+}
+
+.join-class-modal-bottom .class-code > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #3c4043;
+}
+
+.join-class-modal-bottom .class-code > div:first-child div {
+  font-size: 1.2rem;
+}
+
+.join-class-modal-bottom .class-code > div:first-child p {
+  font-size: .875rem;
+}
+
+
+.join-class-modal-bottom .class-code .class-code-input input {
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 50%;
+  font-size: 1rem;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  margin-top: 5px;
+}
+
+.join-class-modal-bottom .class-code .class-code-input input:focus {
+  outline: 1px solid #1a73e8;
+}
+
+.join-class-modal-bottom .instructions {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.join-class-modal-bottom .instructions ul {
+  list-style: disc;
+  margin-left: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #3c4043;
+  font-size: .875rem;
+}
+
+.join-class-modal-bottom .instructions span {
+  color: #1a73e8;
+}
+
+.join-class-modal-bottom .instructions p:last-of-type {
+  font-size: .9375rem;
+  color: #3c4043;
+}
+
+.class-code-error {
+  color: red;
+  font-size: .9375rem;
+}
+
+.class-code-error.hide {
+  display: none;
+}
+
+
+.join-class-modal .user-profile-pic {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  overflow: hidden;
+}
+
+.join-class-modal .user-profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
