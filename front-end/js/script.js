@@ -534,6 +534,7 @@ pages.page_teacher_classwork = () => {
         console.log(error)
     }
 
+    // get the topics fo the class and display them
     
 
     for (let i = 0; i < checkboxes.length; i++) {
