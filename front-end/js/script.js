@@ -577,20 +577,16 @@ pages.page_teacher_classwork = () => {
     const closeAssignmentButton = document.getElementById("close-assignment")
 
     const add_topic = document.getElementById('add-button');
-    add_topic.addEventListener('click', async() => {
-        const topic_name = document.querySelector('#topic-area').innerHTML;
-        console.log(topic_name)
-
-        try {
-            const data = new FormData();
-            data.append('topic_name' , topic_name);
-            let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
-
-        } catch (error) {
-            console.log(error);
-        }
-    })
-
+    add_topic.addEventListener('click', async () => {
+      const topic_name = document.querySelector('#topic-area').value;   
+      try {
+        const data = new FormData();
+        data.append('topic_name', topic_name);
+        let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
+      } catch (error) {
+        console.log(error);
+      }
+    });
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
         assignmentModal.classList.add("hide")
