@@ -487,6 +487,7 @@
     overflow: hidden !important;
     background-color: white;
     padding: 30px;
+    overflow: auto;
 }
 
 .assignment-sidebar > div {
@@ -519,6 +520,9 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    max-height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .dropdown-item {

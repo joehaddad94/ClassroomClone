@@ -440,29 +440,29 @@ pages.page_teacher_stream = () => {
 };
 
 pages.page_teacher_classwork = () => {
-    const createButton = document.getElementById("create-button")
-    const dropDown = document.getElementById("drop-down")
-    const topicModal = document.getElementById("topic-modal")
+    const createButton = document.getElementById("create-button");
+    const dropDown = document.getElementById("drop-down");
+    const topicModal = document.getElementById("topic-modal");
     const createTopicButton = document.getElementById("create-topic-button");
-    const createAssignmentButton = document.getElementById("create-assignment-button")
+    const createAssignmentButton = document.getElementById("create-assignment-button");
     const boxTopicModal = document.getElementById("topic-box");
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
     const assignmentModal = document.getElementById("modal-assignment");
-    const closeAssignmentButton = document.getElementById("close-assignment")
+    const closeAssignmentButton = document.getElementById("close-assignment");
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
         assignmentModal
             .classList
-            .add("hide")
-    })
+            .add("hide");
+    });
 
     // open assignment
     createAssignmentButton.addEventListener("click", (e) => {
         assignmentModal
             .classList
-            .remove("hide")
-    })
+            .remove("hide");
+    });
 
     createButton.addEventListener("click", (e) => {
         if (!dropDown.contains(e.target)) {
@@ -470,60 +470,86 @@ pages.page_teacher_classwork = () => {
                 .classList
                 .remove("hide");
         }
-        console.log("bottom clicked")
-    })
+        console.log("bottom clicked");
+    });
 
     document.addEventListener("click", (e) => {
         if (!createButton.contains(e.target) && !createButton.contains(e.target)) {
             dropDown
                 .classList
-                .add("hide")
+                .add("hide");
         }
-    })
+    });
 
     createTopicButton.addEventListener("click", (e) => {
         dropDown
             .classList
-            .add("hide")
+            .add("hide");
         topicModal
             .classList
             .remove("hide");
     });
 
-    topicModal.addEventListener('click', (e) => {
+    topicModal.addEventListener("click", (e) => {
         if (!boxTopicModal.contains(e.target)) {
             topicModal
                 .classList
-                .add("hide")
+                .add("hide");
         }
-    })
+    });
 
     topicCancelButton.addEventListener("click", (e) => {
         topicModal
             .classList
-            .add("hide")
-    })
+            .add("hide");
+    });
 
     // assignment sidebar
     const dropdownToggle = document.getElementById("dropdownToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
+    const dropDownClasses = document.getElementById("dropdownMenu")
+    const userId = JSON
+        .parse(localStorage.getItem("userData"))
+        .user_id
 
-    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]')
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+
+    const data = new FormData()
+    data.append("user_id", userId)
+
+    // get the classes and display them
+    try {
+        let getClasses = async() => {
+            let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data)
+            response.data.map((item, index) => {
+                dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input type="checkbox" value=${item.class_name}>
+                                            ${item.class_name}</label>
+                                    </div>`;
+            })
+            console.log(response.data)
+        }
+        getClasses()
+    } catch (error) {
+        console.log(error)
+    }
+
+    
 
     for (let i = 0; i < checkboxes.length; i++) {
         if (i === 0) {
-            checkboxes[i].checked = true
+            checkboxes[i].checked = true;
             dropdownToggle.innerHTML = `<div>${checkboxes[i].value}</div><div><i class="fa-solid fa-caret-down"></i></div>`;
         } else {
-            checkboxes.checked = false
+            checkboxes.checked = false;
         }
     }
 
     dropdownToggle.addEventListener("click", () => {
         dropdownMenu.style.display = dropdownMenu.style.display === "block"
             ? "none"
-            : "block"
-    })
+            : "block";
+    });
 
     dropdownMenu.addEventListener("click", (e) => {
         const checkedValues = [];
@@ -532,9 +558,8 @@ pages.page_teacher_classwork = () => {
                 checkedValues.push(checkbox.value);
             }
         });
-        console.log(checkedValues)
-    })
-
+        console.log(checkedValues);
+    });
 }
 
 pages.page_signin_password = () => {

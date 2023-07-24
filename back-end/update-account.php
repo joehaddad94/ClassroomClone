@@ -2,9 +2,6 @@
 
 include('connection.php');
 
-$user_id = $_POST["user_id"];
-$new_first_name = $_POST['new_first_name'];
-$new_last_name = $_POST['new_last_name'];
 
 // Update the user information
 $query = $mysqli->prepare('UPDATE users SET first_name = ?, last_name = ? WHERE user_id = ?');
@@ -15,6 +12,8 @@ $query->execute();
 $query2 = $mysqli->prepare('SELECT user_id, first_name, last_name, email, role_id FROM users WHERE user_id = ?');
 $query2->bind_param('i', $user_id);
 $query2->execute();
+echo json_encode($user_data);
+
 
 $result = $query2->get_result();
 $user_data = $result->fetch_assoc();
