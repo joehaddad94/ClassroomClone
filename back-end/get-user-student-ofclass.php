@@ -8,7 +8,7 @@ if ($_POST['class_id'] != "") {
     FROM users 
     JOIN enroll ON enroll.user_id = users.user_id 
     JOIN classes ON enroll.class_id = classes.class_id 
-    WHERE enroll.class_id = ? AND users.role_id = 1');
+    WHERE enroll.class_id = ? AND users.role_id = 2');
     $query->bind_param('i', $class_id);
     $query->execute();
     $result = $query->get_result();

@@ -1109,12 +1109,11 @@ pages.page_student_people=async()=>{
             console.log('clicked')
             window.location.href= `/student_classwork.html?id=${class_idParam}`   
         } )
-    // const user_id = JSON
-    // .parse(localStorage.getItem("userData"))
-    // .user_id
+    const user_id = JSON
+    .parse(localStorage.getItem("userData"))
+    .user_id
 
-    const user_id=7
-    const class_id=1     
+    const class_id=class_idParam    
     const data = new FormData();
     data.append("user_id", user_id);
     data.append("class_id",class_id);
@@ -1186,6 +1185,7 @@ pages.page_student_stream=async()=>{
 
     const class_id=class_idParam    
     btn_join=document.getElementById('btnJoin')
+
     const data = new FormData();    
     data.append("class_id",class_id);    
     const response = await pages.postAPI(pages.base_url + "get-google-meet-link.php", data);
