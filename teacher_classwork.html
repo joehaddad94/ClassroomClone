@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./front-end/styles/index.css">
-        <link rel="stylesheet" href="./front-end/styles/classwork.css">
-        <link rel="stylesheet" href="./front-end/styles/classroom.css">
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"/>
-        <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
-        <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
-        <title>Classwork</title>
-    </head>
-    <body>
-        <!-- ASSIGNMENT MODAL -->
-        <div id="modal-assignment" class="modal-assignment hide">
-            <div class="modal-assignment-header">
-                <div class="modal-assignment-header-left">
-                    <div id="close-assignment" class="x-icon">
-                        <i class="fa-solid fa-x"></i>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-table-list"></i>
-                    </div>
-                    <div>Assignment</div>
-                </div>
-                <div class="assign-button">
-                    <button>Assign</button>
-                </div>
-            </div>
-            <div class="modal-assignment-bottom">
-                <div class="modal-assignment-main">
-                    <div class="modal-assignment-input">
-                        <input class="assignment-title" placeholder="Title" type="text">
-                        <!-- <div class="text-input">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./front-end/styles/index.css" />
+    <link rel="stylesheet" href="./front-end/styles/classwork.css" />
+    <link rel="stylesheet" href="./front-end/styles/classroom.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.quilljs.com/1.0.0/quill.snow.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+    <title>Classwork</title>
+  </head>
+  <body>
+    <!-- ASSIGNMENT MODAL -->
+    <div id="modal-assignment" class="modal-assignment hide">
+      <div class="modal-assignment-header">
+        <div class="modal-assignment-header-left">
+          <div id="close-assignment" class="x-icon">
+            <i class="fa-solid fa-x"></i>
+          </div>
+          <div>
+            <i class="fa-solid fa-table-list"></i>
+          </div>
+          <div>Assignment</div>
+        </div>
+        <div class="assign-button">
+          <button>Assign</button>
+        </div>
+      </div>
+      <div class="modal-assignment-bottom">
+        <div class="modal-assignment-main">
+          <div class="modal-assignment-input">
+            <input class="assignment-title" placeholder="Title" type="text" />
+            <!-- <div class="text-input">
                             <div id="editor">
                                 <p></p>
                             </div>
@@ -47,224 +51,259 @@
                                 <button class="ql-underline">Underline</button>
                             </div>
                         </div> -->
-                        <div class="text-input">
-                            <div id="editor" style="border: none;">
-                                <p></p>
-                            </div>
-                            <div id="toolbar" class="toolbar" style="border: none">
-                                <button class="ql-bold">Bold</button>
-                                <button class="ql-italic">Italic</button>
-                                <button class="ql-underline">Underline</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-assignment-attachments">
-                        <h4>Attach</h4>
-                        <div class="attachments">
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-brands fa-google-drive"></i>
-                                </div>
-                                <div>Drive</div>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-brands fa-youtube"></i>
-                                </div>
-                                <div>Youtube</div>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                                <div>Create</div>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-upload"></i>
-                                </div>
-                                <div>Upload</div>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-link"></i>
-                                </div>
-                                <div>Link</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="assignment-sidebar">
-                    <div>
-                        <div>For</div>
-                        <input placeholder="Group Project" type="text">
-                    </div>
-                    <div>
-                        <div>Due</div>
-                        <input placeholder="No due date" type="text">
-                    </div>
-                </div>
+            <div class="text-input">
+              <div id="editor" style="border: none">
+                <p></p>
+              </div>
+              <div id="toolbar" class="toolbar" style="border: none">
+                <button class="ql-bold">Bold</button>
+                <button class="ql-italic">Italic</button>
+                <button class="ql-underline">Underline</button>
+              </div>
             </div>
+          </div>
+          <div class="modal-assignment-attachments">
+            <h4>Attach</h4>
+            <div class="attachments">
+              <div>
+                <div class="icon">
+                  <i class="fa-brands fa-google-drive"></i>
+                </div>
+                <div>Drive</div>
+              </div>
+              <div>
+                <div class="icon">
+                  <i class="fa-brands fa-youtube"></i>
+                </div>
+                <div>Youtube</div>
+              </div>
+              <div>
+                <div class="icon">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+                <div>Create</div>
+              </div>
+              <div>
+                <div class="icon">
+                  <i class="fa-solid fa-upload"></i>
+                </div>
+                <div>Upload</div>
+              </div>
+              <div>
+                <div class="icon">
+                  <i class="fa-solid fa-link"></i>
+                </div>
+                <div>Link</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- TOPIC MODAL -->
-        <div id="topic-modal" class="add-topic-modal hide">
-            <div id="topic-box" class="box">
-                <p>Add topic</p>
-                <div><input placeholder="Topic" type="text"></div>
-                <div class="buttons">
-                    <button class="cancel-button">Cancel</button>
-                    <button>Add</button>
+        <div class="assignment-sidebar">
+          <div class="dropdowns">
+            <div class="dropdown">
+              <div class="dropdown-title">For</div>
+              <div class="classes-dropdown">
+                <button class="dropdown-toggle" id="dropdownToggle"></button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                  <div class="dropdown-item">
+                    <label
+                      ><input
+                        disabled
+                        checked
+                        type="checkbox"
+                        value="option1"
+                      />
+                      Option 1</label
+                    >
+                  </div>
+                  <div class="dropdown-item">
+                    <label
+                      ><input type="checkbox" value="option2" /> Option 2</label
+                    >
+                  </div>
+                  <div class="dropdown-item">
+                    <label
+                      ><input type="checkbox" value="option3" /> Option 3</label
+                    >
+                  </div>
                 </div>
+              </div>
             </div>
+            <div class="due-date-section">
+              <label for="dateInput">Due</label>
+              <input type="date" id="dateInput" />
+            </div>
+            <div class="topics-sidebar-section">
+              <label for="topics">Topic</label>
+              <select id="topics">
+                <option value="UIX">UIX</option>
+                <option value="Soft Skills">Soft Skills</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <!-- NAVBAR -->
-        <div class="classroom-navbar">
-            <div class="left-classroom-navbar">
-                <div id="burgerIcon" class="icon burger-icon">
-                    <i class="fa-solid fa-bars fa-lg burger-icon"></i>
-                </div>
-                <div class="classroom-data">
-                    <div class="classroom-name">Test 2</div>
-                    <p class="classroom-section">section</p>
-                </div>
-            </div>
-            <div class="tabs">
-                <div>Stream</div>
-                <div>Classwork</div>
-                <div>People</div>
-            </div>
-            <div class="right-classroom-navbar">
-                <div class="settings-icon">
-                    <i class="fa-solid fa-gear fa-lg"></i>
-                </div>
-                <div>
-                    <i class="fa-solid fa-border-none fa-lg"></i>
-                </div>
-                <div class="profile-pic">
-                    <img
-                        src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-                        alt="profile picture">
-                </div>
-            </div>
+      </div>
+    </div>
+    <!-- TOPIC MODAL -->
+    <div id="topic-modal" class="add-topic-modal hide">
+      <div id="topic-box" class="box">
+        <p>Add topic</p>
+        <div><input placeholder="Topic" type="text" /></div>
+        <div class="buttons">
+          <button class="cancel-button">Cancel</button>
+          <button>Add</button>
         </div>
-        <div class="classwork-content">
-            <div class="topics-section">
-                <p>All topics</p>
-                <div>
-                    <p>UIX</p>
-                    <p>Soft Skills</p>
-                </div>
-            </div>
-            <div class="classwork-right">
-                <div class="classwork-header">
-                    <div id="create-button" class="button">
-                        <div>
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                        <div>Create</div>
-                        <div  id="drop-down" class="list hide">
-                            <div id="create-assignment-button" class="list-item">
-                                <div class="icon">
-                                    <i class="fa-solid fa-clipboard-list fa-xl"></i>
-                                </div>
-                                <div class="list-title">Assignment</div>
-                            </div>
-                            <div id="create-topic-button" class="list-item">
-                                <div class="icon">
-                                    <i class="fa-solid fa-rectangle-list ga-xl"></i>
-                                </div>
-                                <div class="list-title">Topic</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="apps">
-                        <div>
-                            <div>
-                                <i class="fa-regular fa-calendar"></i>
-                            </div>
-                            <p>Google Calendar</p>
-                        </div>
-                        <div>
-                            <div>
-                                <i class="fa-brands fa-google-drive"></i>
-                            </div>
-                            <p>Class Drive folder</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="topics">
-                    <div class="topic">
-                        <div class="topic-header">
-                            <div class="topic-name">UIX</div>
-                            <div>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </div>
-                        <div class="assignments">
-                            <div class="assignment">
-                                <div class="assignment-data">
-                                    <div>
-                                        <i class="fa-regular fa-rectangle-list fa-lg"></i>
-                                    </div>
-                                    <div class="assignment-name">Assignment One</div>
-                                </div>
-                                <div class="date">Posted 2:36PM</div>
-                            </div>
-                            <div class="assignment">
-                                <div class="assignment-data">
-                                    <div>
-                                        <i class="fa-regular fa-rectangle-list fa-lg"></i>
-                                    </div>
-                                    <div class="assignment-name">Assignment One</div>
-                                </div>
-                                <div class="date">Posted 2:36PM</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-header">
-                            <div class="topic-name">UIX</div>
-                            <div>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </div>
-                        <div class="assignments">
-                            <div class="assignment">
-                                <div class="assignment-data">
-                                    <div>
-                                        <i class="fa-regular fa-rectangle-list fa-lg"></i>
-                                    </div>
-                                    <div class="assignment-name">Assignment One</div>
-                                </div>
-                                <div class="date">Posted 2:36PM</div>
-                            </div>
-                            <div class="assignment">
-                                <div class="assignment-data">
-                                    <div>
-                                        <i class="fa-regular fa-rectangle-list fa-lg"></i>
-                                    </div>
-                                    <div class="assignment-name">Assignment One</div>
-                                </div>
-                                <div class="date">Posted 2:36PM</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <!-- NAVBAR -->
+    <div class="classroom-navbar">
+      <div class="left-classroom-navbar">
+        <div id="burgerIcon" class="icon burger-icon">
+          <i class="fa-solid fa-bars fa-lg burger-icon"></i>
         </div>
-        <script>
-            var editor = new Quill('#editor', {
-                modules: {
-                    toolbar: '#toolbar'
-                },
-                theme: 'snow',
-                placeholder: "Announce something to your class"
-            });
-        </script>
-        <script src="front-end/js/axios.min.js"></script>
-        <script src="front-end/js/script.js"></script>
-        <script>
-            pages.loadFor("teacher_classwork");
-        </script>
-    </body>
+        <div class="classroom-data">
+          <div class="classroom-name">Test 2</div>
+          <p class="classroom-section">section</p>
+        </div>
+      </div>
+      <div class="tabs">
+        <div id="stream-id">Stream</div>
+        <div id="classwork-id">Classwork</div>
+        <div id="people-id">People</div>
+      </div>
+      <div class="right-classroom-navbar">
+        <div class="settings-icon">
+          <i class="fa-solid fa-gear fa-lg"></i>
+        </div>
+        <div>
+          <i class="fa-solid fa-border-none fa-lg"></i>
+        </div>
+        <div class="profile-pic">
+          <img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="profile picture"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="classwork-content">
+      <div class="topics-section">
+        <p>All topics</p>
+        <div>
+          <p>UIX</p>
+          <p>Soft Skills</p>
+        </div>
+      </div>
+      <div class="classwork-right">
+        <div class="classwork-header">
+          <div id="create-button" class="button">
+            <div>
+              <i class="fa-solid fa-plus"></i>
+            </div>
+            <div>Create</div>
+            <div id="drop-down" class="list hide">
+              <div id="create-assignment-button" class="list-item">
+                <div class="icon">
+                  <i class="fa-solid fa-clipboard-list fa-xl"></i>
+                </div>
+                <div class="list-title">Assignment</div>
+              </div>
+              <div id="create-topic-button" class="list-item">
+                <div class="icon">
+                  <i class="fa-solid fa-rectangle-list ga-xl"></i>
+                </div>
+                <div class="list-title">Topic</div>
+              </div>
+            </div>
+          </div>
+          <div class="apps">
+            <div>
+              <div>
+                <i class="fa-regular fa-calendar"></i>
+              </div>
+              <p>Google Calendar</p>
+            </div>
+            <div>
+              <div>
+                <i class="fa-brands fa-google-drive"></i>
+              </div>
+              <p>Class Drive folder</p>
+            </div>
+          </div>
+        </div>
+        <div class="topics">
+          <div class="topic">
+            <div class="topic-header">
+              <div class="topic-name">UIX</div>
+              <div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
+            </div>
+            <div class="assignments">
+              <div class="assignment">
+                <div class="assignment-data">
+                  <div>
+                    <i class="fa-regular fa-rectangle-list fa-lg"></i>
+                  </div>
+                  <div class="assignment-name">Assignment One</div>
+                </div>
+                <div class="date">Posted 2:36PM</div>
+              </div>
+              <div class="assignment">
+                <div class="assignment-data">
+                  <div>
+                    <i class="fa-regular fa-rectangle-list fa-lg"></i>
+                  </div>
+                  <div class="assignment-name">Assignment One</div>
+                </div>
+                <div class="date">Posted 2:36PM</div>
+              </div>
+            </div>
+          </div>
+          <div class="topic">
+            <div class="topic-header">
+              <div class="topic-name">UIX</div>
+              <div>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
+            </div>
+            <div class="assignments">
+              <div class="assignment">
+                <div class="assignment-data">
+                  <div>
+                    <i class="fa-regular fa-rectangle-list fa-lg"></i>
+                  </div>
+                  <div class="assignment-name">Assignment One</div>
+                </div>
+                <div class="date">Posted 2:36PM</div>
+              </div>
+              <div class="assignment">
+                <div class="assignment-data">
+                  <div>
+                    <i class="fa-regular fa-rectangle-list fa-lg"></i>
+                  </div>
+                  <div class="assignment-name">Assignment One</div>
+                </div>
+                <div class="date">Posted 2:36PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var editor = new Quill("#editor", {
+        modules: {
+          toolbar: "#toolbar",
+        },
+        theme: "snow",
+        placeholder: "Announce something to your class",
+      });
+    </script>
+    <script src="front-end/js/axios.min.js"></script>
+    <script src="front-end/js/script.js"></script>
+    <script>
+      pages.loadFor("teacher_classwork");
+    </script>
+  </body>
 </html>

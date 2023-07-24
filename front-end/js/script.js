@@ -180,14 +180,13 @@ if (userRole == 1){
     link = "/student_stream.html"
 }
 
-// let redirect = document.querySelector("#redirect")
-
 
 const displayClasses = async (apiUrl) => {
     
 
     try {
         const user_id = JSON.parse(localStorage.getItem("userData")).user_id;
+        console.log(user_id)
         const data = new FormData();
         data.append("user_id", user_id);
 
@@ -199,8 +198,9 @@ const displayClasses = async (apiUrl) => {
             sidebarClasses.innerHTML += `
             <div class="class">
                 <div>${item.class_name[0]}</div>
-                    <div class="class-data">
+                    <div <a href="${link}?id=${item.class_id}" class="class-data">
                         <p class="class-name">
+                        <a href="${link}?id=${item.class_id}"
                             ${item.class_name}
                         </p>
                         <p class="class-desc">${item.section}</p>
@@ -315,7 +315,8 @@ if (userRole == 1) {
 
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        const user = JSON.parse(localStorage.getItem("userData"))
+        const user_id = user.user_id
         const classname = classname_input.value;
         const section = section_input.value;
         const subject = subject_input.value;
@@ -331,6 +332,7 @@ if (userRole == 1) {
         classData.append("googlemeet_link", googleMeetLink);
         classData.append("class_code", classCode);
         classData.append("user_id", user_id);
+        console.log(classData)
 
         try {
             const createClass = async() => {
@@ -386,8 +388,14 @@ if (userRole == 1) {
     const joinClassName = document.querySelector(".join-class-modal-bottom .name");
     const joinClassEmail = document.querySelector(".join-class-modal-bottom .email");
 
-    let userEmail = JSON.parse(localStorage.getItem("userData")).email
-    let userName = JSON.parse(localStorage.getItem("userData")).first_name + " " + JSON.parse(localStorage.getItem("userData")).last_name
+    let userEmail = JSON
+        .parse(localStorage.getItem("userData"))
+        .email
+    let userName = JSON
+        .parse(localStorage.getItem("userData"))
+        .first_name + " " + JSON
+        .parse(localStorage.getItem("userData"))
+        .last_name
 
     joinClassName.innerText = userName
     joinClassEmail.innerText = userEmail
@@ -396,12 +404,20 @@ if (userRole == 1) {
         joinClassModal
             .classList
             .remove("hide")
-        document.body.classList.add("no-overflow")
+        document
+            .body
+            .classList
+            .add("no-overflow")
     })
 
     closeJoinModalButton.addEventListener("click", () => {
-        joinClassModal.classList.add("hide")
-        document.body.classList.remove("no-overflow");
+        joinClassModal
+            .classList
+            .add("hide")
+        document
+            .body
+            .classList
+            .remove("no-overflow");
     })
 
 };
@@ -415,6 +431,19 @@ pages.page_teacher_stream = () => {
     const cancelButton = document.querySelector("#second-state-announcement .buttons .cancel-button")
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
+
+    //tabs
+        
+        const classwork = document.getElementById("classwork-tab")
+        const peopleTab = document.getElementById("people-tab")
+
+        classwork.addEventListener('click', () =>{
+            window.location.href= `/teacher_classwork.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_people.html?id=${class_idParam}`   
+        } )
 
     const user = JSON.parse(localStorage.getItem("userData"))
         const user_idStorage = user.user_id
@@ -576,6 +605,8 @@ pages.page_teacher_stream = () => {
     
     })
 
+   
+
     pages.page_forget_password = () => {
 
         const checkButton = document.getElementById("check-button")
@@ -641,20 +672,42 @@ pages.page_teacher_stream = () => {
 
     }
 
-    // const profileBtn = document.getElementById("profile-pic")
-    // const manage_profile = document.getElementById("profile-manage");
-    // profileBtn.addEventListener("click", () => {
-    //     console.log("Click profile successful");
-    //     if (manage_profile.style.display !== "none") {
-    //         manage_profile.style.display = "none";
-    //     } else {
-    //         manage_profile.style.display = "block";
-    //     }
-    // })
+    const profileBtn = document.getElementById("profile-pic")
+    const manage_profile = document.getElementById("profile-manage");
+    profileBtn.addEventListener("click", () => {
+        console.log("Click profile successful");
+        if (manage_profile.style.display !== "none") {
+            manage_profile.style.display = "none";
+        } else {
+            manage_profile.style.display = "block";
+        }
+    })
 
 };
 
 pages.page_teacher_classwork = () => {
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const peopleTab = document.getElementById("people-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/teacher_stream.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/teacher_people.html?id=${class_idParam}`   
+        } )
+
+
     const createButton = document.getElementById("create-button")
     const dropDown = document.getElementById("drop-down")
     const topicModal = document.getElementById("topic-modal")
@@ -719,6 +772,90 @@ pages.page_teacher_classwork = () => {
             .add("hide")
     })
 
+    //add topic
+    const add_topic = document.getElementById('add-button');
+    add_topic.addEventListener('click', async() => {
+        const topic_name = document.querySelector('#topic-area').innerHTML;
+        console.log(topic_name)
+
+        try {
+            const data = new FormData();
+            data.append('topic_name' , topic_name);
+            let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    })
+
+    add_topic.addEventListener('click', async () => {
+      const topic_name = document.querySelector('#topic-area').value;   
+      try {
+        const data = new FormData();
+        data.append('topic_name', topic_name);
+        let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    // assignment sidebar
+    const dropdownToggle = document.getElementById("dropdownToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const dropDownClasses = document.getElementById("dropdownMenu")
+    const userId = JSON
+        .parse(localStorage.getItem("userData"))
+        .user_id
+
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+
+    const data = new FormData()
+    data.append("user_id", userId)
+
+    // get the classes and display them
+    try {
+        let getClasses = async() => {
+            let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data)
+            response.data.map((item, index) => {
+                dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input type="checkbox" value=${item.class_name}>
+                                            ${item.class_name}</label>
+                                    </div>`;
+            })
+            console.log(response.data)
+        }
+        getClasses()
+    } catch (error) {
+        console.log(error)
+    }
+
+    // get the topics fo the class and display them
+    
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (i === 0) {
+            checkboxes[i].checked = true;
+            dropdownToggle.innerHTML = `<div>${checkboxes[i].value}</div><div><i class="fa-solid fa-caret-down"></i></div>`;
+        } else {
+            checkboxes.checked = false;
+        }
+    }
+
+    dropdownToggle.addEventListener("click", () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block"
+            ? "none"
+            : "block";
+    });
+
+    dropdownMenu.addEventListener("click", (e) => {
+        const checkedValues = [];
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkedValues.push(checkbox.value);
+            }
+        });
+        console.log(checkedValues);
+    });
 }
 
 pages.page_signin_password = () => {
@@ -873,3 +1010,213 @@ pages.page_manage_account = () => {
         }
     });
 }
+pages.page_teacher_people=async()=>{
+
+     //Get query Parameter
+     const queryParamsString = window.location.search;
+     const queryParams = new URLSearchParams(queryParamsString);
+     const class_idParam = queryParams.get('id');
+     console.log(class_idParam);
+
+        const streamTab = document.getElementById("stream-id")
+        const classworkTab = document.getElementById("classwork-id")
+        console.log(classworkTab);
+
+        streamTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_stream.html?id=${class_idParam}`   
+        } )
+
+        classworkTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_classwork.html?id=${class_idParam}`
+        console.log('clicked');
+
+        } )
+    
+    // const user_id = JSON
+    // .parse(localStorage.getItem("userData"))
+    // .user_id
+
+    const user_id=7
+    const class_id=1     
+    const data = new FormData();
+    data.append("user_id", user_id);
+    data.append("class_id",class_id);
+    let teacher_info=document.getElementById('teach')
+    const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
+    console.log(response.data)
+    datax=response.data
+    var results = [];
+    for (var i = 0, len = datax.length; i < len; i++)
+    {
+        var res = datax[i];
+        results.push({
+            'first_name':res.first_name,
+            'last_name':res.last_name,
+            
+        });
+        console.log(res)
+        console.log(res.first_name+" "+res.last_name)
+        teacher_info.innerHTML += '<div class="teacher-data">' +
+        '<div class="profile-pic">' +
+        '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+        '</div>' +
+        '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
+        '</div>';
+    }
+    const data_s = new FormData();
+    data_s.append("class_id",class_id);
+    let student_info=document.getElementById('student')
+    const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
+    console.log(response_s.data)
+    const numRows = response_s.data.num_rows;
+    console.log(numRows)
+    const students_number=document.getElementById('nb-students')
+    students_number.innerText=numRows+" students"
+    const users = response_s.data;
+for (let i = 0; i < numRows; i++) {
+    const first_name = users[i].first_name;
+    const last_name = users[i].last_name;
+    console.log(first_name, last_name);    
+    student_info.innerHTML += '<div class="student">' +
+    '<div class="profile-pic">' +
+    '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+    '</div>' +
+    '<div class="student-name">' + first_name +" "+last_name+ '</div>' +
+    '</div>';
+    } 
+}
+
+
+
+pages.page_student_people=async()=>{
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const classworkTab = document.getElementById("classwork-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_stream.html?id=${class_idParam}`   
+        } )
+
+        classworkTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_classwork.html?id=${class_idParam}`   
+        } )
+    // const user_id = JSON
+    // .parse(localStorage.getItem("userData"))
+    // .user_id
+
+    const user_id=7
+    const class_id=1     
+    const data = new FormData();
+    data.append("user_id", user_id);
+    data.append("class_id",class_id);
+    let teacher_info=document.getElementById('teach')
+    const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
+    console.log(response.data)
+    datax=response.data
+    var results = [];
+    for (var i = 0, len = datax.length; i < len; i++)
+    {
+        var res = datax[i];
+        results.push({
+            'first_name':res.first_name,
+            'last_name':res.last_name,
+            
+        });
+        console.log(res)
+        console.log(res.first_name+" "+res.last_name)
+        teacher_info.innerHTML += '<div class="teacher-data">' +
+        '<div class="profile-pic">' +
+        '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+        '</div>' +
+        '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
+        '</div>';
+    }
+    const data_s = new FormData();
+    data_s.append("class_id",class_id);
+    let student_info=document.getElementById('student')
+    const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
+    console.log(response_s.data)
+    const numRows = response_s.data.num_rows;
+    console.log(numRows)
+    const students_number=document.getElementById('nb-students')
+    students_number.innerText=numRows+" students"
+    const users = response_s.data;
+for (let i = 0; i < numRows; i++) {
+    const first_name = users[i].first_name;
+    const last_name = users[i].last_name;
+    console.log(first_name, last_name);    
+    student_info.innerHTML += '<div class="student">' +
+    '<div class="profile-pic">' +
+    '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+    '</div>' +
+    '<div class="student-name">' + first_name +" "+last_name+ '</div>' +
+    '</div>';
+    }  
+}
+pages.page_student_stream=async()=>{
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const classworkTab = document.getElementById("classwork-id")
+        const peopleTab = document.getElementById("people-id")
+
+        classworkTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_classwork.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_people.html?id=${class_idParam}`   
+        } )
+
+    const class_id=class_idParam    
+    btn_join=document.getElementById('btnJoin')
+    const data = new FormData();    
+    data.append("class_id",class_id);    
+    const response = await pages.postAPI(pages.base_url + "get-google-meet-link.php", data);
+    console.log(response.data)
+    let link=response.data[0]
+    console.log("link :",link)
+    btn_join.addEventListener('click',()=>{
+        window.open(link)
+    })
+}
+
+pages.page_student_classwork=async()=>{
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const peopleTab = document.getElementById("people-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_stream.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/student_people.html?id=${class_idParam}`   
+        } )
+}
+
