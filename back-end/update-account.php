@@ -20,8 +20,4 @@ $user_data = $result->fetch_assoc();
 
 $mysqli->close();
 
-<<<<<<< HEAD
 echo json_encode($user_data);
-=======
-echo json_encode($user_data);
->>>>>>> f17466e37f8f772cbf8bd28ae9dffc39d1aa3a26

@@ -34,7 +34,7 @@
           <div>Assignment</div>
         </div>
         <div class="assign-button">
-          <button>Assign</button>
+          <button id="assign-button" class="" disabled>Assign</button>
         </div>
       </div>
       <div class="modal-assignment-bottom">
@@ -105,27 +105,10 @@
               <div class="classes-dropdown">
                 <button class="dropdown-toggle" id="dropdownToggle"></button>
                 <div class="dropdown-menu" id="dropdownMenu">
-                  <div class="dropdown-item">
-                    <label
-                      ><input
-                        disabled
-                        checked
-                        type="checkbox"
-                        value="option1"
-                      />
-                      Option 1</label
-                    >
-                  </div>
-                  <div class="dropdown-item">
-                    <label
-                      ><input type="checkbox" value="option2" /> Option 2</label
-                    >
-                  </div>
-                  <div class="dropdown-item">
-                    <label
-                      ><input type="checkbox" value="option3" /> Option 3</label
-                    >
-                  </div>
+                  <!-- <div class="dropdown-item">
+                                        <label><input disabled checked type="checkbox">
+                                            Select your classes</label>
+                                    </div> -->
                 </div>
               </div>
             </div>
@@ -136,8 +119,8 @@
             <div class="topics-sidebar-section">
               <label for="topics">Topic</label>
               <select id="topics">
-                <option value="UIX">UIX</option>
-                <option value="Soft Skills">Soft Skills</option>
+                <!-- <option value="UIX">UIX</option>
+                                <option value="Soft Skills">Soft Skills</option> -->
               </select>
             </div>
           </div>
@@ -305,5 +288,6 @@
     <script>
       pages.loadFor("teacher_classwork");
     </script>
+     
   </body>
 </html>

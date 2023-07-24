@@ -777,7 +777,9 @@ pages.page_teacher_classwork = () => {
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
     const assignmentModal = document.getElementById("modal-assignment");
     const closeAssignmentButton = document.getElementById("close-assignment");
-    
+
+    let classID = 2;
+
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
         assignmentModal
@@ -787,12 +789,14 @@ pages.page_teacher_classwork = () => {
 
     // open assignment
     createAssignmentButton.addEventListener("click", (e) => {
+        
         assignmentModal
             .classList
             .remove("hide")
     })
 
     createButton.addEventListener("click", (e) => {
+        
         if (!dropDown.contains(e.target)) {
             dropDown
                 .classList
@@ -858,6 +862,27 @@ pages.page_teacher_classwork = () => {
       }
     });
 
+
+    const topicsSelectBox = document.getElementById("topics");
+
+    // get the topics fo the class and display them
+    try {
+        let getTopics = async() => {
+            const data = new FormData();
+            data.append("class_id", classID);
+            let response = await pages.postAPI(pages.base_url + "fetch_topics.php", data);
+            response
+                .data
+                .map((item) => {
+                    topicsSelectBox.innerHTML += `<option value="${item.topic_id}">${item.topic_name}</option>`;
+                });
+            console.log(response.data);
+        };
+        getTopics();
+    } catch (error) {
+        console.log(error);
+    }
+
     // assignment sidebar
     const dropdownToggle = document.getElementById("dropdownToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
@@ -871,16 +896,24 @@ pages.page_teacher_classwork = () => {
     const data = new FormData()
     data.append("user_id", userId)
 
+    dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input disabled checked type="checkbox" value="${classID}">
+                                            Dynamic Class</label>
+                                    </div>`;
+    dropdownToggle.innerHTML = `<div>Dynamic Class</div><div><i class="fa-solid fa-caret-down"></i></div>`;
+
     // get the classes and display them
     try {
         let getClasses = async() => {
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data)
-            response.data.map((item, index) => {
-                dropDownClasses.innerHTML += `<div class="dropdown-item">
-                                        <label><input type="checkbox" value=${item.class_name}>
+            response
+                .data
+                .map((item, index) => {
+                    dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input type="checkbox" value="${item.class_id}">
                                             ${item.class_name}</label>
                                     </div>`;
-            })
+                })
             console.log(response.data)
         }
         getClasses()
@@ -888,17 +921,7 @@ pages.page_teacher_classwork = () => {
         console.log(error)
     }
 
-    // get the topics fo the class and display them
     
-
-    for (let i = 0; i < checkboxes.length; i++) {
-        if (i === 0) {
-            checkboxes[i].checked = true;
-            dropdownToggle.innerHTML = `<div>${checkboxes[i].value}</div><div><i class="fa-solid fa-caret-down"></i></div>`;
-        } else {
-            checkboxes.checked = false;
-        }
-    }
 
     dropdownToggle.addEventListener("click", () => {
         dropdownMenu.style.display = dropdownMenu.style.display === "block"
@@ -907,7 +930,11 @@ pages.page_teacher_classwork = () => {
     });
 
     dropdownMenu.addEventListener("click", (e) => {
-        const checkedValues = [];
+        e.stopPropagation();
+
+        const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+
+        let checkedValues = [];
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
