@@ -62,17 +62,16 @@ pages.page_index = () => {
     // .getElementById("password_in")         .value     const errorElement =
     // document.querySelector(".error")     const data = new FormData();
     // data.append("email", email);     data.append("password", password)     try {
-    //   let response = await pages.postAPI(pages.base_url + "signin.php", data);
-    //   if (response.data.status === "user not found") { errorElement.innerText =
-    // "User not found"             setTimeout(() => { errorElement.innerText = ""
-    //           }, 3000)         } else if (response.data.status === "wrong
-    // password") { errorElement.innerText = "Wrong Password" setTimeout(() => {
-    //        errorElement.innerText = ""             }, 3000)         } else {
-    //       const userObject = Object .keys(response.data)
-    // .reduce((acc, key) => {           if (key !== "status") {
-    //     acc[key] = response.data[key]             }                     return
-    // acc }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
-    // window.location.href = "classrooms.html"         }     } catch (error) {
+    // let response = await pages.postAPI(pages.base_url + "signin.php", data); if
+    // (response.data.status === "user not found") { errorElement.innerText = "User
+    // not found"             setTimeout(() => { errorElement.innerText = "" },
+    // 3000)         } else if (response.data.status === "wrong password") {
+    // errorElement.innerText = "Wrong Password" setTimeout(() => {
+    // errorElement.innerText = ""             }, 3000)         } else { const
+    // userObject = Object .keys(response.data) .reduce((acc, key) => {    if (key
+    // !== "status") {     acc[key] = response.data[key]             }    return acc
+    // }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
+    // window.location.href = "classrooms.html" }     } catch (error) {
     // console.error('Login error : ', error);     } })
 }
 
@@ -131,7 +130,6 @@ pages.page_signup = () => {
 }
 
 pages.page_classrooms = () => {
-    console.log("classroom page")
 
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
@@ -145,6 +143,7 @@ pages.page_classrooms = () => {
     const section_input = document.getElementById("section-input");
     const subject_input = document.getElementById("subject-input");
     const room_input = document.getElementById("room-input");
+    const googleMeetLinkInput = document.getElementById("googleMeetLink-input");
     const formElement = document.querySelector("form")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
@@ -191,6 +190,40 @@ pages.page_classrooms = () => {
                             <p class="class-desc">${item.section}</p>
                         </div>
                     </div>`
+
+                    bottom_classrooms.innerHTML += `<a href="/teacher_stream.html?id=${item.class_id}"><div class="class">
+                    <div class="top-class">
+                        <div class="class-title">
+                            <p>${item.class_name}</p>
+                            <div>
+                                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                            </div>
+                        </div>
+                        <p>${item.room || ""}</p>
+                        <p>${userData.first_name + userData.last_name}</p>
+                        <div class="profile-pic"><img
+                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                            alt="Profile Picture"></div>
+                    </div>
+                    <div class="assignments">
+                        <div class="assignment">
+                            <p class="due-date">Due today</p>
+                            <p>11:59PM - Professional Development Plan</p>
+                        </div>
+                        <div class="assignment">
+                            <p class="due-date">Due tomorrow</p>
+                            <p>11:59PM - Planners(Time Management)</p>
+                        </div>
+                    </div>
+                    <div class="bottom-class">
+                        <div class="user-icon">
+                            <i class="fa-regular fa-user fa-lg"></i>
+                        </div>
+                        <div class="folder-icon">
+                            <i class="fa-regular fa-folder fa-lg"></i>
+                        </div>
+                    </div>
+                </div></a>`;
                 })
         }
         getClasses()
@@ -238,6 +271,20 @@ pages.page_classrooms = () => {
             .add("hide")
     })
 
+    // function to create class code
+    function generateRandomCode() {
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let code = "";
+        const codeLength = 7;
+
+        for (let i = 0; i < codeLength; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            code += characters.charAt(randomIndex);
+        }
+
+        return code;
+    }
+
     formElement.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -245,24 +292,34 @@ pages.page_classrooms = () => {
         const section = section_input.value;
         const subject = subject_input.value;
         const room = room_input.value;
+        const googleMeetLink = googleMeetLinkInput.value;
+        const classCode = generateRandomCode();
 
         let classData = new FormData();
         classData.append("class_name", classname);
         classData.append("section", section);
         classData.append("subject", subject);
         classData.append("room", room);
-        classData.append("googlemeet_link", "");
+        classData.append("googlemeet_link", googleMeetLink);
+        classData.append("class_code", classCode);
         classData.append("user_id", user_id);
+
+        console.log("class_name", classname);
+        console.log("section", section);
+        console.log("subject", subject);
+        console.log("room", room);
+        console.log("googlemeet_link", googleMeetLink);
+        console.log("class_code", classCode);
+        console.log("user_id", user_id);
 
         try {
             const createClass = async() => {
-                await pages.postAPI(pages.base_url + "create-class.php", classData);
+                const response = await pages.postAPI(pages.base_url + "create-class.php", classData);
+                console.log(response.data);
                 modal
                     .classList
-                    .add("hide")
-                window
-                    .location
-                    .reload()
+                    .add("hide");
+                window.location.reload();
             };
             createClass();
         } catch (error) {
@@ -303,60 +360,6 @@ pages.page_teacher_stream = () => {
                 .remove("text-area")
         })
     })
-
-    pages.page_classrooms = async() => {
-        const user = JSON.parse(localStorage.getItem("userData"))
-        const user_id = user.user_id
-        const data = new FormData();
-        data.append("user_id", user_id)
-        const classroom_url = pages.base_url + "teachers-classes.php"
-        const response = await pages.postAPI(classroom_url, data);
-        console.log(response.data)
-        console.log(1)
-        const bottom_classroom = document.querySelector(".bottom-classrooms")
-        console.log(bottom_classroom)
-        response
-            .data
-            .map((item) => (bottom_classroom.innerHTML += `         
-        <div class="class">
-        <div class="top-class">
-          <div class="class-title">
-            <p>${item.class_name}</p>
-            <div>
-              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-            </div>
-          </div>
-          <p>Full Stack Web Development Bootcamp</p>
-          <p>Tech Department</p>
-          <div class="profile-pic">
-            <img
-              src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-              alt="Profile Picture"
-            />
-          </div>
-        </div>
-        <div class="assignments">
-          <div class="assignment">
-            <p class="due-date">Due today</p>
-            <p>11:59PM - Professional Development Plan</p>
-          </div>
-          <div class="assignment">
-            <p class="due-date">Due tomorrow</p>
-            <p>11:59PM - Planners(Time Management)</p>
-          </div>
-        </div>
-        <div class="bottom-class">
-          <div class="user-icon">
-            <i class="fa-regular fa-user fa-lg"></i>
-          </div>
-          <div class="folder-icon">
-            <i class="fa-regular fa-folder fa-lg"></i>
-          </div>
-        </div>
-      </div>
-      `))
-
-    }
 
     const profileBtn = document.getElementById("profile-pic")
     const manage_profile = document.getElementById("profile-manage");
@@ -491,10 +494,38 @@ pages.page_signin_password = () => {
 
 pages.page_forget_password = () => {
 
+    const userEmail = JSON
+        .parse(localStorage.getItem('userData'))
+        .email
+    const emailElement = document.querySelector(".email")
+    const answerInput = document.getElementById("fav-color")
     const checkButton = document.getElementById("check-button")
-    const favColorInput = document.getElementById("fav-color")
+    const answerError = document.querySelector(".answer-error")
+    const passwordsError = document.querySelector(".passwords-error")
+    const passwordInput = document.getElementById("password")
+    const confirmPasswordInput = document.getElementById("confirm-password")
 
-    checkButton.addEventListener('click', () => {
-        pages.postAPI
+    emailElement.innerText = userEmail
+
+    checkButton.addEventListener("click", async() => {
+        let answer = answerInput.value
+
+        if (answer !== "") {
+            let data = new FormData();
+            data.append("email", userEmail);
+            data.append("answer", answer);
+
+            let response = await axios.post(pages.base_url + "check-answer.php", data);
+            console.log(response.data);
+            if(response.data.answer_check === "Wrong answer") {
+                answerError.classList.remove("hide")
+                setTimeout(() => {
+                    answerError.classList.add("hide")
+                }, 3000)
+            }else {
+                answerInput.disabled = true
+            }
+        }
     })
+
 }

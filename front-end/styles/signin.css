@@ -245,3 +245,11 @@ img {
 .forgot-password-page .user-email:hover {
     background-color: #cccccc3a;
 }
+
+.answer-error, .passwords-error {
+    color: red;
+}
+
+.answer-error.hide, .passwords-error.hide {
+    display: none;
+}
