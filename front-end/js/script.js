@@ -596,17 +596,25 @@ pages.page_manage_account = () => {
     const lastNameElement = document.getElementById("last-name");
     const applyChangesButton = document.getElementById("apply-changes-button");
 
-    emailElement.innerText = userEmail;
-    let userEmail = JSON
-        .parse(localStorage.getItem("userData"))
-        .email;
+    let user_id = JSON
+    .parse(localStorage.getItem("userData"))
+    .user_id;
+    let user_email = JSON.parse(localStorage.getItem("userData")).email;
+    emailElement.innerText = user_email;
 
-    applyChangesButton.addEventListener("click", () => {
+    applyChangesButton.addEventListener("click", async() => {
         let firstName = firstNameElement.value;
         let lastName = lastNameElement.value;
 
-        if (firstName !== "" || lastName !== "") {}
-    });
+        let data = new FormData()
+        data.append("user_id", user_id)
+        data.append("new_first_name", firstName)
+        data.append("new_last_name", lastName)
 
-    console.log(userEmail)
+        if (firstName !== "" || lastName !== "") {
+            let response = await axios.post(pages.base_url + "update-account.php", data)
+            localStorage.setItem("userData", JSON.stringify(response.data))
+            window.location.href = "classrooms.html"
+        }
+    });
 }
