@@ -3,10 +3,11 @@ include('connection.php');
 
 $topic_name = $_POST['topic_name'];
 
-$checkQuery = $mysqli->prepare('SELECT topic_id FROM topics WHERE topic_name = ?');
+$checkQuery = $mysqli->prepare('select topic_id from topics where topic_name = ?');
 $checkQuery->bind_param('s', $topic_name);
 $checkQuery->execute();
 $checkResult = $checkQuery->get_result();
+
 
 if ($checkResult->num_rows > 0) {
     echo "Error: Topic already exists!";

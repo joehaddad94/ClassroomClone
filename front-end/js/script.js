@@ -478,7 +478,6 @@ pages.page_teacher_classwork = () => {
                 .classList
                 .remove("hide");
         }
-        console.log("bottom clicked")
     })
 
     document.addEventListener("click", (e) => {
@@ -509,45 +508,4 @@ pages.page_teacher_classwork = () => {
     topicCancelButton.addEventListener("click", (e) => {
         topicModal.classList.add("hide")
     })
-
-}
-
-pages.page_forget_password = () => {
-
-    const checkButton = document.getElementById("check-button")
-    const favColorInput = document.getElementById("fav-color")
-
-    checkButton.addEventListener('click', () => {
-        pages.postAPI
-    })
-}
-
-pages.add_topics = () => {
-    document.getElementById("add-button").addEventListener("click", function (event) {
-        event.preventDefault();
-        addTopic();
-    });
-
-    function addTopic() {
-        const topicName = document.getElementById("topic-area").value;
-
-        let data = new FormData();
-        data.append("topicName", topicName);
-
-        fetch('http://localhost/ClassroomClone/back-end/save-topic.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                console.log("Topic saved successfully!");
-            } else {
-                console.error("Error saving topic:", result.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-    }
 }
