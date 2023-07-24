@@ -615,6 +615,6 @@ pages.page_student_stream=async()=>{
     btn_join.addEventListener('click',()=>{
         window.open(link)
     })
-    }
+}
 
 
