@@ -349,11 +349,12 @@ pages.page_teacher_stream = () => {
     const queryParams = new URLSearchParams(queryParamsString);
     const class_id = queryParams.get('id');
     console.log(class_id);
+
+    const data_class_id = new FormData();
+    data_class_id.append("class_id", class_id);
     
     //Load announcements
     document.addEventListener('DOMContentLoaded', async function() {
-        const data_class_id = new FormData();
-        data_class_id.append("class_id", class_id);
 
         const class_url = pages.base_url + "fetch_announcement.php"
         const response = await pages.postAPI(class_url, data_class_id);
@@ -390,9 +391,12 @@ pages.page_teacher_stream = () => {
         <div class="share-icon">
             <i class="fa-solid fa-share"></i>
         </div>
-    </div>` 
+    </div>`
 
-
+    const classCode_url = pages.base_url + "get-class-info.php"   
+    const response_classCode = await pages.postAPI(classCode_url,data_class_id)
+    const class_code = response_classCode.data[0].class_code;
+    document.getElementById("class_code").innerHTML = class_code;
     });
 
     //Create announcement functionality and design
@@ -403,19 +407,8 @@ pages.page_teacher_stream = () => {
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
 
-    document.addEventListener('DOMContentLoaded',async function(){
-        const data = new FormData();
-        data.append("class_id",9)
-        const response = await pages.postAPI("http://localhost/ClassroomClone/back-end/get-class-info.php",data)
-        const class_code = response.data[0].class_code;
-        document.getElementById("class_code").innerHTML = class_code;
-        
-
-    })
-
 
     postButton.addEventListener("click",async () => {
-
 
         const description = document.querySelector("#editor p").innerHTML;
         const class_id = 13;
