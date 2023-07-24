@@ -142,13 +142,118 @@ a {
   cursor: pointer;
 }
 
+/* MANAGE ACCOUNT MODAL */
+
 .manage-account-modal {
   position: absolute;
-  background-color: red;
-  width: 200px;
-  height: 300px;
+  background-color: #007a83;
   top: 70px;
   right: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  z-index: 999;
+  transition: all .1s ease;
+  -webkit-transition: all .1s ease;
+  -moz-transition: all .1s ease;
+  -ms-transition: all .1s ease;
+  -o-transition: all .1s ease;
+}
+
+.manage-account-modal.hide {
+  visibility: hidden;
+}
+
+.manage-account-modal-top {
+  padding: 10px 10px 0 10px;
+}
+
+.manage-account-modal .content-box {
+  padding: 15px 20px 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.manage-account-modal .content-box .user-data {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.manage-account-modal .content-box .user-data .user-email {
+  font-size: .75rem;
+  color: rgba(0, 0, 0, 0.582);
+  letter-spacing: .6px;
+}
+
+.manage-account-modal .content-box .user-data > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.manage-account-modal .content-box .manage-account-button {
+  text-align: right;
+}
+
+.manage-account-modal .content-box .manage-account-button button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border: 1px solid black;
+  background-color: white;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.manage-account-modal .content-box .manage-account-button button:hover {
+  background-color: #7373732f;
+}
+
+.manage-account-modal .content-box .user-data .image {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.manage-account-modal .sign-out {
+  display: flex;
+  align-items: center;
+  padding: 15px 60px;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.manage-account-modal .bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+}
+
+.manage-account-modal .bottom .dot {
+  font-size: .3125rem;
 }
 
 .arrow-icon {
