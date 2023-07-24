@@ -140,7 +140,7 @@ pages.page_signup = () => {
 }
 
 pages.page_classrooms = () => {
-    console.log("classroom page")
+
 
     const burgerIcon = document.getElementById("burgerIcon");
     const sidebar = document.getElementById("sidebar");
@@ -158,26 +158,6 @@ pages.page_classrooms = () => {
 
     let userData = JSON.parse(localStorage.getItem("userData"))
 
-    // modal functionlity const modal = document.querySelector(".modal") const
-    // boxModal = document.querySelector(".modal .modal-box")
-    // modal.addEventListener("click", (e) => {     if
-    // (!boxModal.contains(e.target)) {         modal             .classList
-    // .toggle("hide");     } }) createClassButton.addEventListener('click', () => {
-    //     console.log('clicked')     modal         .classList .remove("hide") })
-    // modalCancelButton.addEventListener("click", () => { modal         .classList
-    //       .add("hide") }) formElement.addEventListener("submit", (e) => {
-    // e.preventDefault(); const classname = classname_input.value;     const
-    // section = section_input.value;     const subject = subject_input.value; const
-    // room = room_input.value;     let classData = new FormData();
-    // classData.append("class_name", classname);     classData.append("section",
-    // section);     classData.append("subject", subject); classData.append("room",
-    // room);     classData.append("googlemeet_link", "");
-    // classData.append("user_id", user_id);     try {         const createClass =
-    // async() => {             await pages.postAPI(pages.base_url +
-    // "create-class.php", classData);             modal                 .classList
-    //              .add("hide")             window                 .location
-    // .reload()         };         createClass();     } catch (error) {
-    // console.log(error);     } });
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -195,54 +175,109 @@ pages.page_classrooms = () => {
             }
         })
 
-    //Display Classes in classrooms
 
-    const user_id = JSON
-        .parse(localStorage.getItem("userData"))
-        .user_id
-    const data = new FormData();
-    data.append("user_id", user_id);
+// Function to fetch and display classes
+const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
+let link = ""
+if (userRole == 1){
+    link = "/teacher_stream.html"
+} else {
+    link = "/student_stream.html"
+}
+
+let redirect = document.querySelector("#redirect")
+console.log(redirect)
+
+const displayClasses = async (apiUrl) => {
+    
 
     try {
+        const user_id = JSON.parse(localStorage.getItem("userData")).user_id;
+        const data = new FormData();
+        data.append("user_id", user_id);
 
-        let getClasses = async() => {
+        const response = await pages.postAPI(apiUrl, data);
+        const bottom_classrooms = document.querySelector(".bottom-classrooms");
 
-            let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data);
+        response.data.forEach((item) => {
+            sidebarClasses.innerHTML += `
+            <div class="class">
+                <div>${item.class_name[0]}</div>
+                    <div class="class-data">
+                        <p class="class-name">
+                            ${item.class_name}
+                        </p>
+                        <p class="class-desc">${item.section}</p>
+                    </div>
+            </div>`;
 
-            response
-                .data
-                .map((item) => {
-                    sidebarClasses.innerHTML += `<div class="class">
-                        <div>${item.class_name[0]}</div>
-                        <div class="class-data">
-                            <p class="class-name">
-                                ${item.class_name}
-                            </p>
-                            <p class="class-desc">${item.section}</p>
+            bottom_classrooms.innerHTML += `<a href="${link}?id=${item.class_id}" class="class-link"><div class="class">
+            <div class="top-class">
+                <div class="class-title">
+                  <p>${item.class_name}</p>
+              <div>
+              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                </div>
+            </div>
+            <p>${item.room || ""}</p>
+            <p>${userData.first_name + userData.last_name}</p>
+            <div class="profile-pic"><img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="Profile Picture"></div>
+            </div>
+                <div class="assignments">
+                    <div class="assignment">
+                    <p class="due-date">Due today</p>
+                    <p>11:59PM - Professional Development Plan</p>
+                    </div>
+                    <div class="assignment">
+                        <p class="due-date">Due tomorrow</p>
+                        <p>11:59PM - Planners(Time Management)</p>
+                    </div>
+                    </div>
+                    <div class="bottom-class">
+                        <div class="user-icon">
+                            <i class="fa-regular fa-user fa-lg"></i>
                         </div>
-                    </div>`
-                })
-        }
-        getClasses()
+                        <div class="folder-icon">
+                            <i class="fa-regular fa-folder fa-lg"></i>
+                        </div>
+                    </div>
+                </div></a>`;
+        });
 
         // checking for the user to set the button in the navbar
-        let userRole = JSON
-            .parse(localStorage.getItem("userData"))
-            .role_id
-
+        const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
         if (userRole === 1) {
-            joinClassButton
-                .classList
-                .add("hide")
+            joinClassButton.classList.add("hide");
         } else {
-            createClassButton
-                .classList
-                .add("hide")
+            createClassButton.classList.add("hide");
         }
-
     } catch (error) {
-        console.log(error + " in loading classes")
+        console.log("Error in loading classes:", error);
     }
+};
+
+// Call the function for teacher or student view
+
+if (userRole == 1) {
+    const teacherClassesUrl = pages.base_url + "teachers-classes.php";
+    displayClasses(teacherClassesUrl);
+} else {
+    const studentClassesUrl = pages.base_url + "student-classes.php";
+    displayClasses(studentClassesUrl);
+}
+
+// const classLinks = document.querySelectorAll(".class-link");
+// classLinks.forEach((linkElement) => {
+//     linkElement.addEventListener("click", (event) => {
+//         event.preventDefault();
+//         const href = linkElement.getAttribute("href");
+//         window.location.href = href; 
+//     });
+// });
+
+
 
     // modal functionlity
 
@@ -310,32 +345,118 @@ pages.page_teacher_stream = () => {
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
 
-    document.addEventListener('DOMContentLoaded',async function(){
-        const data = new FormData();
-        data.append("class_id",9)
-        const response = await pages.postAPI("http://localhost/ClassroomClone/back-end/get-class-info.php",data)
-        const class_code = response.data[0].class_code;
-        document.getElementById("class_code").innerHTML = class_code;
-        
+    const user = JSON.parse(localStorage.getItem("userData"))
+        const user_idStorage = user.user_id
+        const first_name = user.first_name
+        const last_name = user.last_name
+        console.log(first_name)
+        console.log(last_name)
 
-    })
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
 
+     
+    //Load announcements
+    document.addEventListener('DOMContentLoaded', async function() {
+        const data_class_id = new FormData();
+        data_class_id.append("class_id", class_idParam);
 
+        const class_url = pages.base_url + "fetch_announcement.php"
+        const response = await pages.postAPI(class_url, data_class_id);
+        const description = response.data[0].description
+        console.log(response)
+        console.log(description)
+
+        const announcement = document.querySelector(".announcement")
+        console.log(announcement)
+        announcement.innerHTML += `<div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${first_name} ${last_name}</div>
+                    <!--<p class="date">02:32</p>-->
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+            ${description}
+        </div>
+    </div>
+    <div class="announcement-comment">
+        <div class="profile-pic"><img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="profile-picture"></div>
+        <div class="comment-input"><input placeholder="Add class comment" type="text"></div>
+        <div class="share-icon">
+            <i class="fa-solid fa-share"></i>
+        </div>
+    </div>`
+
+    const classCode_url = pages.base_url + "get-class-info.php"   
+    const response_classCode = await pages.postAPI(classCode_url,data_class_id)
+    const class_code = response_classCode.data[0].class_code;
+    document.getElementById("class_code").innerHTML = class_code;
+    });
+
+    
+    // Add announcement functionality
     postButton.addEventListener("click",async () => {
 
-
         const description = document.querySelector("#editor p").innerHTML;
-        const class_id = 13;
-        const user_id = 39;
+        const class_id = class_idParam;
+        // const user_id = user_idStorage;
         if(description != "<br>"){
             try {
                 const data = new FormData();
                 data.append("description",description);
                 data.append("class_id",class_id);
-                data.append("user_id",user_id);
-                let response = await pages.postAPI("http://localhost/ClassroomClone/back-end/add_announcement.php",data);
+                // data.append("user_id",user_id);
+                const classCode_url = pages.base_url + "add_announcement.php"   
+                const response_classCode = await pages.postAPI(classCode_url,data)
+                console.log(response_classCode)
 
-                description.innerText = "";
+                const class_url = pages.base_url + "fetch_announcement.php"
+                const response = await pages.postAPI(class_url, data);
+                const description = response.data[0].description
+
+                description.innerHTML += `<div class="announcement-top">
+                <div>
+                    <div class="user-data">
+                        <div class="profile-pic"><img
+                            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                            alt="profile-picture"></div>
+                        <div>
+                            <div class="name">${first_name} ${last_name}</div>
+                            <!--<p class="date">02:32</p>-->
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                    </div>
+                </div>
+                <div class="announcement-content">
+                    ${description}
+                </div>
+            </div>
+            <div class="announcement-comment">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div class="comment-input"><input placeholder="Add class comment" type="text"></div>
+                <div class="share-icon">
+                    <i class="fa-solid fa-share"></i>
+                </div>
+            </div>`;
+
             } catch (error) {
                 console.log(error);
             }
@@ -344,6 +465,7 @@ pages.page_teacher_stream = () => {
 
     })
 
+    //Create announcement functionality and design
     firstStateAnnouncement.addEventListener('click', () => {
         firstStateAnnouncement
             .classList
@@ -360,6 +482,8 @@ pages.page_teacher_stream = () => {
         firstStateAnnouncement.classList.remove("hide")
         annoucementInput.classList.remove("text-area")
     })
+
+    
     })
 
     pages.page_forget_password = () => {
@@ -376,14 +500,15 @@ pages.page_teacher_stream = () => {
     pages.page_classrooms = async() => {
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
+
         const data = new FormData();
         data.append("user_id", user_id)
+
         const classroom_url = pages.base_url + "teachers-classes.php"
         const response = await pages.postAPI(classroom_url, data);
-        console.log(response.data)
-        console.log(1)
+        
         const bottom_classroom = document.querySelector(".bottom-classrooms")
-        console.log(bottom_classroom)
+        
         response
             .data
             .map((item) => (bottom_classroom.innerHTML += `         
@@ -427,16 +552,16 @@ pages.page_teacher_stream = () => {
 
     }
 
-    const profileBtn = document.getElementById("profile-pic")
-    const manage_profile = document.getElementById("profile-manage");
-    profileBtn.addEventListener("click", () => {
-        console.log("Click profile successful");
-        if (manage_profile.style.display !== "none") {
-            manage_profile.style.display = "none";
-        } else {
-            manage_profile.style.display = "block";
-        }
-    })
+    // const profileBtn = document.getElementById("profile-pic")
+    // const manage_profile = document.getElementById("profile-manage");
+    // profileBtn.addEventListener("click", () => {
+    //     console.log("Click profile successful");
+    //     if (manage_profile.style.display !== "none") {
+    //         manage_profile.style.display = "none";
+    //     } else {
+    //         manage_profile.style.display = "block";
+    //     }
+    // })
 
 };
 
