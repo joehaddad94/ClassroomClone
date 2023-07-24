@@ -233,6 +233,13 @@ a {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  overflow: hidden;
+}
+
+.manage-account-modal .content-box .user-data .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .manage-account-modal .sign-out {
@@ -242,6 +249,7 @@ a {
   justify-content: flex-start;
   gap: 40px;
   cursor: pointer;
+  color: white;
 }
 
 .manage-account-modal .bottom {
@@ -251,11 +259,18 @@ a {
   gap: 20px;
   padding: 15px;
   border-top: 1px solid #ccc;
+  color: white;
 }
 
 .manage-account-modal .bottom .dot {
   font-size: .3125rem;
 }
+
+
+
+
+
+
 
 .arrow-icon {
   width: 100%;

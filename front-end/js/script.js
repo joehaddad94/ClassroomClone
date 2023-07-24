@@ -337,11 +337,15 @@ pages.page_classrooms = () => {
         window.location.href = "manage_account.html"
     })
 
-    // document     .body     .addEventListener("click", (e) => {         if
-    // (!manageAccountModal.classList.contains("hide") &&
-    // !e.target.classList.contains("nav-profile-pic") &&
-    // !manageAccountModal.contains(e.target)) {             manageAccountModal
-    //            .classList                 .add("hide");         }     });
+    document
+        .body
+        .addEventListener("click", (e) => {
+            if (!manageAccountModal.classList.contains("hide") && !profileBtn.contains(e.target) && !manageAccountModal.contains(e.target)) {
+                manageAccountModal
+                    .classList
+                    .add("hide");
+            }
+        });
 
     // sign Out functionality
     signoutElement.addEventListener("click", () => {
