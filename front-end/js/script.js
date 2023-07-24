@@ -776,8 +776,8 @@ pages.page_teacher_classwork = () => {
     const boxTopicModal = document.getElementById("topic-box");
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
     const assignmentModal = document.getElementById("modal-assignment");
-    const closeAssignmentButton = document.getElementById("close-assignment")
-
+    const closeAssignmentButton = document.getElementById("close-assignment");
+    
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
         assignmentModal
@@ -798,7 +798,6 @@ pages.page_teacher_classwork = () => {
                 .classList
                 .remove("hide");
         }
-        console.log("bottom clicked")
     })
 
     document.addEventListener("click", (e) => {
