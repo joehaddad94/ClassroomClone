@@ -500,6 +500,7 @@ pages.page_forget_password = () => {
     const emailElement = document.querySelector(".email")
     const answerInput = document.getElementById("fav-color")
     const checkButton = document.getElementById("check-button")
+    const changePasswordButton = document.getElementById("change-password-button")
     const answerError = document.querySelector(".answer-error")
     const passwordsError = document.querySelector(".passwords-error")
     const passwordInput = document.getElementById("password")
@@ -508,6 +509,7 @@ pages.page_forget_password = () => {
     emailElement.innerText = userEmail
 
     checkButton.addEventListener("click", async() => {
+        console.log("checked")
         let answer = answerInput.value
 
         if (answer !== "") {
@@ -523,8 +525,29 @@ pages.page_forget_password = () => {
                     answerError.classList.add("hide")
                 }, 3000)
             }else {
+                answerInput.value = ""
                 answerInput.disabled = true
+                checkButton.classList.add("hide")
+                changePasswordButton.classList.remove("hide")
+                passwordInput.disabled = false
+                confirmPasswordInput.disabled = false
             }
+        }
+    })
+
+    changePasswordButton.addEventListener("click", async() => {
+        if(passwordInput.value !== confirmPasswordInput.value) {
+            passwordsError.classList.remove("hide")
+            setTimeout(() => {
+                passwordsError.classList.add("hide")
+            }, 3000)
+        }else {
+            let data = new FormData()
+            data.append("email", userEmail)
+            data.append("new password", passwordInput.value)
+
+            let response = await axios.post(pages.base_url + "change-password.php", data)
+            window.location.href = "index.html"
         }
     })
 

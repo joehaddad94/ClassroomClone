@@ -127,7 +127,7 @@ img {
 .signup-button button,
 .check-button button,
 .login-button button,
-.change-button button {
+.change-password-button button {
     color: white;
     background-color: #1a73e8;
     border: none;
@@ -251,5 +251,9 @@ img {
 }
 
 .answer-error.hide, .passwords-error.hide {
+    display: none;
+}
+
+.check-button.hide, .change-password-button.hide {
     display: none;
 }
