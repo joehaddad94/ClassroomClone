@@ -310,8 +310,19 @@ pages.page_teacher_stream = () => {
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
 
+    document.addEventListener('DOMContentLoaded',async function(){
+        const data = new FormData();
+        data.append("class_id",8)
+        const response = await pages.postAPI("http://localhost/ClassroomClone/back-end/get-class-info.php",data)
+        const class_code = response.data[0].class_code;
+        document.getElementById("class_code").innerHTML = class_code;
+        
+
+    })
+
 
     postButton.addEventListener("click",async () => {
+
 
         const description = document.querySelector("#editor p").innerHTML;
         const class_id = 13;
