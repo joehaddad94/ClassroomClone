@@ -776,4 +776,24 @@ pages.page_student_stream=async()=>{
     })
 }
 
+pages.page_student_classwork=async()=>{
+
+    const class_id=1 
+    const topic=document.getElementById('topic_name');        
+    const data = new FormData();    
+    data.append("class_id",class_id);    
+    const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
+    console.log(response.data)  
+    topics=[]
+    response.data.forEach(item => {
+        console.log(item.topic_name);
+        topics.push(item.topic_name)
+      });
+    console.log(topics)
+    for(i=0;i<topics.length;i++){
+       topic.innerHTML+="<p>"+topics[i]+"</p>";
+    }
+    
+}
+
 
