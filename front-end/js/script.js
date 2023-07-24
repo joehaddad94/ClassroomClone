@@ -403,6 +403,40 @@ pages.page_teacher_stream = () => {
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
 
+    document.addEventListener('DOMContentLoaded',async function(){
+        const data = new FormData();
+        data.append("class_id",9)
+        const response = await pages.postAPI("http://localhost/ClassroomClone/back-end/get-class-info.php",data)
+        const class_code = response.data[0].class_code;
+        document.getElementById("class_code").innerHTML = class_code;
+        
+
+    })
+
+
+    postButton.addEventListener("click",async () => {
+
+
+        const description = document.querySelector("#editor p").innerHTML;
+        const class_id = 13;
+        const user_id = 39;
+        if(description != "<br>"){
+            try {
+                const data = new FormData();
+                data.append("description",description);
+                data.append("class_id",class_id);
+                data.append("user_id",user_id);
+                let response = await pages.postAPI("http://localhost/ClassroomClone/back-end/add_announcement.php",data);
+
+                description.innerText = "";
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+
+    })
+
     firstStateAnnouncement.addEventListener('click', () => {
         firstStateAnnouncement
             .classList
