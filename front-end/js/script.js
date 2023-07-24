@@ -338,6 +338,14 @@ if (userRole == 1) {
 
 pages.page_teacher_stream = () => {
 
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    console.log(queryParamsString)
+    const queryParams = new URLSearchParams(queryParamsString);
+    const q = queryParams.get('id');
+    console.log(q);   
+
+    //Create announcement functionality and design
     const annoucementInput = document.getElementById("announcement-input")
     const firstStateAnnouncement = document.getElementById("first-state-announcement")
     const secondStateAnnoucnement = document.getElementById("second-state-announcement")
@@ -361,6 +369,8 @@ pages.page_teacher_stream = () => {
         firstStateAnnouncement.classList.remove("hide")
         annoucementInput.classList.remove("text-area")
     })
+
+    
     })
 
     pages.page_forget_password = () => {
@@ -428,16 +438,16 @@ pages.page_teacher_stream = () => {
 
     }
 
-    const profileBtn = document.getElementById("profile-pic")
-    const manage_profile = document.getElementById("profile-manage");
-    profileBtn.addEventListener("click", () => {
-        console.log("Click profile successful");
-        if (manage_profile.style.display !== "none") {
-            manage_profile.style.display = "none";
-        } else {
-            manage_profile.style.display = "block";
-        }
-    })
+    // const profileBtn = document.getElementById("profile-pic")
+    // const manage_profile = document.getElementById("profile-manage");
+    // profileBtn.addEventListener("click", () => {
+    //     console.log("Click profile successful");
+    //     if (manage_profile.style.display !== "none") {
+    //         manage_profile.style.display = "none";
+    //     } else {
+    //         manage_profile.style.display = "block";
+    //     }
+    // })
 
 };
 
