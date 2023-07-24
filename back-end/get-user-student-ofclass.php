@@ -17,7 +17,9 @@ if ($_POST['class_id'] != "") {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $response[] = $row;
+            
         }
+        $response['num_rows'] = $result->num_rows;
     } else {
         $response['message'] = 'not found';
     }

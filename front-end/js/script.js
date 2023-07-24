@@ -492,22 +492,16 @@ pages.page_forget_password = () => {
 }
 
 pages.page_teacher_people=async()=>{
-
-
     // const user_id = JSON
     // .parse(localStorage.getItem("userData"))
     // .user_id
 
-
     const user_id=7
-    const class_id=1        
-
+    const class_id=1     
     const data = new FormData();
     data.append("user_id", user_id);
     data.append("class_id",class_id);
-   let teacher_info=document.getElementById('teach')
-    // const teacher_name=document.getElementById('tname')
-
+    let teacher_info=document.getElementById('teach')
     const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
     console.log(response.data)
     datax=response.data
@@ -529,41 +523,82 @@ pages.page_teacher_people=async()=>{
         '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
         '</div>';
     }
-
-
     const data_s = new FormData();
     data_s.append("class_id",class_id);
-   let student_info=document.getElementById('student')
-    // const teacher_name=document.getElementById('tname')
-
+    let student_info=document.getElementById('student')
     const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
     console.log(response_s.data)
-    datay=response_s.data
-    var result_s = [];
-    for (var i = 0, len = datay.length; i < len; i++)
+    const numRows = response_s.data.num_rows;
+    console.log(numRows)
+    const students_number=document.getElementById('nb-students')
+    students_number.innerText=numRows+" students"
+    const users = response_s.data;
+for (let i = 0; i < numRows; i++) {
+    const first_name = users[i].first_name;
+    const last_name = users[i].last_name;
+    console.log(first_name, last_name);    
+    student_info.innerHTML += '<div class="student">' +
+    '<div class="profile-pic">' +
+    '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+    '</div>' +
+    '<div class="student-name">' + first_name +" "+last_name+ '</div>' +
+    '</div>';
+    } 
+}
+
+
+
+pages.page_student_people=async()=>{
+    // const user_id = JSON
+    // .parse(localStorage.getItem("userData"))
+    // .user_id
+
+    const user_id=7
+    const class_id=1     
+    const data = new FormData();
+    data.append("user_id", user_id);
+    data.append("class_id",class_id);
+    let teacher_info=document.getElementById('teach')
+    const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
+    console.log(response.data)
+    datax=response.data
+    var results = [];
+    for (var i = 0, len = datax.length; i < len; i++)
     {
-        var res_s = datay[i];
-        result_s.push({
-            'first_name':res_s.first_name,
-            'last_name':res_s.last_name,
+        var res = datax[i];
+        results.push({
+            'first_name':res.first_name,
+            'last_name':res.last_name,
             
         });
-        console.log(res_s)
-        console.log(res_s.first_name+" "+res_s.last_name)
-        student_info.innerHTML += '<div class="student">' +
+        console.log(res)
+        console.log(res.first_name+" "+res.last_name)
+        teacher_info.innerHTML += '<div class="teacher-data">' +
         '<div class="profile-pic">' +
         '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
         '</div>' +
-        '<div class="student-name">' + res_s.first_name +" "+res_s.last_name+ '</div>' +
+        '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
         '</div>';
     }
-
-
-
-
-
-
-
-    
-
+    const data_s = new FormData();
+    data_s.append("class_id",class_id);
+    let student_info=document.getElementById('student')
+    const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
+    console.log(response_s.data)
+    const numRows = response_s.data.num_rows;
+    console.log(numRows)
+    const students_number=document.getElementById('nb-students')
+    students_number.innerText=numRows+" students"
+    const users = response_s.data;
+for (let i = 0; i < numRows; i++) {
+    const first_name = users[i].first_name;
+    const last_name = users[i].last_name;
+    console.log(first_name, last_name);    
+    student_info.innerHTML += '<div class="student">' +
+    '<div class="profile-pic">' +
+    '<img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb" alt="profile picture">' +
+    '</div>' +
+    '<div class="student-name">' + first_name +" "+last_name+ '</div>' +
+    '</div>';
+    }  
 }
