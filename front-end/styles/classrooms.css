@@ -836,6 +836,10 @@ a {
   overflow-y: hidden;
 }
 
+.join-class-modal.hide {
+  display: none;
+}
+
 body.no-overflow {
   overflow-y: hidden;
 }
@@ -934,6 +938,12 @@ body.no-overflow {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+
+.join-class-modal-bottom .name-email {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .join-class-modal-bottom .name-email .name {

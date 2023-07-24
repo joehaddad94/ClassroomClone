@@ -248,7 +248,7 @@ pages.page_classrooms = () => {
         console.log(error + " in loading classes")
     }
 
-    // modal functionlity
+    // create class modal functionlity
 
     const modal = document.querySelector(".modal")
     const boxModal = document.querySelector(".modal .modal-box")
@@ -351,6 +351,30 @@ pages.page_classrooms = () => {
     signoutElement.addEventListener("click", () => {
         localStorage.removeItem("userData")
         window.location.href = "index.html"
+    })
+
+    // join class modal functionality
+    const joinClassModal = document.getElementById("join-class-modal")
+    const closeJoinModalButton = document.querySelector(".close-join-class-icon");
+    const joinClassName = document.querySelector(".join-class-modal-bottom .name");
+    const joinClassEmail = document.querySelector(".join-class-modal-bottom .email");
+
+    let userEmail = JSON.parse(localStorage.getItem("userData")).email
+    let userName = JSON.parse(localStorage.getItem("userData")).first_name + " " + JSON.parse(localStorage.getItem("userData")).last_name
+
+    joinClassName.innerText = userName
+    joinClassEmail.innerText = userEmail
+
+    joinClassButton.addEventListener("click", () => {
+        joinClassModal
+            .classList
+            .remove("hide")
+        document.body.classList.add("no-overflow")
+    })
+
+    closeJoinModalButton.addEventListener("click", () => {
+        joinClassModal.classList.add("hide")
+        document.body.classList.remove("no-overflow");
     })
 
 };
@@ -597,9 +621,11 @@ pages.page_manage_account = () => {
     const applyChangesButton = document.getElementById("apply-changes-button");
 
     let user_id = JSON
-    .parse(localStorage.getItem("userData"))
-    .user_id;
-    let user_email = JSON.parse(localStorage.getItem("userData")).email;
+        .parse(localStorage.getItem("userData"))
+        .user_id;
+    let user_email = JSON
+        .parse(localStorage.getItem("userData"))
+        .email;
     emailElement.innerText = user_email;
 
     applyChangesButton.addEventListener("click", async() => {
