@@ -51,7 +51,7 @@ pages.page_index = () => {
                 }, 3000)
             } else {
                 localStorage.setItem("userEmail", JSON.stringify(emailData))
-                window.location.href = "signin-password.html"
+                window.location.href = "signin_password.html"
             }
         }
     })
@@ -515,8 +515,7 @@ pages.page_signin_password = () => {
 pages.page_forget_password = () => {
 
     const userEmail = JSON
-        .parse(localStorage.getItem('userData'))
-        .email
+        .parse(localStorage.getItem('userEmail'))
     const emailElement = document.querySelector(".email")
     const answerInput = document.getElementById("fav-color")
     const checkButton = document.getElementById("check-button")
@@ -583,4 +582,13 @@ pages.page_forget_password = () => {
         }
     })
 
+}
+
+pages.page_manage_account = () => {
+    
+
+
+    
+
+    console.log(userEmail)
 }
