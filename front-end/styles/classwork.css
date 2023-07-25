@@ -374,6 +374,7 @@
 }
 
 .modal-assignment-header .assign-button button {
+<<<<<<< HEAD
   padding: 10px 30px;
   border: none;
   border-radius: 3px;
@@ -385,6 +386,24 @@
   color: white;
   font-size: 0.9375rem;
   cursor: pointer;
+=======
+    padding: 10px 30px;
+    border: none;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    background-color: #f8f9fa;
+    color: #6e6e6e;
+    font-size: 0.9375rem;
+    font-weight: bold;
+}
+
+.modal-assignment-header .assign-button button.active {
+    background-color: #007b83;
+    color: white;
+>>>>>>> 2631b4cde71c6a133099236f888a4fd257a507a4
 }
 
 .modal-assignment-bottom {
