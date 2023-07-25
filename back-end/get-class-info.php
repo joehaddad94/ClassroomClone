@@ -23,3 +23,4 @@ where class_id = ?');
     }
 
     echo json_encode($response);
+?>
