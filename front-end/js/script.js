@@ -1311,14 +1311,11 @@ pages.page_student_people=async()=>{
             console.log('clicked')
             window.location.href= `/student_classwork.html?id=${class_idParam}`   
         } )
-    const user_id = JSON
-    .parse(localStorage.getItem("userData"))
-    .user_id
-
-    const class_id=class_idParam    
+    const user_id = JSON.parse(localStorage.getItem("userData")).user_id
+    const class_id_t=class_idParam    
     const data = new FormData();
     data.append("user_id", user_id);
-    data.append("class_id",class_id);
+    data.append("class_id",class_id_t);
     let teacher_info=document.getElementById('teach')
     const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
     console.log(response.data)
@@ -1341,8 +1338,9 @@ pages.page_student_people=async()=>{
         '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
         '</div>';
     }
+    const class_id_s=class_idParam 
     const data_s = new FormData();
-    data_s.append("class_id",class_id);
+    data_s.append("class_id",class_id_s);
     let student_info=document.getElementById('student')
     const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
     console.log(response_s.data)
