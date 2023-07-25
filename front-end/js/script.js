@@ -207,7 +207,7 @@ const displayClasses = async (apiUrl) => {
         const response = await pages.postAPI(apiUrl, data);
         const bottom_classrooms = document.querySelector(".bottom-classrooms");
         // console.log(response)
-
+        if (Array.isArray(response.data)) {
         response.data.forEach((item) => {
             sidebarClasses.innerHTML += `
             <div class="class">
@@ -254,7 +254,10 @@ const displayClasses = async (apiUrl) => {
                         </div>
                     </div>
                 </div></a>`;
-        });
+        });} else {
+            
+            console.log("No data available in response.");
+          }
 
         // checking for the user to set the button in the navbar
         const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
@@ -632,111 +635,12 @@ pages.page_teacher_stream = () => {
         })
     }
 
-    // pages.page_classrooms = async() => {
-    //     const user = JSON.parse(localStorage.getItem("userData"))
-    //     const user_id = user.user_id
-    //     const data = new FormData();
-    //     data.append("user_id", user_id)
-    //     const classroom_url = pages.base_url + "teachers-classes.php"
-    //     const response = await pages.postAPI(classroom_url, data);
-    //     console.log(response.data)
-    //     console.log(1)
-    //     const bottom_classroom = document.querySelector(".bottom-classrooms")
-    //     console.log(bottom_classroom)
-    //     response
-    //         .data
-    //         .map((item) => (bottom_classroom.innerHTML += `         
-    //     <div class="class">
-    //     <div class="top-class">
-    //       <div class="class-title">
 
-    //         <p>${item.class_name}</p>
-    //         <div>
-    //           <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-    //         </div>
-    //       </div>
-    //       <p>Full Stack Web Development Bootcamp</p>
-    //       <p>Tech Department</p>
-    //       <div class="profile-pic">
-    //         <img
-    //           src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-    //           alt="Profile Picture"
-    //         />
-    //       </div>
-    //     </div>
-    //     <div class="assignments">
-    //       <div class="assignment">
-    //         <p class="due-date">Due today</p>
-    //         <p>11:59PM - Professional Development Plan</p>
-    //       </div>
-    //       <div class="assignment">
-    //         <p class="due-date">Due tomorrow</p>
-    //         <p>11:59PM - Planners(Time Management)</p>
-    //       </div>
-    //     </div>
-    //     <div class="bottom-class">
-    //       <div class="user-icon">
-    //         <i class="fa-regular fa-user fa-lg"></i>
-    //       </div>
-    //       <div class="folder-icon">
-    //         <i class="fa-regular fa-folder fa-lg"></i>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   `))
-
-    // }
-
-//     const profileBtn = document.getElementById("profile-pic")
-//     const manage_profile = document.getElementById("profile-manage");
-//     profileBtn.addEventListener("click", () => {
-//         console.log("Click profile successful");
-//         if (manage_profile.style.display !== "none") {
-//             manage_profile.style.display = "none";
-//         } else {
-//             manage_profile.style.display = "block";
-//         }
-//     })
 
 };
 
                 
-// pages.page_student_stream =  async ()  =>{
-//     const user = JSON.parse(localStorage.getItem("userData"))
-//     const user_id = user.user_id
-//     const class_id = 8;            
-//     const data = new FormData();
-//     data.append("user_id", user_id)
-//     data.append("class_id",class_id);
-//     const classroom_url = pages.base_url + "return_ass_ann.php"
-//     const response = await pages.postAPI(classroom_url, data);
-//     console.log(response.data)
-//     const assignment = document.querySelector(".announcements")
-   
-//     response.data.map((item) => (assignment.innerHTML += `   
-//     <div class="announcement">
-//     <div class="announcement-top">
-//         <div>
-//             <div class="user-data">
-//                 <div class="profile-pic"><img
-//                     src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-//                     alt="profile-picture"></div>
-//                 <div>
-//                     <div class="name">${item.title}</div>
-//                     <p class="date">${item.due_date}</p>
-//                 </div>
-//             </div>
-//             <div>
-//                 <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-//             </div>
-//         </div>
-//         <div class="announcement-content">
-//                 ${item.instructions}
-//         </div>
-//     </div>     
 
-//   `))
-// }
 
 pages.page_teacher_classwork = () => {
 
@@ -996,6 +900,7 @@ pages.page_teacher_classwork = () => {
     // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);	
     // setInterval(() => {     console.log(instructionsInput.innerHTML);	
     // console.log(assignmentInput.value); }, 1500);
+    
 }
 
 pages.page_signin_password = () => {
@@ -1161,6 +1066,7 @@ pages.page_teacher_people=async()=>{
      const class_idParam = queryParams.get('id');
      console.log(class_idParam);
 
+        //tabs
         const streamTab = document.getElementById("stream-id")
         const classworkTab = document.getElementById("classwork-id")
         console.log(classworkTab);
@@ -1259,10 +1165,10 @@ pages.page_student_people=async()=>{
 
     const class_id=class_idParam    
     const data = new FormData();
-    data.append("user_id", user_id);
+    // data.append("user_id", user_id);
     data.append("class_id",class_id);
     let teacher_info=document.getElementById('teach')
-    const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
+    const response = await pages.postAPI(pages.base_url + "get-teacher-in-student-people.php", data);
     console.log(response.data)
     datax=response.data
     var results = [];
