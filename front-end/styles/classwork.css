@@ -390,6 +390,7 @@
 .modal-assignment-header .assign-button button.active {
     background-color: #007b83;
     color: white;
+    cursor: pointer;
 }
 
 .modal-assignment-bottom {

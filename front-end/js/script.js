@@ -453,7 +453,7 @@ pages.page_teacher_classwork = () => {
     const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
     let checkedValues = [];
 
-    let classID = 2;
+    let classID = 88;
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
@@ -556,7 +556,7 @@ pages.page_teacher_classwork = () => {
             response
                 .data
                 .map((item, index) => {
-                    if(item.class_id !== classID) {
+                    if (item.class_id !== classID) {
                         dropDownClasses.innerHTML += `<div class="dropdown-item">
                                             <label><input type="checkbox" value="${item.class_id}">
                                                 ${item.class_name}</label>
@@ -599,44 +599,33 @@ pages.page_teacher_classwork = () => {
     const instructionsInput = document.querySelector("#editor p")
     const dateInput = document.getElementById("dateInput")
 
-    let dueDate = dateInput.value;
-
-    const currentDate = new Date();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-    let date = `${month}-${day}-${hours}:${minutes}`;
-
     assignButton.addEventListener("click", async() => {
 
         try {
             for (let i = 0; i < checkedValues.length; i++) {
                 let data = new FormData();
+                let dueDate = dateInput.value;
+                dueDate == ""
+                    ? (dueDate = "No due date")
+                    : (dueDate = dueDate);
 
+                // get the current date
                 const currentDate = new Date();
                 const month = currentDate.getMonth() + 1;
                 const day = currentDate.getDate();
                 const hours = currentDate.getHours();
                 const minutes = currentDate.getMinutes();
-                let date = `${month}-${day}-${hours}:${minutes}`;
+                let date = `${month}-${day}-${hours}-${minutes}`;
 
                 data.append("launch_date", date);
                 data.append("title", assignmentTitleInput.value);
-                // if (instructionsInput.innerHTML != "<br>") {
-                //     data.append("instructions", instructionsInput.innerHTML);
-                // }
                 data.append("instructions", instructionsInput.innerHTML);
-                dueDate === ""
-                    ? (dueDate = "No due date")
-                    : (dueDate = dueDate);
                 data.append("user_id", JSON.parse(localStorage.getItem("userData")).user_id);
                 data.append("class_id", checkedValues[i])
                 data.append("due_date", dueDate)
 
                 let response = await pages.postAPI(pages.base_url + "create-assignment.php", data);
-                console.log(response.data)
+                window.location.href = "teacher_classwork.html"
             }
         } catch (error) {
             console.log(error)
@@ -655,16 +644,6 @@ pages.page_teacher_classwork = () => {
                 .classList
                 .remove("active");
         }
-
-        console.log("TITLE " + assignmentTitleInput.value)
-        console.log("INSTRUCTIONS " + instructionsInput.innerHTML)
-        console.log("LAUNCH DATE " + date)
-        dueDate === ""
-            ? (dueDate = "No due date")
-            : (dueDate = dueDate);
-        console.log("due date " + dueDate)
-        console.log("CLASSES " + checkedValues)
-        console.log(topicsSelectBox.value)
     })
 
     // setInterval(() => {     console.log(checkedValues);
@@ -829,16 +808,56 @@ pages.page_manage_account = () => {
 pages.page_assignment = () => {
     const form = document.querySelector("form")
     const inputFile = document.getElementById("file-input")
+    const image = document.querySelector(".file-image img")
+
+    let base64 = ""
 
     inputFile.addEventListener("input", (e) => {
-        if(e.target.files.length > 0) {
-            console.log(e.target.files[0])
+        if (e.target.files.length > 0) {
+            function getBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = (error) => reject(error);
+                });
+            }
+            getBase64(e.target.files[0]).then((data) => {
+                image.src = data;
+            });
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                base64 = reader.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
         }
     })
-    
-    form.addEventListener("submit", (e) => {
-        e.preventDefault()
 
-        console.log("submitted")
+    form.addEventListener("submit", async(e) => {
+        e.preventDefault()
+        const userID = JSON
+            .parse(localStorage.getItem("userData"))
+            .user_id
+        const assignment_id = 4;
+
+        const currentDate = new Date();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        let turnInDate = `${month}-${day}-${hours}:${minutes}`;
+
+        let data = formData()
+        data.append('user_id', userID)
+        data.append('turnin_date', turnInDate)
+        data.append('assignment_id', assignment_id)
+        data.append('solution_text', base64)
+
+        try {
+            await pages.postAPI(pages.base_url + "upload_solution.php", data)
+        } catch (error) {
+            console.log(error)
+        }
     })
 }

@@ -229,3 +229,14 @@ form {
         flex: 4;
     }
 }
+
+.file-image {
+    max-height: 80px;
+    width: 100%;
+}
+
+.file-image img {
+    width: 100%;
+    max-height: 80px;
+    object-fit: cover;
+}
