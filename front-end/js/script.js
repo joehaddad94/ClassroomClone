@@ -131,6 +131,7 @@ pages.page_classrooms = () => {
     const room_input = document.getElementById("room-input");
     const googleMeetLinkInput = document.getElementById("googleMeetLink-input");
     const formElement = document.querySelector("form")
+    console.log(formElement)
     const signoutElement = document.getElementById("sign-out")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
@@ -322,6 +323,7 @@ if (userRole == 1) {
     }
 
     formElement.addEventListener("submit", (e) => {
+        console.log('fucntion entered')
         e.preventDefault();
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
@@ -1292,31 +1294,30 @@ pages.page_student_classwork=async()=>{
             console.log('clicked')
             window.location.href= `/student_people.html?id=${class_idParam}`   
         } )
-}
-    const class_id=1 
-    const topic=document.getElementById('topic_name');        
-    const data = new FormData();    
-    data.append("class_id",class_id);    
-    const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
-    console.log(response.data)  
-    topics=[]
-    response.data.forEach(item => {
-        console.log(item.topic_name);
-        topics.push(item.topic_name)
-      });
-    console.log(topics)
-    for(i=0;i<topics.length;i++){
-       topic.innerHTML+="<p>"+topics[i]+"</p>";
-    }
+
+        const class_id=1 
+        const topic=document.getElementById('topic_name');        
+        const data = new FormData();    
+        data.append("class_id",class_id);    
+        const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
+        console.log(response.data)  
+        topics=[]
+        response.data.forEach(item => {
+            console.log(item.topic_name);
+            topics.push(item.topic_name)
+          });
+        console.log(topics)
+        for(i=0;i<topics.length;i++){
+           topic.innerHTML+="<p>"+topics[i]+"</p>";
+        }
+
     // const topic_ass=document.getElementById('topic-ass')
     const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
     console.log(response_ass.data)
 
     const assignments = response_ass.data;
 
-   
     const topic_ass = document.getElementById("topic-ass");
-    
     
     for (const topic in assignments) {         
     topic_ass.innerHTML+=`<div class="topic-header">
@@ -1345,6 +1346,14 @@ pages.page_student_classwork=async()=>{
                         </div>`;
                         }
 }
+
+
+
+}
+    
+
+    
+
 
     
 
