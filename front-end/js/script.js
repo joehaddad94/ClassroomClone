@@ -40,6 +40,7 @@ pages.page_index = () => {
         const emailData = emailInput.value;
         const data = new FormData()
         data.append("email", emailData)
+    })
 
     const login = document.getElementById("login")
 
@@ -103,7 +104,7 @@ pages.page_index = () => {
     // }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
     // window.location.href = "classrooms.html" }     } catch (error) {
     // console.error('Login error : ', error);     } })
-})
+}
 
 pages.page_signup = () => {
 
@@ -1169,7 +1170,7 @@ pages.page_student_stream=async()=>{
     btn_join.addEventListener('click',()=>{
         window.open(link)
     })
-};
+}
 
 pages.page_student_classwork=async()=>{
     console.log('class ID Param:');
