@@ -1348,29 +1348,15 @@ pages.page_student_stream=async()=>{
 }
 
 pages.page_student_classwork=async()=>{
-    console.log('class ID Param:');
 
     //Get query Parameter
     const queryParamsString = window.location.search;
     const queryParams = new URLSearchParams(queryParamsString);
     const class_idParam = queryParams.get('id');
-    console.log('class ID Param:' + class_idParam);
 
-    //tabs
-    const streamTab = document.getElementById("stream-id")
-    const peopleTab = document.getElementById("people-id")
-
-    streamTab.addEventListener('click', () =>{
-        console.log('clicked')
-        window.location.href= `/student_stream.html?id=${class_idParam}`   
-    } )
-
-    peopleTab.addEventListener('click', () =>{
-        console.log('clicked')
-        window.location.href= `/student_people.html?id=${class_idParam}`   
-    } )
-
-        const class_id=class_idParam
+        console.log('class ID Param:' + class_idParam);
+        
+        const class_id=class_idParam 
         console.log('class ID' + class_id);
         const topic=document.getElementById('topic_name');
         console.log(topic)        
@@ -1389,8 +1375,8 @@ pages.page_student_classwork=async()=>{
         }
     
 
-//     // const topic_ass=document.getElementById('topic-ass')
-    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php?class_id=", data);
+
+    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
     console.log(response_ass.data)
 
     const assignments = response_ass.data;
@@ -1423,12 +1409,22 @@ pages.page_student_classwork=async()=>{
                             </div>
                         </div>`;
                         }
+   //tabs
+   const streamTab = document.getElementById("stream-id")
+   const peopleTab = document.getElementById("people-id")
+
+   streamTab.addEventListener('click', () =>{
+       console.log('clicked')
+       window.location.href= `/student_stream.html?id=${class_idParam}`   
+   } )
+
+   peopleTab.addEventListener('click', () =>{
+       console.log('clicked')
+       window.location.href= `/student_people.html?id=${class_idParam}`   
+   } )
+
 }
-
-
-
 }
-    
 
     
 
