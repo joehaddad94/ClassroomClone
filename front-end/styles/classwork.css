@@ -381,10 +381,15 @@
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
+    background-color: #f8f9fa;
+    color: #6e6e6e;
+    font-size: 0.9375rem;
+    font-weight: bold;
+}
+
+.modal-assignment-header .assign-button button.active {
     background-color: #007b83;
     color: white;
-    font-size: 0.9375rem;
-    cursor: pointer;
 }
 
 .modal-assignment-bottom {

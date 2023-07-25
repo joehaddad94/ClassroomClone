@@ -9,6 +9,8 @@ $due_date = $_POST['due_date'];
 $class_id = $_POST['class_id'];
 $user_id = $_POST['user_id'];
 
+$instructions = isset($_POST['instructions']) ? $_POST['instructions'] : NULL;
+
 // Check if attachment_id is set, otherwise set to NULL
 $attachment_id = isset($_POST['attachment_id']) ? $_POST['attachment_id'] : NULL;
 

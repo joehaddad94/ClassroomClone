@@ -1,0 +1,225 @@
+.main-assignment {
+    padding: 20px 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    gap: 30px;
+}
+
+.left-main-assignment {
+    flex: 9;
+    display: flex;
+    gap: 15px;
+}
+
+.left-main-assignment > div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-main-assignment .assignment-instructions {
+    padding: 20px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.left-main-assignment .icon {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    background-color: #b4b4b4;
+    color: white;
+}
+
+.assignment-public-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.assignment-public-comments > div:first-child {
+    display: flex;
+    gap: 10px;
+}
+
+.assignment-public-comments > div:last-child {
+    cursor: pointer;
+    margin-left: -15px;
+    padding: 9px 10px;
+    width: fit-content;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    -o-transition: all .2s ease;
+}
+
+.assignment-public-comments > div:last-child:hover {
+    background-color: #cccccc3d;
+}
+
+.assignment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.assignment-details > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.teacher-name-launch-date {
+    font-size: .875rem;
+    display: flex;
+    gap: 10px;
+    color: #737373;
+}
+
+.grades-due-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .875rem;
+}
+
+.assignment-details .assignment-name {
+    font-size: 2rem;
+}
+
+.dots {
+    font-size: 1.1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+
+.dots:hover {
+    background-color: #cccccc59;
+}
+
+
+.right-main-assignment {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.assignment-attachments, .assignment-private-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    background-color: white;
+    border: 2px solid #ccc;
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.45);
+-webkit-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.45);
+-moz-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.45);
+}
+
+.assignment-attachments .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.assignment-attachments .files {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.assignment-attachments .files > div {
+    width: 100%;
+}
+
+.assignment-attachments .files > div button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.assignment-attachments .mark-as-done {
+    width: 100%;
+}
+
+.assignment-attachments .mark-as-done button {
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.assignment-private-comments > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.assignment-private-comments > div:last-child {
+    font-size: .9375rem;
+}
+
+@media (max-width: 1000px) {
+
+    .main-assignment {
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 1150px) {
+    .right-main-assignment {
+        flex: 4;
+    }
+}
