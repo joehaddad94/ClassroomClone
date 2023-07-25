@@ -10,17 +10,8 @@ $googlemeet_link = $_POST['googlemeet_link'];
 $class_code = $_POST['class_code'];
 $user_id = $_POST['user_id'];
 
-
 $query = $mysqli->prepare('insert into classes(class_name, section, subject, room, class_code, googlemeet_link, user_id) value(?,?,?,?,?,?,?)');
 $query->bind_param('ssssssi', $class_name, $section, $subject, $room, $googlemeet_link, $class_code, $user_id);
-
-$query = $mysqli->prepare('insert into classes(class_name, section, subject, room,class_code, googlemeet_link, user_id) value(?,?,?,?,?,?,?)');
-$query->bind_param('ssssssi', $class_name, $section, $subject, $room, $class_code, $googlemeet_link, $user_id);
->>>>>>> 27a34f81c9af9f8b30ac2b17bba2857031ab9424
-
-$query = $mysqli->prepare('insert into classes(class_name, section, subject, room, class_code, googlemeet_link, user_id) value(?,?,?,?,?,?,?)');
-$query->bind_param('ssssssi', $class_name, $section, $subject, $room, $googlemeet_link, $class_code, $user_id);
->>>>>>> f0873a36ec22e9168ca84c7b6e839e946e31c5a3
 
 $response = array();
 

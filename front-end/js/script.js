@@ -28,12 +28,15 @@ pages.loadFor = (page) => {
 }
 
 pages.page_index = () => {
+    console.log('sign in')
 
     const nextButton = document.querySelector(".next-button")
     const emailInput = document.getElementById("email")
     const error = document.querySelector(".error")
+    console.log(nextButton)
 
     nextButton.addEventListener("click", async() => {
+        console.log('clicked')
         const emailData = emailInput.value;
         const data = new FormData()
         data.append("email", emailData)
@@ -56,23 +59,6 @@ pages.page_index = () => {
         }
     })
 
-    // const login = document.getElementById("login")
-    // login.addEventListener("click", async() => {     const email = document
-    // .getElementById("email_in")         .value     const password = document
-    // .getElementById("password_in")         .value     const errorElement =
-    // document.querySelector(".error")     const data = new FormData();
-    // data.append("email", email);     data.append("password", password)     try {
-    // let response = await pages.postAPI(pages.base_url + "signin.php", data); if
-    // (response.data.status === "user not found") { errorElement.innerText = "User
-    // not found"             setTimeout(() => { errorElement.innerText = "" },
-    // 3000)         } else if (response.data.status === "wrong password") {
-    // errorElement.innerText = "Wrong Password" setTimeout(() => {
-    // errorElement.innerText = ""             }, 3000)         } else { const
-    // userObject = Object .keys(response.data) .reduce((acc, key) => {    if (key
-    // !== "status") {     acc[key] = response.data[key]             }    return acc
-    // }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
-    // window.location.href = "classrooms.html" }     } catch (error) {
-    // console.error('Login error : ', error);     } })
 }
 
 pages.page_signup = () => {
@@ -145,6 +131,7 @@ pages.page_classrooms = () => {
     const room_input = document.getElementById("room-input");
     const googleMeetLinkInput = document.getElementById("googleMeetLink-input");
     const formElement = document.querySelector("form")
+    console.log(formElement)
     const signoutElement = document.getElementById("sign-out")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
@@ -341,6 +328,7 @@ if (userRole == 1) {
     }
 
     formElement.addEventListener("submit", (e) => {
+        console.log('fucntion entered')
         e.preventDefault();
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
@@ -661,6 +649,7 @@ pages.page_teacher_stream = () => {
         <div class="class">
         <div class="top-class">
           <div class="class-title">
+
             <p>${item.class_name}</p>
             <div>
               <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
@@ -711,6 +700,44 @@ pages.page_teacher_stream = () => {
 
 };
 
+                
+pages.page_student_stream =  async ()  =>{
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const class_id = 8;            
+    const data = new FormData();
+    data.append("user_id", user_id)
+    data.append("class_id",class_id);
+    const classroom_url = pages.base_url + "return_ass_ann.php"
+    const response = await pages.postAPI(classroom_url, data);
+    console.log(response.data)
+    const assignment = document.querySelector(".announcements")
+   
+    response.data.map((item) => (assignment.innerHTML += `   
+    <div class="announcement">
+    <div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${item.title}</div>
+                    <p class="date">${item.due_date}</p>
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+                ${item.instructions}
+        </div>
+    </div>     
+
+  `))
+}
+
 pages.page_teacher_classwork = () => {
 
     //Get query Parameter
@@ -742,7 +769,9 @@ pages.page_teacher_classwork = () => {
     const boxTopicModal = document.getElementById("topic-box");
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
     const assignmentModal = document.getElementById("modal-assignment");
-    const closeAssignmentButton = document.getElementById("close-assignment")
+    const closeAssignmentButton = document.getElementById("close-assignment");
+
+    let classID = 2;
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
@@ -753,18 +782,19 @@ pages.page_teacher_classwork = () => {
 
     // open assignment
     createAssignmentButton.addEventListener("click", (e) => {
+        
         assignmentModal
             .classList
             .remove("hide")
     })
 
     createButton.addEventListener("click", (e) => {
+        
         if (!dropDown.contains(e.target)) {
             dropDown
                 .classList
                 .remove("hide");
         }
-        console.log("bottom clicked")
     })
 
     document.addEventListener("click", (e) => {
@@ -825,6 +855,27 @@ pages.page_teacher_classwork = () => {
       }
     });
 
+
+    const topicsSelectBox = document.getElementById("topics");
+
+    // get the topics fo the class and display them
+    try {
+        let getTopics = async() => {
+            const data = new FormData();
+            data.append("class_id", classID);
+            let response = await pages.postAPI(pages.base_url + "fetch_topics.php", data);
+            response
+                .data
+                .map((item) => {
+                    topicsSelectBox.innerHTML += `<option value="${item.topic_id}">${item.topic_name}</option>`;
+                });
+            console.log(response.data);
+        };
+        getTopics();
+    } catch (error) {
+        console.log(error);
+    }
+
     // assignment sidebar
     const dropdownToggle = document.getElementById("dropdownToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
@@ -838,16 +889,24 @@ pages.page_teacher_classwork = () => {
     const data = new FormData()
     data.append("user_id", userId)
 
+    dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input disabled checked type="checkbox" value="${classID}">
+                                            Dynamic Class</label>
+                                    </div>`;
+    dropdownToggle.innerHTML = `<div>Dynamic Class</div><div><i class="fa-solid fa-caret-down"></i></div>`;
+
     // get the classes and display them
     try {
         let getClasses = async() => {
             let response = await pages.postAPI(pages.base_url + "teachers-classes.php", data)
-            response.data.map((item, index) => {
-                dropDownClasses.innerHTML += `<div class="dropdown-item">
-                                        <label><input type="checkbox" value=${item.class_name}>
+            response
+                .data
+                .map((item, index) => {
+                    dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                        <label><input type="checkbox" value="${item.class_id}">
                                             ${item.class_name}</label>
                                     </div>`;
-            })
+                })
             console.log(response.data)
         }
         getClasses()
@@ -855,17 +914,7 @@ pages.page_teacher_classwork = () => {
         console.log(error)
     }
 
-    // get the topics fo the class and display them
     
-
-    for (let i = 0; i < checkboxes.length; i++) {
-        if (i === 0) {
-            checkboxes[i].checked = true;
-            dropdownToggle.innerHTML = `<div>${checkboxes[i].value}</div><div><i class="fa-solid fa-caret-down"></i></div>`;
-        } else {
-            checkboxes.checked = false;
-        }
-    }
 
     dropdownToggle.addEventListener("click", () => {
         dropdownMenu.style.display = dropdownMenu.style.display === "block"
@@ -874,7 +923,11 @@ pages.page_teacher_classwork = () => {
     });
 
     dropdownMenu.addEventListener("click", (e) => {
-        const checkedValues = [];
+        e.stopPropagation();
+
+        const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+
+        let checkedValues = [];
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
@@ -934,6 +987,8 @@ pages.page_signin_password = () => {
         }
     })
 }
+
+
 
 pages.page_forget_password = () => {
 
@@ -1224,25 +1279,91 @@ pages.page_student_stream=async()=>{
 }
 
 pages.page_student_classwork=async()=>{
+    console.log('class ID Param:');
 
     //Get query Parameter
     const queryParamsString = window.location.search;
     const queryParams = new URLSearchParams(queryParamsString);
     const class_idParam = queryParams.get('id');
-    console.log(class_idParam);
+    console.log('class ID Param:' + class_idParam);
 
     //tabs
-        const streamTab = document.getElementById("stream-id")
-        const peopleTab = document.getElementById("people-id")
+    const streamTab = document.getElementById("stream-id")
+    const peopleTab = document.getElementById("people-id")
 
-        streamTab.addEventListener('click', () =>{
-            console.log('clicked')
-            window.location.href= `/student_stream.html?id=${class_idParam}`   
-        } )
+    streamTab.addEventListener('click', () =>{
+        console.log('clicked')
+        window.location.href= `/student_stream.html?id=${class_idParam}`   
+    } )
 
-        peopleTab.addEventListener('click', () =>{
-            console.log('clicked')
-            window.location.href= `/student_people.html?id=${class_idParam}`   
-        } )
+    peopleTab.addEventListener('click', () =>{
+        console.log('clicked')
+        window.location.href= `/student_people.html?id=${class_idParam}`   
+    } )
+
+        const class_id=class_idParam
+        console.log('class ID' + class_id);
+        const topic=document.getElementById('topic_name');
+        console.log(topic)        
+        const data = new FormData();    
+        data.append("class_id",class_id);    
+        const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
+        console.log(response.data)  
+        let topics=[]
+        response.data.forEach(item => {
+            console.log(item.topic_name);
+            topics.push(item.topic_name)
+          });
+        console.log(topics)
+        for(i=0;i<topics.length;i++){
+           topic.innerHTML+="<p>"+topics[i]+"</p>";
+        }
+    
+
+//     // const topic_ass=document.getElementById('topic-ass')
+    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
+    console.log(response_ass.data)
+
+    const assignments = response_ass.data;
+
+    const topic_ass = document.getElementById("topic-ass");
+    
+    for (const topic in assignments) {         
+    topic_ass.innerHTML+=`<div class="topic-header">
+    <div class="topic-name" style="color: black;">${topic}</div>
+    <div>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+    </div>
+    </div>`;   
+    
+      // Loop through each assignment under the current topic
+    for (const assignment of assignments[topic]) {
+    // assignment.title
+    // assignment.instructions;
+    // assignment.due_date        
+
+    topic_ass.innerHTML+=`<div class="assignments">
+                            <div class="assignment">
+                                <div class="assignment-data">
+                                    <div style="background-color: #ccc;">
+                                        <i class="fa-regular fa-rectangle-list fa-lg"></i>
+                                    </div>
+                                    <div class="assignment-name">${assignment.title}</div>
+                                </div>
+                                <div class="date">Due ${assignment.due_date}</div>
+                            </div>
+                        </div>`;
+                        }
 }
+
+
+
+}
+    
+
+    
+
+
+    
+
 
