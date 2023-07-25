@@ -5,9 +5,8 @@ include('connection.php');
 $class_id = $_POST['class_id'];
 $user_id = $_POST['user_id'];
 
-$query = $mysqli->prepare('SELECT announcements.description, assignments.title, assignments.instructions, assignments.due_date
+$query = $mysqli->prepare('SELECT assignments.title, assignments.instructions, assignments.due_date
 FROM classes
-JOIN announcements ON classes.class_id = announcements.class_id
 JOIN assignments ON classes.class_id = assignments.class_id
 JOIN users ON assignments.user_id = users.user_id
 WHERE classes.class_id = ? AND users.user_id = ?');

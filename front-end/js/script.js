@@ -675,7 +675,7 @@ pages.page_teacher_classwork = () => {
     const assignmentModal = document.getElementById("modal-assignment");
     const closeAssignmentButton = document.getElementById("close-assignment");
 
-    let classID = 2;
+    let classID = class_idParam;
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
@@ -766,7 +766,6 @@ pages.page_teacher_classwork = () => {
                 .map((item) => {
                     topicsSelectBox.innerHTML += `<option value="${item.topic_id}">${item.topic_name}</option>`;
                 });
-            console.log(response.data);
         };
         getTopics();
     } catch (error) {
@@ -800,10 +799,12 @@ pages.page_teacher_classwork = () => {
             response
                 .data
                 .map((item, index) => {
-                    dropDownClasses.innerHTML += `<div class="dropdown-item">
-                                        <label><input type="checkbox" value="${item.class_id}">
-                                            ${item.class_name}</label>
-                                    </div>`;
+                    if (item.class_id !== classID) {
+                        dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                            <label><input type="checkbox" value="${item.class_id}">
+                                                ${item.class_name}</label>
+                                        </div>`;
+                    }
                 })
             console.log(response.data)
         }
@@ -876,29 +877,56 @@ pages.page_teacher_classwork = () => {
         }	
     })	
 
-    assignmentTitleInput.addEventListener("input", () => {	
-        assignButton.disabled = false	
-        assignButton	
-            .classList	
-            .add("active")	
-        if (assignmentTitleInput.value === "") {	
-            assignButton.disabled = true;	
-            assignButton	
-                .classList	
-                .remove("active");	
-        }	
-        console.log("TITLE " + assignmentTitleInput.value)	
-        console.log("INSTRUCTIONS " + instructionsInput.innerHTML)	
-        console.log("LAUNCH DATE " + date)	
-        dueDate === ""	
-            ? (dueDate = "No due date")	
-            : (dueDate = dueDate);	
-        console.log("due date " + dueDate)	
-        console.log("CLASSES " + checkedValues)	
-    })	
-    // setInterval(() => {     console.log(checkedValues);	
-    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);	
-    // setInterval(() => {     console.log(instructionsInput.innerHTML);	
+    assignButton.addEventListener("click", async() => {
+
+        try {
+            for (let i = 0; i < checkedValues.length; i++) {
+                let data = new FormData();
+                let dueDate = dateInput.value;
+                dueDate == ""
+                    ? (dueDate = "No due date")
+                    : (dueDate = dueDate);
+
+                // get the current date
+                const currentDate = new Date();
+                const month = currentDate.getMonth() + 1;
+                const day = currentDate.getDate();
+                const hours = currentDate.getHours();
+                const minutes = currentDate.getMinutes();
+                let date = `${month}-${day}-${hours}-${minutes}`;
+
+                data.append("launch_date", date);
+                data.append("title", assignmentTitleInput.value);
+                data.append("instructions", instructionsInput.innerHTML);
+                data.append("user_id", JSON.parse(localStorage.getItem("userData")).user_id);
+                data.append("class_id", checkedValues[i])
+                data.append("due_date", dueDate)
+
+                let response = await pages.postAPI(pages.base_url + "create-assignment.php", data);
+                window.location.href = "teacher_classwork.html"
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    assignmentTitleInput.addEventListener("input", () => {
+        assignButton.disabled = false
+        assignButton
+            .classList
+            .add("active")
+
+        if (assignmentTitleInput.value === "") {
+            assignButton.disabled = true;
+            assignButton
+                .classList
+                .remove("active");
+        }
+    })
+
+    // setInterval(() => {     console.log(checkedValues);
+    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);
+    // setInterval(() => {     console.log(instructionsInput.innerHTML);
     // console.log(assignmentInput.value); }, 1500);
     
 }
@@ -1388,3 +1416,59 @@ pages.page_student_classwork = async () =>{
     
 
 
+pages.page_assignment = () => {
+    const form = document.querySelector("form")
+    const inputFile = document.getElementById("file-input")
+    const image = document.querySelector(".file-image img")
+
+    let base64 = ""
+
+    inputFile.addEventListener("input", (e) => {
+        if (e.target.files.length > 0) {
+            function getBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = (error) => reject(error);
+                });
+            }
+            getBase64(e.target.files[0]).then((data) => {
+                image.src = data;
+            });
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                base64 = reader.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    })
+
+    form.addEventListener("submit", async(e) => {
+        e.preventDefault()
+        const userID = JSON
+            .parse(localStorage.getItem("userData"))
+            .user_id
+        const assignment_id = 4;
+
+        const currentDate = new Date();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        let turnInDate = `${month}-${day}-${hours}:${minutes}`;
+
+        let data = formData()
+        data.append('user_id', userID)
+        data.append('turnin_date', turnInDate)
+        data.append('assignment_id', assignment_id)
+        data.append('solution_text', base64)
+
+        try {
+            await pages.postAPI(pages.base_url + "upload_solution.php", data)
+        } catch (error) {
+            console.log(error)
+        }
+    })
+}

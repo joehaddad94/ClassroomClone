@@ -403,7 +403,11 @@
 .modal-assignment-header .assign-button button.active {
     background-color: #007b83;
     color: white;
+<<<<<<< HEAD
 >>>>>>> 2631b4cde71c6a133099236f888a4fd257a507a4
+=======
+    cursor: pointer;
+>>>>>>> e0f2720d5483a6a65c99db4a75ed89eeeaeed2f1
 }
 
 .modal-assignment-bottom {
@@ -614,6 +618,29 @@
   justify-content: space-between;
 }
 
+<<<<<<< HEAD
+=======
+select {
+    padding: 10px;
+    background-color: #cccccc41;
+    color: #6e6e6e;
+    font-size: 1rem;
+    width: 90%;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #6e6e6e;
+    outline: none;
+}
+
+>>>>>>> e0f2720d5483a6a65c99db4a75ed89eeeaeed2f1
 /* DUE DATE SIDEBAR SECTION */
 
 .due-date-section {
@@ -653,6 +680,7 @@
 }
 
 .topics-sidebar-section select {
+<<<<<<< HEAD
   padding: 15px;
   border: none;
   outline: none;
@@ -665,3 +693,35 @@
   font-size: 1rem;
   cursor: pointer;
 }
+=======
+    padding: 15px;
+    border: none;
+    outline: none;
+    background-color: #cccccc41;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .meet, .calendar, .drive {
+        display: none;
+    }
+}
+
+@media (max-width: 750px) {
+    .topics-section {
+        display: none;
+    }
+}
+
+@media (max-width: 860px) {
+    .calendar-teacher, .drive-teacher {
+        display: none;
+    }
+}
+>>>>>>> e0f2720d5483a6a65c99db4a75ed89eeeaeed2f1
