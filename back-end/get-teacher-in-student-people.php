@@ -3,14 +3,14 @@
 include('connection.php');
 
 $class_id = $_POST['class_id'];
-$user_id = $_POST['user_id'];
-if(isset($_POST['user_id']) && $_POST['class_id']!=""){
+
+if($_POST['class_id']!=""){
     $query = $mysqli->prepare('SELECT users.first_name, users.last_name, users.email
     FROM users
     JOIN roles ON users.role_id = roles.role_id
     JOIN classes ON classes.user_id = users.user_id
-    WHERE classes.class_id = ? AND users.user_id = ? and roles.role_id=1');
-    $query->bind_param('ii', $class_id,$user_id);
+    WHERE classes.class_id = ? and roles.role_id=1');
+    $query->bind_param('i', $class_id);
     $query->execute();
     $result = $query->get_result();
     $response = array();

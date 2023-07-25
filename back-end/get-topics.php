@@ -1,14 +1,13 @@
 <?php
 include('connection.php');
-
+// echo "connected successfully!";
 $class_id = $_POST['class_id'];
 
 if ($_POST['class_id'] != "") {
-    $query = $mysqli->prepare('SELECT users.first_name, users.last_name 
-    FROM users 
-    JOIN enroll ON enroll.user_id = users.user_id 
-    JOIN classes ON enroll.class_id = classes.class_id 
-    WHERE enroll.class_id = ? AND users.role_id = 2');
+    $query = $mysqli->prepare('SELECT topic_name 
+    FROM topics    
+    JOIN classes ON classes.class_id = topics.class_id 
+    WHERE topics.class_id = ?');
     $query->bind_param('i', $class_id);
     $query->execute();
     $result = $query->get_result();
@@ -19,7 +18,7 @@ if ($_POST['class_id'] != "") {
             $response[] = $row;
             
         }
-        $response['num_rows'] = $result->num_rows;
+     
     } else {
         $response['message'] = 'not found';
     }
@@ -28,4 +27,3 @@ if ($_POST['class_id'] != "") {
 }
 
 echo json_encode($response);
-?>
