@@ -632,111 +632,111 @@ pages.page_teacher_stream = () => {
         })
     }
 
-    pages.page_classrooms = async() => {
-        const user = JSON.parse(localStorage.getItem("userData"))
-        const user_id = user.user_id
-        const data = new FormData();
-        data.append("user_id", user_id)
-        const classroom_url = pages.base_url + "teachers-classes.php"
-        const response = await pages.postAPI(classroom_url, data);
-        console.log(response.data)
-        console.log(1)
-        const bottom_classroom = document.querySelector(".bottom-classrooms")
-        console.log(bottom_classroom)
-        response
-            .data
-            .map((item) => (bottom_classroom.innerHTML += `         
-        <div class="class">
-        <div class="top-class">
-          <div class="class-title">
+    // pages.page_classrooms = async() => {
+    //     const user = JSON.parse(localStorage.getItem("userData"))
+    //     const user_id = user.user_id
+    //     const data = new FormData();
+    //     data.append("user_id", user_id)
+    //     const classroom_url = pages.base_url + "teachers-classes.php"
+    //     const response = await pages.postAPI(classroom_url, data);
+    //     console.log(response.data)
+    //     console.log(1)
+    //     const bottom_classroom = document.querySelector(".bottom-classrooms")
+    //     console.log(bottom_classroom)
+    //     response
+    //         .data
+    //         .map((item) => (bottom_classroom.innerHTML += `         
+    //     <div class="class">
+    //     <div class="top-class">
+    //       <div class="class-title">
 
-            <p>${item.class_name}</p>
-            <div>
-              <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-            </div>
-          </div>
-          <p>Full Stack Web Development Bootcamp</p>
-          <p>Tech Department</p>
-          <div class="profile-pic">
-            <img
-              src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-              alt="Profile Picture"
-            />
-          </div>
-        </div>
-        <div class="assignments">
-          <div class="assignment">
-            <p class="due-date">Due today</p>
-            <p>11:59PM - Professional Development Plan</p>
-          </div>
-          <div class="assignment">
-            <p class="due-date">Due tomorrow</p>
-            <p>11:59PM - Planners(Time Management)</p>
-          </div>
-        </div>
-        <div class="bottom-class">
-          <div class="user-icon">
-            <i class="fa-regular fa-user fa-lg"></i>
-          </div>
-          <div class="folder-icon">
-            <i class="fa-regular fa-folder fa-lg"></i>
-          </div>
-        </div>
-      </div>
-      `))
+    //         <p>${item.class_name}</p>
+    //         <div>
+    //           <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+    //         </div>
+    //       </div>
+    //       <p>Full Stack Web Development Bootcamp</p>
+    //       <p>Tech Department</p>
+    //       <div class="profile-pic">
+    //         <img
+    //           src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+    //           alt="Profile Picture"
+    //         />
+    //       </div>
+    //     </div>
+    //     <div class="assignments">
+    //       <div class="assignment">
+    //         <p class="due-date">Due today</p>
+    //         <p>11:59PM - Professional Development Plan</p>
+    //       </div>
+    //       <div class="assignment">
+    //         <p class="due-date">Due tomorrow</p>
+    //         <p>11:59PM - Planners(Time Management)</p>
+    //       </div>
+    //     </div>
+    //     <div class="bottom-class">
+    //       <div class="user-icon">
+    //         <i class="fa-regular fa-user fa-lg"></i>
+    //       </div>
+    //       <div class="folder-icon">
+    //         <i class="fa-regular fa-folder fa-lg"></i>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   `))
 
-    }
+    // }
 
-    const profileBtn = document.getElementById("profile-pic")
-    const manage_profile = document.getElementById("profile-manage");
-    profileBtn.addEventListener("click", () => {
-        console.log("Click profile successful");
-        if (manage_profile.style.display !== "none") {
-            manage_profile.style.display = "none";
-        } else {
-            manage_profile.style.display = "block";
-        }
-    })
+//     const profileBtn = document.getElementById("profile-pic")
+//     const manage_profile = document.getElementById("profile-manage");
+//     profileBtn.addEventListener("click", () => {
+//         console.log("Click profile successful");
+//         if (manage_profile.style.display !== "none") {
+//             manage_profile.style.display = "none";
+//         } else {
+//             manage_profile.style.display = "block";
+//         }
+//     })
 
 };
 
                 
-pages.page_student_stream =  async ()  =>{
-    const user = JSON.parse(localStorage.getItem("userData"))
-    const user_id = user.user_id
-    const class_id = 8;            
-    const data = new FormData();
-    data.append("user_id", user_id)
-    data.append("class_id",class_id);
-    const classroom_url = pages.base_url + "return_ass_ann.php"
-    const response = await pages.postAPI(classroom_url, data);
-    console.log(response.data)
-    const assignment = document.querySelector(".announcements")
+// pages.page_student_stream =  async ()  =>{
+//     const user = JSON.parse(localStorage.getItem("userData"))
+//     const user_id = user.user_id
+//     const class_id = 8;            
+//     const data = new FormData();
+//     data.append("user_id", user_id)
+//     data.append("class_id",class_id);
+//     const classroom_url = pages.base_url + "return_ass_ann.php"
+//     const response = await pages.postAPI(classroom_url, data);
+//     console.log(response.data)
+//     const assignment = document.querySelector(".announcements")
    
-    response.data.map((item) => (assignment.innerHTML += `   
-    <div class="announcement">
-    <div class="announcement-top">
-        <div>
-            <div class="user-data">
-                <div class="profile-pic"><img
-                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-                    alt="profile-picture"></div>
-                <div>
-                    <div class="name">${item.title}</div>
-                    <p class="date">${item.due_date}</p>
-                </div>
-            </div>
-            <div>
-                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-            </div>
-        </div>
-        <div class="announcement-content">
-                ${item.instructions}
-        </div>
-    </div>     
+//     response.data.map((item) => (assignment.innerHTML += `   
+//     <div class="announcement">
+//     <div class="announcement-top">
+//         <div>
+//             <div class="user-data">
+//                 <div class="profile-pic"><img
+//                     src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+//                     alt="profile-picture"></div>
+//                 <div>
+//                     <div class="name">${item.title}</div>
+//                     <p class="date">${item.due_date}</p>
+//                 </div>
+//             </div>
+//             <div>
+//                 <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+//             </div>
+//         </div>
+//         <div class="announcement-content">
+//                 ${item.instructions}
+//         </div>
+//     </div>     
 
-  `))
-}
+//   `))
+// }
 
 pages.page_teacher_classwork = () => {
 
@@ -829,31 +829,23 @@ pages.page_teacher_classwork = () => {
     })
 
     //add topic
-    const add_topic = document.getElementById('add-button');
+    
+    const add_topic = document.getElementById('add_button');
     add_topic.addEventListener('click', async() => {
-        const topic_name = document.querySelector('#topic-area').innerHTML;
+        const topic_name = document.querySelector('#topic').value;
+        const class_id = class_idParam;
         console.log(topic_name)
 
         try {
             const data = new FormData();
             data.append('topic_name' , topic_name);
+            data.append('class_id' , class_id);
             let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
-
+            topicModal.classList.add("hide")
         } catch (error) {
             console.log(error);
-        }
-    })
-
-    add_topic.addEventListener('click', async () => {
-      const topic_name = document.querySelector('#topic-area').value;   
-      try {
-        const data = new FormData();
-        data.append('topic_name', topic_name);
-        let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
-      } catch (error) {
-        console.log(error);
-      }
-    });
+        }
+    })
 
 
     const topicsSelectBox = document.getElementById("topics");
@@ -1160,6 +1152,7 @@ pages.page_manage_account = () => {
         }
     });
 }
+
 pages.page_teacher_people=async()=>{
 
      //Get query Parameter
@@ -1182,15 +1175,14 @@ pages.page_teacher_people=async()=>{
 
         } )
     
-    // const user_id = JSON
-    // .parse(localStorage.getItem("userData"))
-    // .user_id
+    const user_id = JSON
+    .parse(localStorage.getItem("userData"))
+    .user_id
 
-    const user_id=7
-    const class_id=1     
+      
     const data = new FormData();
     data.append("user_id", user_id);
-    data.append("class_id",class_id);
+    data.append("class_id",class_idParam);
     let teacher_info=document.getElementById('teach')
     const response = await pages.postAPI(pages.base_url + "get-user-teacher-ofclass.php", data);
     console.log(response.data)
@@ -1213,8 +1205,9 @@ pages.page_teacher_people=async()=>{
         '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
         '</div>';
     }
+
     const data_s = new FormData();
-    data_s.append("class_id",class_id);
+    data_s.append("class_id",class_idParam);
     let student_info=document.getElementById('student')
     const response_s = await pages.postAPI(pages.base_url + "get-user-student-ofclass.php", data);
     console.log(response_s.data)
@@ -1235,7 +1228,6 @@ for (let i = 0; i < numRows; i++) {
     '</div>';
     } 
 }
-
 
 
 pages.page_student_people=async()=>{
@@ -1259,6 +1251,8 @@ pages.page_student_people=async()=>{
             console.log('clicked')
             window.location.href= `/student_classwork.html?id=${class_idParam}`   
         } )
+
+
     const user_id = JSON
     .parse(localStorage.getItem("userData"))
     .user_id
@@ -1289,6 +1283,8 @@ pages.page_student_people=async()=>{
         '<div class="teacher-name" id="tname">' + res.first_name +" "+res.last_name+ '</div>' +
         '</div>';
     }
+
+    //get students in Student people tab
     const data_s = new FormData();
     data_s.append("class_id",class_id);
     let student_info=document.getElementById('student')
@@ -1299,7 +1295,7 @@ pages.page_student_people=async()=>{
     const students_number=document.getElementById('nb-students')
     students_number.innerText=numRows+" students"
     const users = response_s.data;
-for (let i = 0; i < numRows; i++) {
+    for (let i = 0; i < numRows; i++) {
     const first_name = users[i].first_name;
     const last_name = users[i].last_name;
     console.log(first_name, last_name);    
@@ -1332,12 +1328,11 @@ pages.page_student_stream=async()=>{
             console.log('clicked')
             window.location.href= `/student_people.html?id=${class_idParam}`   
         } )
-
-    const class_id=class_idParam    
+   
+    // add Google meet link
     btn_join=document.getElementById('btnJoin')
-
     const data = new FormData();    
-    data.append("class_id",class_id);    
+    data.append("class_id",class_idParam);    
     const response = await pages.postAPI(pages.base_url + "get-google-meet-link.php", data);
     console.log(response.data)
     let link=response.data[0]
@@ -1345,37 +1340,69 @@ pages.page_student_stream=async()=>{
     btn_join.addEventListener('click',()=>{
         window.open(link)
     })
+           
+    const data_announcements = new FormData();
+    data.append("user_id", user.user_id)
+    console.log(user.user_id)
+    data.append("class_id",class_idParam);
+    const classroom_url = pages.base_url + "return_ass_ann.php"
+    const response_announcements = await pages.postAPI(classroom_url, data_announcements);
+    console.log(response.data)
+    const assignment = document.querySelector(".announcements")
+   
+    response_announcements.data.map((item) => (assignment.innerHTML += `   
+    <div class="announcement">
+    <div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${item.title}</div>
+                    <p class="date">${item.due_date}</p>
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+                ${item.instructions}
+        </div>
+    </div>     
+
+  `))
 }
 
+
 pages.page_student_classwork=async()=>{
-    console.log('class ID Param:');
 
     //Get query Parameter
     const queryParamsString = window.location.search;
     const queryParams = new URLSearchParams(queryParamsString);
     const class_idParam = queryParams.get('id');
-    console.log('class ID Param:' + class_idParam);
 
     //tabs
-    const streamTab = document.getElementById("stream-id")
-    const peopleTab = document.getElementById("people-id")
+   const streamTab = document.getElementById("stream-id")
+   const peopleTab = document.getElementById("people-id")
 
-    streamTab.addEventListener('click', () =>{
-        console.log('clicked')
-        window.location.href= `/student_stream.html?id=${class_idParam}`   
-    } )
+   streamTab.addEventListener('click', () =>{
+       console.log('clicked')
+       window.location.href= `/student_stream.html?id=${class_idParam}`   
+   } )
 
-    peopleTab.addEventListener('click', () =>{
-        console.log('clicked')
-        window.location.href= `/student_people.html?id=${class_idParam}`   
-    } )
+   peopleTab.addEventListener('click', () =>{
+       console.log('clicked')
+       window.location.href= `/student_people.html?id=${class_idParam}`   
+   } )
 
-        const class_id=class_idParam
+        console.log('class ID Param:' + class_idParam);
         console.log('class ID' + class_id);
         const topic=document.getElementById('topic_name');
         console.log(topic)        
         const data = new FormData();    
-        data.append("class_id",class_id);    
+        data.append("class_id",class_idParam);    
         const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
         console.log(response.data)  
         let topics=[]
@@ -1389,7 +1416,7 @@ pages.page_student_classwork=async()=>{
         }
     
 
-//     // const topic_ass=document.getElementById('topic-ass')
+     // const topic_ass=document.getElementById('topic-ass')
     const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
     console.log(response_ass.data)
 
@@ -1423,6 +1450,8 @@ pages.page_student_classwork=async()=>{
                             </div>
                         </div>`;
                         }
+   
+
 }
 
 
