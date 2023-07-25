@@ -765,6 +765,9 @@ pages.page_teacher_classwork = () => {
     const topicCancelButton = document.querySelector(".add-topic-modal .cancel-button");
     const assignmentModal = document.getElementById("modal-assignment");
     const closeAssignmentButton = document.getElementById("close-assignment");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+    let checkedValues = [];
 
     let classID = 2;
 
@@ -850,8 +853,8 @@ pages.page_teacher_classwork = () => {
       }
     });
 
-
     const topicsSelectBox = document.getElementById("topics");
+    topicsSelectBox.innerHTML += `<option value="null">No topic</option>`;
 
     // get the topics fo the class and display them
     try {
@@ -873,13 +876,13 @@ pages.page_teacher_classwork = () => {
 
     // assignment sidebar
     const dropdownToggle = document.getElementById("dropdownToggle");
-    const dropdownMenu = document.getElementById("dropdownMenu");
+    // const dropdownMenu = document.getElementById("dropdownMenu");
     const dropDownClasses = document.getElementById("dropdownMenu")
     const userId = JSON
         .parse(localStorage.getItem("userData"))
         .user_id
 
-    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+    // const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
 
     const data = new FormData()
     data.append("user_id", userId)
@@ -888,6 +891,7 @@ pages.page_teacher_classwork = () => {
                                         <label><input disabled checked type="checkbox" value="${classID}">
                                             Dynamic Class</label>
                                     </div>`;
+    checkedValues.push(classID)
     dropdownToggle.innerHTML = `<div>Dynamic Class</div><div><i class="fa-solid fa-caret-down"></i></div>`;
 
     // get the classes and display them
@@ -909,20 +913,21 @@ pages.page_teacher_classwork = () => {
         console.log(error)
     }
 
-    
-
     dropdownToggle.addEventListener("click", () => {
         dropdownMenu.style.display = dropdownMenu.style.display === "block"
             ? "none"
             : "block";
     });
 
+    // classes let checkedValues = [] const checkboxes =
+    // dropdownMenu.querySelectorAll('input[type="checkbox"]');
+
     dropdownMenu.addEventListener("click", (e) => {
         e.stopPropagation();
 
+        checkedValues = [];
         const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
 
-        let checkedValues = [];
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
@@ -930,6 +935,83 @@ pages.page_teacher_classwork = () => {
         });
         console.log(checkedValues);
     });
+
+    // create assignment functinality
+    const assignButton = document.getElementById("assign-button")
+    const assignmentTitleInput = document.querySelector(".assignment-title")
+    const instructionsInput = document.querySelector("#editor p")
+    const dateInput = document.getElementById("dateInput")
+
+    let dueDate = dateInput.value;
+
+    const currentDate = new Date();
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDate();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const seconds = currentDate.getSeconds();
+    let date = `${month}-${day}-${hours}:${minutes}:${seconds}`;
+
+    assignButton.addEventListener("click", async() => {
+
+        try {
+            for (let i = 0; i < checkedValues.length; i++) {
+                let data = new FormData();
+
+                const currentDate = new Date();
+                const month = currentDate.getMonth() + 1;
+                const day = currentDate.getDate();
+                const hours = currentDate.getHours();
+                const minutes = currentDate.getMinutes();
+                let date = `${month}-${day}-${hours}:${minutes}`;
+
+                data.append("launch_date", date);
+                data.append("title", assignmentTitleInput.value);
+                if (instructionsInput.innerHTML != "<br>") {
+                    data.append("instructions", instructionsInput.innerHTML);
+                }
+                dueDate === ""
+                    ? (dueDate = "No due date")
+                    : (dueDate = dueDate);
+                data.append("user_id", JSON.parse(localStorage.getItem("userData")).user_id);
+                data.append("class_id", checkedValues[i])
+                data.append("due_date", dueDate)
+
+                let response = await pages.postAPI(pages.base_url + "create-assignment.php", data);
+                console.log(response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    assignmentTitleInput.addEventListener("input", () => {
+        assignButton.disabled = false
+        assignButton
+            .classList
+            .add("active")
+
+        if (assignmentTitleInput.value === "") {
+            assignButton.disabled = true;
+            assignButton
+                .classList
+                .remove("active");
+        }
+
+        console.log("TITLE " + assignmentTitleInput.value)
+        console.log("INSTRUCTIONS " + instructionsInput.innerHTML)
+        console.log("LAUNCH DATE " + date)
+        dueDate === ""
+            ? (dueDate = "No due date")
+            : (dueDate = dueDate);
+        console.log("due date " + dueDate)
+        console.log("CLASSES " + checkedValues)
+    })
+
+    // setInterval(() => {     console.log(checkedValues);
+    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);
+    // setInterval(() => {     console.log(instructionsInput.innerHTML);
+    // console.log(assignmentInput.value); }, 1500);
 }
 
 pages.page_signin_password = () => {
