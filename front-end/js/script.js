@@ -28,12 +28,15 @@ pages.loadFor = (page) => {
 }
 
 pages.page_index = () => {
+    console.log('sign in')
 
     const nextButton = document.querySelector(".next-button")
     const emailInput = document.getElementById("email")
     const error = document.querySelector(".error")
+    console.log(nextButton)
 
     nextButton.addEventListener("click", async() => {
+        console.log('clicked')
         const emailData = emailInput.value;
         const data = new FormData()
         data.append("email", emailData)
@@ -56,23 +59,6 @@ pages.page_index = () => {
         }
     })
 
-    // const login = document.getElementById("login")
-    // login.addEventListener("click", async() => {     const email = document
-    // .getElementById("email_in")         .value     const password = document
-    // .getElementById("password_in")         .value     const errorElement =
-    // document.querySelector(".error")     const data = new FormData();
-    // data.append("email", email);     data.append("password", password)     try {
-    // let response = await pages.postAPI(pages.base_url + "signin.php", data); if
-    // (response.data.status === "user not found") { errorElement.innerText = "User
-    // not found"             setTimeout(() => { errorElement.innerText = "" },
-    // 3000)         } else if (response.data.status === "wrong password") {
-    // errorElement.innerText = "Wrong Password" setTimeout(() => {
-    // errorElement.innerText = ""             }, 3000)         } else { const
-    // userObject = Object .keys(response.data) .reduce((acc, key) => {    if (key
-    // !== "status") {     acc[key] = response.data[key]             }    return acc
-    // }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
-    // window.location.href = "classrooms.html" }     } catch (error) {
-    // console.error('Login error : ', error);     } })
 }
 
 pages.page_signup = () => {
