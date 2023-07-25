@@ -453,7 +453,7 @@ pages.page_teacher_classwork = () => {
     const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
     let checkedValues = [];
 
-    let classID = 104;
+    let classID = 2;
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
@@ -523,7 +523,6 @@ pages.page_teacher_classwork = () => {
                 .map((item) => {
                     topicsSelectBox.innerHTML += `<option value="${item.topic_id}">${item.topic_name}</option>`;
                 });
-            console.log(response.data);
         };
         getTopics();
     } catch (error) {
@@ -557,10 +556,12 @@ pages.page_teacher_classwork = () => {
             response
                 .data
                 .map((item, index) => {
-                    dropDownClasses.innerHTML += `<div class="dropdown-item">
-                                        <label><input type="checkbox" value="${item.class_id}">
-                                            ${item.class_name}</label>
-                                    </div>`;
+                    if(item.class_id !== classID) {
+                        dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                            <label><input type="checkbox" value="${item.class_id}">
+                                                ${item.class_name}</label>
+                                        </div>`;
+                    }
                 })
             console.log(response.data)
         }
@@ -663,6 +664,7 @@ pages.page_teacher_classwork = () => {
             : (dueDate = dueDate);
         console.log("due date " + dueDate)
         console.log("CLASSES " + checkedValues)
+        console.log(topicsSelectBox.value)
     })
 
     // setInterval(() => {     console.log(checkedValues);
@@ -828,8 +830,10 @@ pages.page_assignment = () => {
     const form = document.querySelector("form")
     const inputFile = document.getElementById("file-input")
 
-    inputFile.addEventListener("input", () => {
-        console.log("uploaded a file")
+    inputFile.addEventListener("input", (e) => {
+        if(e.target.files.length > 0) {
+            console.log(e.target.files[0])
+        }
     })
     
     form.addEventListener("submit", (e) => {
