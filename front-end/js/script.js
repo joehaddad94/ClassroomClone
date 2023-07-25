@@ -453,7 +453,7 @@ pages.page_teacher_classwork = () => {
     const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
     let checkedValues = [];
 
-    let classID = 2;
+    let classID = 104;
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
@@ -606,7 +606,7 @@ pages.page_teacher_classwork = () => {
     const hours = currentDate.getHours();
     const minutes = currentDate.getMinutes();
     const seconds = currentDate.getSeconds();
-    let date = `${month}-${day}-${hours}:${minutes}:${seconds}`;
+    let date = `${month}-${day}-${hours}:${minutes}`;
 
     assignButton.addEventListener("click", async() => {
 
@@ -623,9 +623,10 @@ pages.page_teacher_classwork = () => {
 
                 data.append("launch_date", date);
                 data.append("title", assignmentTitleInput.value);
-                if (instructionsInput.innerHTML != "<br>") {
-                    data.append("instructions", instructionsInput.innerHTML);
-                }
+                // if (instructionsInput.innerHTML != "<br>") {
+                //     data.append("instructions", instructionsInput.innerHTML);
+                // }
+                data.append("instructions", instructionsInput.innerHTML);
                 dueDate === ""
                     ? (dueDate = "No due date")
                     : (dueDate = dueDate);
@@ -821,4 +822,19 @@ pages.page_manage_account = () => {
             window.location.href = "classrooms.html"
         }
     });
+}
+
+pages.page_assignment = () => {
+    const form = document.querySelector("form")
+    const inputFile = document.getElementById("file-input")
+
+    inputFile.addEventListener("input", () => {
+        console.log("uploaded a file")
+    })
+    
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        console.log("submitted")
+    })
 }

@@ -3,7 +3,6 @@ include('connection.php');
 
 
 $title = $_POST['title'];
-$instructions = $_POST['instructions'];
 $launch_date = $_POST['launch_date'];
 $due_date = $_POST['due_date'];
 $class_id = $_POST['class_id'];
