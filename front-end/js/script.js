@@ -839,7 +839,7 @@ pages.page_assignment = () => {
         const userID = JSON
             .parse(localStorage.getItem("userData"))
             .user_id
-        const assignment_id = 4;
+        const assignment_id = 2;
 
         const currentDate = new Date();
         const month = currentDate.getMonth() + 1;
@@ -848,14 +848,15 @@ pages.page_assignment = () => {
         const minutes = currentDate.getMinutes();
         let turnInDate = `${month}-${day}-${hours}:${minutes}`;
 
-        let data = formData()
+        let data = new FormData()
         data.append('user_id', userID)
         data.append('turnin_date', turnInDate)
         data.append('assignment_id', assignment_id)
         data.append('solution_text', base64)
 
         try {
-            await pages.postAPI(pages.base_url + "upload_solution.php", data)
+            let response = await pages.postAPI(pages.base_url + "upload_solution.php", data)
+            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
