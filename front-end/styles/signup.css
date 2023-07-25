@@ -1,3 +1,7 @@
+.signup-main {
+    padding: 20px;
+}
+
 .signup-main .inputs {
     display: flex;
     flex-direction: column;
@@ -85,4 +89,27 @@ select {
     align-content: center;
     padding-left: 35%;
 
+}
+
+
+@media (max-width: 600px) {
+
+    .signup-box {
+        padding: 10px;
+    }
+    
+    .row {
+        padding: 0;
+        gap: 10px;
+        width: 100% !important;
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .column input {
+        width: 100%;
+    }
 }

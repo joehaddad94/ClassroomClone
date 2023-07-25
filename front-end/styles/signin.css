@@ -257,3 +257,9 @@ img {
 .check-button.hide, .change-password-button.hide {
     display: none;
 }
+
+@media (max-width: 500px) {
+    .signin-box {
+        padding: 15px;
+    }
+}

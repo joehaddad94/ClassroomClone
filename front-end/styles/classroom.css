@@ -560,3 +560,11 @@ body {
 #second-state-announcement.hide {
   display: none;
 }
+
+
+@media (max-width: 900px) {
+  
+  .bottom-left-main-teacher {
+    display: none !important;
+  }
+}
