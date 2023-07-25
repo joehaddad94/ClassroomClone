@@ -1,16 +1,15 @@
 <?php
-include('connection.php') ;
+include('connection.php');
 
 $class_id = $_POST['class_id'];
 
-$query = $mysqli->prepare('select  class_code
+$query = $mysqli->prepare('select * 
 from classes 
-where class_id = ?');
+where class_id =?');
+$query->bind_param("i", $class_id);
+$query->execute();
 
-    $query->bind_param('i', $class_id);
-    $query->execute();
-
-    $result = $query->get_result();
+$result = $query->get_result();
 
     $response = array();
 
@@ -23,4 +22,3 @@ where class_id = ?');
     }
 
     echo json_encode($response);
-?>
