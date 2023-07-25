@@ -52,3 +52,128 @@
     font-size: 1.0625rem;
 }
 
+/* INVITE STUDENTS MODAL */
+
+.invite-students-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.226);
+    padding: 0 20px;
+}
+
+.invite-students-modal .box {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.invite-students-modal .box > div:first-child {
+    margin-bottom: 20px;
+}
+
+.invite-students-modal .box input {
+    padding: 15px 10px;
+    font-size: 1rem;
+    border: none;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    outline: none;
+}
+
+.invite-students-modal .box .emails {
+    display: flex;
+    flex-direction: column;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.invite-students-modal .box .email {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.invite-students-modal .box .email:hover {
+    background-color: #cccccc2c;
+}
+
+.invite-students-modal .box .details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.invite-students-modal .box .details div:last-child {
+    font-size: .875rem;
+}
+
+.invite-students-modal .box label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.invite-students-modal .box label input {
+    width: 20px;
+    height: 20px;
+}
+
+.invite-students-modal .box .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 0 0;
+    border-top: 1px solid #ccc;
+}
+
+.invite-students-modal .box .buttons button {
+    padding: 7px;
+    border: none;
+    font-size: .875rem;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    background-color: transparent;
+}
+
+.invite-students-modal .box .cancel-button {
+    cursor: pointer;
+}
+
+.invite-students-modal .box .cancel-button:hover {
+    background-color: #cccccc49;
+}
+
+.invite-students-modal .box .invite-button {
+    color: #ccc;
+}
+
+.invite-students-modal .box .invite-button.active {
+    color: rgba(0, 255, 255, 0.507);
+    cursor: pointer;
+}
+
+.invite-students-modal .box .invite-button.active:hover {
+    background-color: rgba(127, 255, 212, 0.267);
+}
