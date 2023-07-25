@@ -40,70 +40,25 @@ pages.page_index = () => {
         const emailData = emailInput.value;
         const data = new FormData()
         data.append("email", emailData)
-    })
 
-    const login = document.getElementById("login")
-
-    login.addEventListener("click", async() => {
-        const email = document
-            .getElementById("email_in")
-            .value
-        const password = document
-            .getElementById("password_in")
-            .value
-        const errorElement = document.querySelector(".error")
-
-        const data = new FormData();
-        data.append("email", email);
-        data.append("password", password)
-
-        try {
-            let response = await pages.postAPI(pages.base_url + "signin.php", data);
-
-            if (response.data.status === "user not found") {
-                errorElement.innerText = "User not found"
+        if (emailData !== "") {
+            const response = await axios.post(pages.base_url + "check-email.php", data);
+            if (response.data.status === "Failure") {
+                error
+                    .classList
+                    .remove("hide")
                 setTimeout(() => {
-                    errorElement.innerText = ""
-                }, 3000)
-            } else if (response.data.status === "wrong password") {
-                errorElement.innerText = "Wrong Password"
-                setTimeout(() => {
-                    errorElement.innerText = ""
+                    error
+                        .classList
+                        .add("hide");
                 }, 3000)
             } else {
-                const userObject = Object
-                    .keys(response.data)
-                    .reduce((acc, key) => {
-                        if (key !== "status") {
-                            acc[key] = response.data[key]
-                        }
-                        return acc
-                    }, {})
-                localStorage.setItem("userData", JSON.stringify(userObject))
-                window.location.href = "classrooms.html"
+                localStorage.setItem("userEmail", JSON.stringify(emailData))
+                window.location.href = "signin_password.html"
             }
-        } catch (error) {
-            console.error('Login error : ', error);
         }
     })
 
-    // const login = document.getElementById("login")
-    // login.addEventListener("click", async() => {     const email = document
-    // .getElementById("email_in")         .value     const password = document
-    // .getElementById("password_in")         .value     const errorElement =
-    // document.querySelector(".error")     const data = new FormData();
-    // data.append("email", email);     data.append("password", password)     try {
-    // let response = await pages.postAPI(pages.base_url + "signin.php", data); if
-    // (response.data.status === "user not found") { errorElement.innerText = "User
-    // not found"             setTimeout(() => { errorElement.innerText = "" },
-    // 3000)         } else if (response.data.status === "wrong password") {
-    // errorElement.innerText = "Wrong Password" setTimeout(() => {
-    // errorElement.innerText = ""             }, 3000)         } else { const
-    // userObject = Object .keys(response.data) .reduce((acc, key) => {    if (key
-    // !== "status") {     acc[key] = response.data[key]             }    return acc
-    // }, {}) localStorage.setItem("userData", JSON.stringify(userObject))
-    // window.location.href = "classrooms.html" }     } catch (error) {
-    // console.error('Login error : ', error);     } })
 }
 
 pages.page_signup = () => {
@@ -174,10 +129,12 @@ pages.page_classrooms = () => {
     const section_input = document.getElementById("section-input");
     const subject_input = document.getElementById("subject-input");
     const room_input = document.getElementById("room-input");
+    const googleMeetLinkInput = document.getElementById("googleMeetLink-input");
     const formElement = document.querySelector("form")
+    console.log(formElement)
+    const signoutElement = document.getElementById("sign-out")
 
     let userData = JSON.parse(localStorage.getItem("userData"))
-
 
     burgerIcon.addEventListener("click", () => {
         sidebar
@@ -194,8 +151,41 @@ pages.page_classrooms = () => {
                     .add("hide");
             }
         })
+        const classCodeInput = document.getElementById('class-code');
+        const joinButton = document.querySelector('.join-class-modal-header .join-class-button button');
+      
+        classCodeInput.addEventListener('input', function() {
+          const inputValue = classCodeInput.value.trim();
+          if (inputValue !== '') {
+            joinButton.removeAttribute('disabled');
+            joinButton.classList.add('active');
+          } else {
+            joinButton.setAttribute('disabled', 'disabled');
+            joinButton.classList.remove('active');
+          }
+        });
+        const button_join = document.getElementById('button_join')
+        button_join.addEventListener('click', async() => {
+            const class_code = document.querySelector('#class-code').value;
+            try {
+                const data = new FormData();
+                data.append('class_code',class_code)
+                let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/class_code.php', data);
+            } catch (error) {
+                console.log(error);
+            }
+            location.reload()
+        })
+    
+        
+ 
 
 
+    const user_id = JSON
+        .parse(localStorage.getItem("userData"))
+        .user_id
+    const data = new FormData();
+    data.append("user_id", user_id);
 // Function to fetch and display classes
 const userRole = JSON.parse(localStorage.getItem("userData")).role_id;
 let link = ""
@@ -204,8 +194,6 @@ if (userRole == 1){
 } else {
     link = "/student_stream.html"
 }
-
-// let redirect = document.querySelector("#redirect")
 
 
 const displayClasses = async (apiUrl) => {
@@ -224,8 +212,9 @@ const displayClasses = async (apiUrl) => {
             sidebarClasses.innerHTML += `
             <div class="class">
                 <div>${item.class_name[0]}</div>
-                    <div class="class-data">
+                    <div <a href="${link}?id=${item.class_id}" class="class-data">
                         <p class="class-name">
+                        <a href="${link}?id=${item.class_id}"
                             ${item.class_name}
                         </p>
                         <p class="class-desc">${item.section}</p>
@@ -277,7 +266,7 @@ const displayClasses = async (apiUrl) => {
     } catch (error) {
         console.log("Error in loading classes:", error);
     }
-}
+};
 
 // Call the function for teacher or student view
 
@@ -300,7 +289,7 @@ if (userRole == 1) {
 
 
 
-    // modal functionlity
+    // create class modal functionlity
 
     const modal = document.querySelector(".modal")
     const boxModal = document.querySelector(".modal .modal-box")
@@ -324,38 +313,127 @@ if (userRole == 1) {
             .add("hide")
     })
 
+    // function to create class code
+    function generateRandomCode() {
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let code = "";
+        const codeLength = 7;
+
+        for (let i = 0; i < codeLength; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            code += characters.charAt(randomIndex);
+        }
+
+        return code;
+    }
+
     formElement.addEventListener("submit", (e) => {
         console.log('fucntion entered')
         e.preventDefault();
-
+        const user = JSON.parse(localStorage.getItem("userData"))
+        const user_id = user.user_id
         const classname = classname_input.value;
         const section = section_input.value;
         const subject = subject_input.value;
         const room = room_input.value;
+        const googleMeetLink = googleMeetLinkInput.value;
+        const classCode = generateRandomCode();
 
         let classData = new FormData();
         classData.append("class_name", classname);
         classData.append("section", section);
         classData.append("subject", subject);
         classData.append("room", room);
-        classData.append("googlemeet_link", "");
+        classData.append("googlemeet_link", googleMeetLink);
+        classData.append("class_code", classCode);
         classData.append("user_id", user_id);
 
         try {
             const createClass = async() => {
-                await pages.postAPI(pages.base_url + "create-class.php", classData);
+                const response = await pages.postAPI(pages.base_url + "create-class.php", classData);
+                console.log(response.data);
                 modal
                     .classList
-                    .add("hide")
+                    .add("hide");
                 window
                     .location
-                    .reload()
+                    .reload();
             };
             createClass();
         } catch (error) {
             console.log(error);
         }
     });
+
+    // manage account modal functionality
+    const profileBtn = document.getElementById("profile-pic");
+    const manageAccountModal = document.getElementById("manage-account-modal");
+    const manageAccountButton = document.querySelector(".manage-account-button")
+
+    profileBtn.addEventListener('click', () => {
+        manageAccountModal
+            .classList
+            .remove("hide")
+    })
+
+    manageAccountButton.addEventListener("click", () => {
+        window.location.href = "manage_account.html"
+    })
+
+    document
+        .body
+        .addEventListener("click", (e) => {
+            if (!manageAccountModal.classList.contains("hide") && !profileBtn.contains(e.target) && !manageAccountModal.contains(e.target)) {
+                manageAccountModal
+                    .classList
+                    .add("hide");
+            }
+        });
+
+    // sign Out functionality
+    signoutElement.addEventListener("click", () => {
+        localStorage.removeItem("userData")
+        window.location.href = "index.html"
+    })
+
+    // join class modal functionality
+    const joinClassModal = document.getElementById("join-class-modal")
+    const closeJoinModalButton = document.querySelector(".close-join-class-icon");
+    const joinClassName = document.querySelector(".join-class-modal-bottom .name");
+    const joinClassEmail = document.querySelector(".join-class-modal-bottom .email");
+
+    let userEmail = JSON
+        .parse(localStorage.getItem("userData"))
+        .email
+    let userName = JSON
+        .parse(localStorage.getItem("userData"))
+        .first_name + " " + JSON
+        .parse(localStorage.getItem("userData"))
+        .last_name
+
+    joinClassName.innerText = userName
+    joinClassEmail.innerText = userEmail
+
+    joinClassButton.addEventListener("click", () => {
+        joinClassModal
+            .classList
+            .remove("hide")
+        document
+            .body
+            .classList
+            .add("no-overflow")
+    })
+
+    closeJoinModalButton.addEventListener("click", () => {
+        joinClassModal
+            .classList
+            .add("hide")
+        document
+            .body
+            .classList
+            .remove("no-overflow");
+    })
+
 };
 
 pages.page_teacher_stream = () => {
@@ -367,6 +445,19 @@ pages.page_teacher_stream = () => {
     const cancelButton = document.querySelector("#second-state-announcement .buttons .cancel-button")
     const postButton = document.querySelector(".post-button")
     const editor = document.querySelector("#editor p")
+
+    //tabs
+        
+        const classwork = document.getElementById("classwork-tab")
+        const peopleTab = document.getElementById("people-tab")
+
+        classwork.addEventListener('click', () =>{
+            window.location.href= `/teacher_classwork.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            window.location.href= `/teacher_people.html?id=${class_idParam}`   
+        } )
 
     const user = JSON.parse(localStorage.getItem("userData"))
         const user_idStorage = user.user_id
@@ -513,14 +604,22 @@ pages.page_teacher_stream = () => {
             .classList
             .add("text-area")
 
-    cancelButton.addEventListener("click", () => {
-        secondStateAnnoucnement.classList.add("hide")
-        firstStateAnnouncement.classList.remove("hide")
-        annoucementInput.classList.remove("text-area")
-    })
+        cancelButton.addEventListener("click", () => {
+            secondStateAnnoucnement
+                .classList
+                .add("hide")
+            firstStateAnnouncement
+                .classList
+                .remove("hide")
+            annoucementInput
+                .classList
+                .remove("text-area")
+        })
 
     
     })
+
+   
 
     pages.page_forget_password = () => {
 
@@ -536,21 +635,21 @@ pages.page_teacher_stream = () => {
     pages.page_classrooms = async() => {
         const user = JSON.parse(localStorage.getItem("userData"))
         const user_id = user.user_id
-
         const data = new FormData();
         data.append("user_id", user_id)
-
         const classroom_url = pages.base_url + "teachers-classes.php"
         const response = await pages.postAPI(classroom_url, data);
-        
+        console.log(response.data)
+        console.log(1)
         const bottom_classroom = document.querySelector(".bottom-classrooms")
-        
+        console.log(bottom_classroom)
         response
             .data
             .map((item) => (bottom_classroom.innerHTML += `         
         <div class="class">
         <div class="top-class">
           <div class="class-title">
+
             <p>${item.class_name}</p>
             <div>
               <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
@@ -588,20 +687,80 @@ pages.page_teacher_stream = () => {
 
     }
 
-    // const profileBtn = document.getElementById("profile-pic")
-    // const manage_profile = document.getElementById("profile-manage");
-    // profileBtn.addEventListener("click", () => {
-    //     console.log("Click profile successful");
-    //     if (manage_profile.style.display !== "none") {
-    //         manage_profile.style.display = "none";
-    //     } else {
-    //         manage_profile.style.display = "block";
-    //     }
-    // })
+    const profileBtn = document.getElementById("profile-pic")
+    const manage_profile = document.getElementById("profile-manage");
+    profileBtn.addEventListener("click", () => {
+        console.log("Click profile successful");
+        if (manage_profile.style.display !== "none") {
+            manage_profile.style.display = "none";
+        } else {
+            manage_profile.style.display = "block";
+        }
+    })
 
 };
 
+                
+pages.page_student_stream =  async ()  =>{
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const class_id = 8;            
+    const data = new FormData();
+    data.append("user_id", user_id)
+    data.append("class_id",class_id);
+    const classroom_url = pages.base_url + "return_ass_ann.php"
+    const response = await pages.postAPI(classroom_url, data);
+    console.log(response.data)
+    const assignment = document.querySelector(".announcements")
+   
+    response.data.map((item) => (assignment.innerHTML += `   
+    <div class="announcement">
+    <div class="announcement-top">
+        <div>
+            <div class="user-data">
+                <div class="profile-pic"><img
+                    src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+                    alt="profile-picture"></div>
+                <div>
+                    <div class="name">${item.title}</div>
+                    <p class="date">${item.due_date}</p>
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+            </div>
+        </div>
+        <div class="announcement-content">
+                ${item.instructions}
+        </div>
+    </div>     
+
+  `))
+}
+
 pages.page_teacher_classwork = () => {
+
+    //Get query Parameter
+    const queryParamsString = window.location.search;
+    const queryParams = new URLSearchParams(queryParamsString);
+    const class_idParam = queryParams.get('id');
+    console.log(class_idParam);
+
+    //tabs
+        const streamTab = document.getElementById("stream-id")
+        const peopleTab = document.getElementById("people-id")
+
+        streamTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/teacher_stream.html?id=${class_idParam}`   
+        } )
+
+        peopleTab.addEventListener('click', () =>{
+            console.log('clicked')
+            window.location.href= `/teacher_people.html?id=${class_idParam}`   
+        } )
+
+
     const createButton = document.getElementById("create-button")
     const dropDown = document.getElementById("drop-down")
     const topicModal = document.getElementById("topic-modal")
@@ -616,10 +775,21 @@ pages.page_teacher_classwork = () => {
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
-        assignmentModal.classList.add("hide")
-    });
+        assignmentModal
+            .classList
+            .add("hide")
+    })
+
+    // open assignment
+    createAssignmentButton.addEventListener("click", (e) => {
+        
+        assignmentModal
+            .classList
+            .remove("hide")
+    })
 
     createButton.addEventListener("click", (e) => {
+        
         if (!dropDown.contains(e.target)) {
             dropDown
                 .classList
@@ -653,11 +823,26 @@ pages.page_teacher_classwork = () => {
     })
 
     topicCancelButton.addEventListener("click", (e) => {
-        topicModal.classList.add("hide")
+        topicModal
+            .classList
+            .add("hide")
     })
 
+    //add topic
+    const add_topic = document.getElementById('add-button');
+    add_topic.addEventListener('click', async() => {
+        const topic_name = document.querySelector('#topic-area').innerHTML;
+        console.log(topic_name)
 
+        try {
+            const data = new FormData();
+            data.append('topic_name' , topic_name);
+            let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
 
+        } catch (error) {
+            console.log(error);
+        }
+    })
 
     add_topic.addEventListener('click', async () => {
       const topic_name = document.querySelector('#topic-area').value;   
@@ -669,6 +854,7 @@ pages.page_teacher_classwork = () => {
         console.log(error);
       }
     });
+
 
     const topicsSelectBox = document.getElementById("topics");
     topicsSelectBox.innerHTML += `<option value="null">No topic</option>`;
@@ -693,13 +879,13 @@ pages.page_teacher_classwork = () => {
 
     // assignment sidebar
     const dropdownToggle = document.getElementById("dropdownToggle");
-    // const dropdownMenu = document.getElementById("dropdownMenu");
+    const dropdownMenu = document.getElementById("dropdownMenu");
     const dropDownClasses = document.getElementById("dropdownMenu")
     const userId = JSON
         .parse(localStorage.getItem("userData"))
         .user_id
 
-    // const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
 
     const data = new FormData()
     data.append("user_id", userId)
@@ -730,21 +916,20 @@ pages.page_teacher_classwork = () => {
         console.log(error)
     }
 
+    
+
     dropdownToggle.addEventListener("click", () => {
         dropdownMenu.style.display = dropdownMenu.style.display === "block"
             ? "none"
             : "block";
     });
 
-    // classes let checkedValues = [] const checkboxes =
-    // dropdownMenu.querySelectorAll('input[type="checkbox"]');
-
     dropdownMenu.addEventListener("click", (e) => {
         e.stopPropagation();
 
-        checkedValues = [];
         const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
 
+        let checkedValues = [];
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
                 checkedValues.push(checkbox.value);
@@ -753,81 +938,71 @@ pages.page_teacher_classwork = () => {
         console.log(checkedValues);
     });
 
-    // create assignment functinality
-    const assignButton = document.getElementById("assign-button")
-    const assignmentTitleInput = document.querySelector(".assignment-title")
-    const instructionsInput = document.querySelector("#editor p")
-    const dateInput = document.getElementById("dateInput")
+    // create assignment functinality	
+    const assignButton = document.getElementById("assign-button")	
+    const assignmentTitleInput = document.querySelector(".assignment-title")	
+    const instructionsInput = document.querySelector("#editor p")	
+    const dateInput = document.getElementById("dateInput")	
+    let dueDate = dateInput.value;	
+    const currentDate = new Date();	
+    const month = currentDate.getMonth() + 1;	
+    const day = currentDate.getDate();	
+    const hours = currentDate.getHours();	
+    const minutes = currentDate.getMinutes();	
+    const seconds = currentDate.getSeconds();	
+    let date = `${month}-${day}-${hours}:${minutes}:${seconds}`;	
+    assignButton.addEventListener("click", async() => {	
+        try {	
+            for (let i = 0; i < checkedValues.length; i++) {	
+                let data = new FormData();	
+                const currentDate = new Date();	
+                const month = currentDate.getMonth() + 1;	
+                const day = currentDate.getDate();	
+                const hours = currentDate.getHours();	
+                const minutes = currentDate.getMinutes();	
+                let date = `${month}-${day}-${hours}:${minutes}`;	
+                data.append("launch_date", date);	
+                data.append("title", assignmentTitleInput.value);	
+                if (instructionsInput.innerHTML != "<br>") {	
+                    data.append("instructions", instructionsInput.innerHTML);	
+                }	
+                dueDate === ""	
+                    ? (dueDate = "No due date")	
+                    : (dueDate = dueDate);	
+                data.append("user_id", JSON.parse(localStorage.getItem("userData")).user_id);	
+                data.append("class_id", checkedValues[i])	
+                data.append("due_date", dueDate)	
+                let response = await pages.postAPI(pages.base_url + "create-assignment.php", data);	
+                console.log(response.data)	
+            }	
+        } catch (error) {	
+            console.log(error)	
+        }	
+    })	
 
-    let dueDate = dateInput.value;
-
-    const currentDate = new Date();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-    let date = `${month}-${day}-${hours}:${minutes}:${seconds}`;
-
-    assignButton.addEventListener("click", async() => {
-
-        try {
-            for (let i = 0; i < checkedValues.length; i++) {
-                let data = new FormData();
-
-                const currentDate = new Date();
-                const month = currentDate.getMonth() + 1;
-                const day = currentDate.getDate();
-                const hours = currentDate.getHours();
-                const minutes = currentDate.getMinutes();
-                let date = `${month}-${day}-${hours}:${minutes}`;
-
-                data.append("launch_date", date);
-                data.append("title", assignmentTitleInput.value);
-                if (instructionsInput.innerHTML != "<br>") {
-                    data.append("instructions", instructionsInput.innerHTML);
-                }
-                dueDate === ""
-                    ? (dueDate = "No due date")
-                    : (dueDate = dueDate);
-                data.append("user_id", JSON.parse(localStorage.getItem("userData")).user_id);
-                data.append("class_id", checkedValues[i])
-                data.append("due_date", dueDate)
-
-                let response = await pages.postAPI(pages.base_url + "create-assignment.php", data);
-                console.log(response.data)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    })
-
-    assignmentTitleInput.addEventListener("input", () => {
-        assignButton.disabled = false
-        assignButton
-            .classList
-            .add("active")
-
-        if (assignmentTitleInput.value === "") {
-            assignButton.disabled = true;
-            assignButton
-                .classList
-                .remove("active");
-        }
-
-        console.log("TITLE " + assignmentTitleInput.value)
-        console.log("INSTRUCTIONS " + instructionsInput.innerHTML)
-        console.log("LAUNCH DATE " + date)
-        dueDate === ""
-            ? (dueDate = "No due date")
-            : (dueDate = dueDate);
-        console.log("due date " + dueDate)
-        console.log("CLASSES " + checkedValues)
-    })
-
-    // setInterval(() => {     console.log(checkedValues);
-    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);
-    // setInterval(() => {     console.log(instructionsInput.innerHTML);
+    assignmentTitleInput.addEventListener("input", () => {	
+        assignButton.disabled = false	
+        assignButton	
+            .classList	
+            .add("active")	
+        if (assignmentTitleInput.value === "") {	
+            assignButton.disabled = true;	
+            assignButton	
+                .classList	
+                .remove("active");	
+        }	
+        console.log("TITLE " + assignmentTitleInput.value)	
+        console.log("INSTRUCTIONS " + instructionsInput.innerHTML)	
+        console.log("LAUNCH DATE " + date)	
+        dueDate === ""	
+            ? (dueDate = "No due date")	
+            : (dueDate = dueDate);	
+        console.log("due date " + dueDate)	
+        console.log("CLASSES " + checkedValues)	
+    })	
+    // setInterval(() => {     console.log(checkedValues);	
+    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);	
+    // setInterval(() => {     console.log(instructionsInput.innerHTML);	
     // console.log(assignmentInput.value); }, 1500);
 }
 
