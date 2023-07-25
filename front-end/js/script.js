@@ -1274,34 +1274,37 @@ pages.page_student_stream=async()=>{
 }
 
 pages.page_student_classwork=async()=>{
+    console.log('class ID Param:');
 
     //Get query Parameter
     const queryParamsString = window.location.search;
     const queryParams = new URLSearchParams(queryParamsString);
     const class_idParam = queryParams.get('id');
-    console.log(class_idParam);
+    console.log('class ID Param:' + class_idParam);
 
     //tabs
-        const streamTab = document.getElementById("stream-id")
-        const peopleTab = document.getElementById("people-id")
+    const streamTab = document.getElementById("stream-id")
+    const peopleTab = document.getElementById("people-id")
 
-        streamTab.addEventListener('click', () =>{
-            console.log('clicked')
-            window.location.href= `/student_stream.html?id=${class_idParam}`   
-        } )
+    streamTab.addEventListener('click', () =>{
+        console.log('clicked')
+        window.location.href= `/student_stream.html?id=${class_idParam}`   
+    } )
 
-        peopleTab.addEventListener('click', () =>{
-            console.log('clicked')
-            window.location.href= `/student_people.html?id=${class_idParam}`   
-        } )
+    peopleTab.addEventListener('click', () =>{
+        console.log('clicked')
+        window.location.href= `/student_people.html?id=${class_idParam}`   
+    } )
 
-        const class_id=1 
-        const topic=document.getElementById('topic_name');        
+        const class_id=class_idParam
+        console.log('class ID' + class_id);
+        const topic=document.getElementById('topic_name');
+        console.log(topic)        
         const data = new FormData();    
         data.append("class_id",class_id);    
         const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
         console.log(response.data)  
-        topics=[]
+        let topics=[]
         response.data.forEach(item => {
             console.log(item.topic_name);
             topics.push(item.topic_name)
@@ -1310,8 +1313,9 @@ pages.page_student_classwork=async()=>{
         for(i=0;i<topics.length;i++){
            topic.innerHTML+="<p>"+topics[i]+"</p>";
         }
+    
 
-    // const topic_ass=document.getElementById('topic-ass')
+//     // const topic_ass=document.getElementById('topic-ass')
     const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
     console.log(response_ass.data)
 
