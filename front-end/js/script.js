@@ -852,8 +852,8 @@ pages.page_teacher_classwork = () => {
         let response = await pages.postAPI('http://localhost/ClassroomClone/back-end/save-topic.php', data);
       } catch (error) {
         console.log(error);
-      }
-    });
+        }
+});
 
 
     const topicsSelectBox = document.getElementById("topics");
@@ -1390,7 +1390,7 @@ pages.page_student_classwork=async()=>{
     
 
 //     // const topic_ass=document.getElementById('topic-ass')
-    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
+    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php?class_id=", data);
     console.log(response_ass.data)
 
     const assignments = response_ass.data;
