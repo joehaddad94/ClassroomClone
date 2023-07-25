@@ -1376,12 +1376,87 @@ pages.page_student_stream=async()=>{
 }
 
 
-pages.page_student_classwork=async()=>{
+pages.page_student_classwork = async () =>{
 
     //Get query Parameter
     const queryParamsString = window.location.search;
     const queryParams = new URLSearchParams(queryParamsString);
     const class_idParam = queryParams.get('id');
+    
+    const class_id=class_idParam 
+    console.log('class ID' + class_id);
+    const topic=document.getElementById('topic_name');
+    console.log(topic)        
+    const data = new FormData();    
+    data.append("class_id",class_id);    
+    const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
+    console.log(response.data)  
+    let topics=[]
+    response.data.forEach(item => {
+        console.log(item.topic_name);
+        topics.push(item.topic_name)
+      });
+    console.log(topics)
+    for(i=0;i<topics.length;i++){
+       topic.innerHTML+="<p>"+topics[i]+"</p>";
+    }
+    
+    
+    
+    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
+    console.log(response_ass.data)
+    const link ="/assignment.html"
+    
+    const assignments = response_ass.data;
+    console.log("this" + response_ass.data)
+    
+    const topic_ass = document.getElementById("topic-ass");
+    
+    for (const topic in assignments) {         
+    topic_ass.innerHTML+=`<div class="topic-header">
+    <div class="topic-name" style="color: black;">${topic}</div>
+    <div>
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+    </div>
+    </div>`;   
+    
+    // Loop through each assignment under the current topic
+    for (const assignment of assignments[topic]) {
+    // assignment.title
+    // assignment.instructions;
+    // assignment.due_date
+    console.log(assignment.assignment_id)        
+    
+    topic_ass.innerHTML+=`<a href="${link}?id=${assignment.assignment_id}">
+                            <div class="assignments">
+                                <div   class="assignment">
+                        
+                                    <div  class="assignment-data">
+                            
+                                <div style="background-color: #ccc;">
+                                    <i class="fa-regular fa-rectangle-list fa-lg"></i>
+                                </div>
+                                <div class="assignment-name">${assignment.title}</div>
+                            </div>
+                            <div class="date">Due ${assignment.due_date}</div>
+                        </div>
+                    </div>`;
+                    }
+    //tabs
+    const streamTab = document.getElementById("stream-id")
+    const peopleTab = document.getElementById("people-id")
+    
+    streamTab.addEventListener('click', () =>{
+    console.log('clicked')
+    window.location.href= `/student_stream.html?id=${class_idParam}`   
+    } )
+    
+    peopleTab.addEventListener('click', () =>{
+    console.log('clicked')
+    window.location.href= `/student_people.html?id=${class_idParam}`   
+       } )
+    
+    }
 
     //tabs
    const streamTab = document.getElementById("stream-id")
@@ -1396,64 +1471,6 @@ pages.page_student_classwork=async()=>{
        console.log('clicked')
        window.location.href= `/student_people.html?id=${class_idParam}`   
    } )
-
-        console.log('class ID Param:' + class_idParam);
-        console.log('class ID' + class_id);
-        const topic=document.getElementById('topic_name');
-        console.log(topic)        
-        const data = new FormData();    
-        data.append("class_id",class_idParam);    
-        const response = await pages.postAPI(pages.base_url + "get-topics.php", data);
-        console.log(response.data)  
-        let topics=[]
-        response.data.forEach(item => {
-            console.log(item.topic_name);
-            topics.push(item.topic_name)
-          });
-        console.log(topics)
-        for(i=0;i<topics.length;i++){
-           topic.innerHTML+="<p>"+topics[i]+"</p>";
-        }
-    
-
-     // const topic_ass=document.getElementById('topic-ass')
-    const response_ass = await pages.postAPI(pages.base_url + "classwork-ass-topic-student.php", data);
-    console.log(response_ass.data)
-
-    const assignments = response_ass.data;
-
-    const topic_ass = document.getElementById("topic-ass");
-    
-    for (const topic in assignments) {         
-    topic_ass.innerHTML+=`<div class="topic-header">
-    <div class="topic-name" style="color: black;">${topic}</div>
-    <div>
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-    </div>
-    </div>`;   
-    
-      // Loop through each assignment under the current topic
-    for (const assignment of assignments[topic]) {
-    // assignment.title
-    // assignment.instructions;
-    // assignment.due_date        
-
-    topic_ass.innerHTML+=`<div class="assignments">
-                            <div class="assignment">
-                                <div class="assignment-data">
-                                    <div style="background-color: #ccc;">
-                                        <i class="fa-regular fa-rectangle-list fa-lg"></i>
-                                    </div>
-                                    <div class="assignment-name">${assignment.title}</div>
-                                </div>
-                                <div class="date">Due ${assignment.due_date}</div>
-                            </div>
-                        </div>`;
-                        }
-   
-
-}
-
 
 
 }
