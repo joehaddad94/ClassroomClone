@@ -3,7 +3,7 @@ include('connection.php');
 $class_id = $_POST['class_id'];
 
 if ($_POST['class_id'] != "") {
-    $query = $mysqli->prepare('SELECT topics.topic_name, assignments.title, assignments.instructions, assignments.due_date FROM topics JOIN classes ON classes.class_id = topics.class_id JOIN assignments ON assignments.topic_id = topics.topic_id WHERE topics.class_id = ? GROUP BY topics.topic_name, assignments.title');
+    $query = $mysqli->prepare('SELECT assignments.assignment_id, topics.topic_name, assignments.title, assignments.instructions, assignments.due_date FROM topics JOIN classes ON classes.class_id = topics.class_id JOIN assignments ON assignments.topic_id = topics.topic_id WHERE topics.class_id = ? GROUP BY topics.topic_name, assignments.title');
     $query->bind_param('i', $class_id);
     $query->execute();
     $result = $query->get_result();
@@ -16,6 +16,7 @@ if ($_POST['class_id'] != "") {
                 $response[$topic_name] = array();
             }
             $response[$topic_name][] = array(
+                'assignment_id' => $row['assignment_id'],
                 'title' => $row['title'],
                 'instructions' => $row['instructions'],
                 'due_date' => $row['due_date']
