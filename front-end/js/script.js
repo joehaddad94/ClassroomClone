@@ -1275,16 +1275,18 @@ pages.page_student_stream=async()=>{
         window.open(link)
     })
            
-    const data_announcements = new FormData();
-    data.append("user_id", user.user_id)
-    console.log(user.user_id)
-    data.append("class_id",class_idParam);
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const class_id = class_idParam;            
+    data.append("user_id", user_id)
+    data.append("class_id",class_id);
     const classroom_url = pages.base_url + "return_ass_ann.php"
-    const response_announcements = await pages.postAPI(classroom_url, data_announcements);
-    console.log(response.data)
-    const assignment = document.querySelector(".announcements")
+    const assignment_response = await pages.postAPI(classroom_url, data);
+    console.log(assignment_response.data)
+    const assignment = document.querySelector(".announcements");
    
-    response_announcements.data.map((item) => (assignment.innerHTML += `   
+    assignment_response.data.map((item) => (assignment.innerHTML += `
+    <a href="${link}?id=${item.class_id}"   
     <div class="announcement">
     <div class="announcement-top">
         <div>
@@ -1410,16 +1412,16 @@ pages.page_student_classwork = async () =>{
 }
     
 
-    
-
-
-    
-
 
 pages.page_assignment = () => {
     const form = document.querySelector("form")
     const inputFile = document.getElementById("file-input")
     const image = document.querySelector(".file-image img")
+
+    const queryParamsString = window.location.search;
+        const queryParams = new URLSearchParams(queryParamsString);
+        const assignment_idParam = queryParams.get('id');
+        
 
     let base64 = ""
 
@@ -1450,25 +1452,52 @@ pages.page_assignment = () => {
         const userID = JSON
             .parse(localStorage.getItem("userData"))
             .user_id
-        const assignment_id = 4;
+        const assignment_id = assignment_idParam;
 
         const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
         const month = currentDate.getMonth() + 1;
         const day = currentDate.getDate();
-        const hours = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
-        let turnInDate = `${month}-${day}-${hours}:${minutes}`;
+        // const hours = currentDate.getHours();
+        // const minutes = currentDate.getMinutes();
+        let turnInDate = `${currentYear}-${month}-${day}`;
+        console.log(turnInDate)
 
-        let data = formData()
+        let data = new FormData()
         data.append('user_id', userID)
         data.append('turnin_date', turnInDate)
-        data.append('assignment_id', assignment_id)
+        data.append('assignment_id', assignment_idParam)
         data.append('solution_text', base64)
+        console.log(data)
 
         try {
-            await pages.postAPI(pages.base_url + "upload_solution.php", data)
+            await pages.postAPI(pages.base_url + "solution.php", data)
         } catch (error) {
             console.log(error)
         }
     })
+
+    document.addEventListener('DOMContentLoaded', async function() {
+        
+
+        const assignmentName = document.querySelector(".assignment-name")
+        const launchDate = document.querySelector(".launch-date")
+        const dueDate = document.querySelector(".due-date")
+        const instructions = document.querySelector(".assignment-instructions")
+
+        const data = new FormData();    
+        data.append("assignment_id",assignment_idParam);    
+        const response = await pages.postAPI(pages.base_url + "get-assignment-info.php", data);
+        console.log(response)
+
+        assignmentName.innerText = `${response.data[0].title}`
+        launchDate.innerText = `${response.data[0].launch_date}`
+        dueDate.innerText = `${response.data[0].due_date}`
+        instructions.innerText = `${response.data[0].instructions}`
+
+
+    })
+        
+    
+        
 }
