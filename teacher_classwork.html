@@ -34,7 +34,7 @@
           <div>Assignment</div>
         </div>
         <div class="assign-button">
-          <button>Assign</button>
+          <button style="padding: 10px 25px;" id="assign-button">Assign</button>
         </div>
       </div>
       <div class="modal-assignment-bottom">
@@ -112,9 +112,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="due-date-section">
+                        <div class="due-date-section" style="display: flex; flex-direction: column; gap: 10px;">
                             <label for="dateInput">Due</label>
-                            <input type="date" id="dateInput">
+                            <input style="width: 90%" type="date" id="dateInput">
                         </div>
                         <select style="display: none;" class="dropdown" id="topics">
                         </select>
@@ -171,7 +171,7 @@
     <div class="classwork-content">
       <div class="topics-section">
         <p>All topics</p>
-        <div>
+        <div id="topic-ass">
           <p>UIX</p>
           <p>Soft Skills</p>
         </div>
