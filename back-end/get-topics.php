@@ -23,7 +23,7 @@ if ($_POST['class_id'] != "") {
         $response['message'] = 'not found';
     }
 } else {
-    $response['message'] = 'not found';
+    $response['message'] = 'error found';
 }
 
 echo json_encode($response);
