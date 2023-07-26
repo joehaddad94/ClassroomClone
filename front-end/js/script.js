@@ -675,7 +675,7 @@ pages.page_teacher_classwork = () => {
     const assignmentModal = document.getElementById("modal-assignment");
     const closeAssignmentButton = document.getElementById("close-assignment");
 
-    let classID = 2;
+    let classID = class_idParam;
 
     // close assignment
     closeAssignmentButton.addEventListener("click", (e) => {
@@ -766,7 +766,6 @@ pages.page_teacher_classwork = () => {
                 .map((item) => {
                     topicsSelectBox.innerHTML += `<option value="${item.topic_id}">${item.topic_name}</option>`;
                 });
-            console.log(response.data);
         };
         getTopics();
     } catch (error) {
@@ -800,10 +799,12 @@ pages.page_teacher_classwork = () => {
             response
                 .data
                 .map((item, index) => {
-                    dropDownClasses.innerHTML += `<div class="dropdown-item">
-                                        <label><input type="checkbox" value="${item.class_id}">
-                                            ${item.class_name}</label>
-                                    </div>`;
+                    if (item.class_id !== classID) {
+                        dropDownClasses.innerHTML += `<div class="dropdown-item">
+                                            <label><input type="checkbox" value="${item.class_id}">
+                                                ${item.class_name}</label>
+                                        </div>`;
+                    }
                 })
             console.log(response.data)
         }
@@ -876,29 +877,56 @@ pages.page_teacher_classwork = () => {
         }	
     })	
 
-    assignmentTitleInput.addEventListener("input", () => {	
-        assignButton.disabled = false	
-        assignButton	
-            .classList	
-            .add("active")	
-        if (assignmentTitleInput.value === "") {	
-            assignButton.disabled = true;	
-            assignButton	
-                .classList	
-                .remove("active");	
-        }	
-        console.log("TITLE " + assignmentTitleInput.value)	
-        console.log("INSTRUCTIONS " + instructionsInput.innerHTML)	
-        console.log("LAUNCH DATE " + date)	
-        dueDate === ""	
-            ? (dueDate = "No due date")	
-            : (dueDate = dueDate);	
-        console.log("due date " + dueDate)	
-        console.log("CLASSES " + checkedValues)	
-    })	
-    // setInterval(() => {     console.log(checkedValues);	
-    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);	
-    // setInterval(() => {     console.log(instructionsInput.innerHTML);	
+    assignButton.addEventListener("click", async() => {
+
+        try {
+            for (let i = 0; i < checkedValues.length; i++) {
+                let data = new FormData();
+                let dueDate = dateInput.value;
+                dueDate == ""
+                    ? (dueDate = "No due date")
+                    : (dueDate = dueDate);
+
+                // get the current date
+                const currentDate = new Date();
+                const month = currentDate.getMonth() + 1;
+                const day = currentDate.getDate();
+                const hours = currentDate.getHours();
+                const minutes = currentDate.getMinutes();
+                let date = `${month}-${day}-${hours}-${minutes}`;
+
+                data.append("launch_date", date);
+                data.append("title", assignmentTitleInput.value);
+                data.append("instructions", instructionsInput.innerHTML);
+                data.append("user_id", JSON.parse(localStorage.getItem("userData")).user_id);
+                data.append("class_id", checkedValues[i])
+                data.append("due_date", dueDate)
+
+                let response = await pages.postAPI(pages.base_url + "create-assignment.php", data);
+                window.location.href = "teacher_classwork.html"
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    assignmentTitleInput.addEventListener("input", () => {
+        assignButton.disabled = false
+        assignButton
+            .classList
+            .add("active")
+
+        if (assignmentTitleInput.value === "") {
+            assignButton.disabled = true;
+            assignButton
+                .classList
+                .remove("active");
+        }
+    })
+
+    // setInterval(() => {     console.log(checkedValues);
+    // console.log(dateInput.value);     console.log(topicsSelect.value) }, 1000);
+    // setInterval(() => {     console.log(instructionsInput.innerHTML);
     // console.log(assignmentInput.value); }, 1500);
     
 }
@@ -1247,16 +1275,18 @@ pages.page_student_stream=async()=>{
         window.open(link)
     })
            
-    const data_announcements = new FormData();
-    data.append("user_id", user.user_id)
-    console.log(user.user_id)
-    data.append("class_id",class_idParam);
+    const user = JSON.parse(localStorage.getItem("userData"))
+    const user_id = user.user_id
+    const class_id = class_idParam;            
+    data.append("user_id", user_id)
+    data.append("class_id",class_id);
     const classroom_url = pages.base_url + "return_ass_ann.php"
-    const response_announcements = await pages.postAPI(classroom_url, data_announcements);
-    console.log(response.data)
-    const assignment = document.querySelector(".announcements")
+    const assignment_response = await pages.postAPI(classroom_url, data);
+    console.log(assignment_response.data)
+    const assignment = document.querySelector(".announcements");
    
-    response_announcements.data.map((item) => (assignment.innerHTML += `   
+    assignment_response.data.map((item) => (assignment.innerHTML += `
+    <a href="${link}?id=${item.class_id}"   
     <div class="announcement">
     <div class="announcement-top">
         <div>
@@ -1382,9 +1412,92 @@ pages.page_student_classwork = async () =>{
 }
     
 
+
+pages.page_assignment = () => {
+    const form = document.querySelector("form")
+    const inputFile = document.getElementById("file-input")
+    const image = document.querySelector(".file-image img")
+
+    const queryParamsString = window.location.search;
+        const queryParams = new URLSearchParams(queryParamsString);
+        const assignment_idParam = queryParams.get('id');
+        
+
+    let base64 = ""
+
+    inputFile.addEventListener("input", (e) => {
+        if (e.target.files.length > 0) {
+            function getBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = (error) => reject(error);
+                });
+            }
+            getBase64(e.target.files[0]).then((data) => {
+                image.src = data;
+            });
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                base64 = reader.result;
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    })
+
+    form.addEventListener("submit", async(e) => {
+        e.preventDefault()
+        const userID = JSON
+            .parse(localStorage.getItem("userData"))
+            .user_id
+        const assignment_id = assignment_idParam;
+
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+        // const hours = currentDate.getHours();
+        // const minutes = currentDate.getMinutes();
+        let turnInDate = `${currentYear}-${month}-${day}`;
+        console.log(turnInDate)
+
+        let data = new FormData()
+        data.append('user_id', userID)
+        data.append('turnin_date', turnInDate)
+        data.append('assignment_id', assignment_idParam)
+        data.append('solution_text', base64)
+        console.log(data)
+
+        try {
+            await pages.postAPI(pages.base_url + "solution.php", data)
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    document.addEventListener('DOMContentLoaded', async function() {
+        
+
+        const assignmentName = document.querySelector(".assignment-name")
+        const launchDate = document.querySelector(".launch-date")
+        const dueDate = document.querySelector(".due-date")
+        const instructions = document.querySelector(".assignment-instructions")
+
+        const data = new FormData();    
+        data.append("assignment_id",assignment_idParam);    
+        const response = await pages.postAPI(pages.base_url + "get-assignment-info.php", data);
+        console.log(response)
+
+        assignmentName.innerText = `${response.data[0].title}`
+        launchDate.innerText = `${response.data[0].launch_date}`
+        dueDate.innerText = `${response.data[0].due_date}`
+        instructions.innerText = `${response.data[0].instructions}`
+
+
+    })
+        
     
-
-
-    
-
-
+        
+}

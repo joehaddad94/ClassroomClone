@@ -1,118 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./front-end/styles/index.css">
-        <link rel="stylesheet" href="./front-end/styles/classroom.css">
-        <link rel="stylesheet" href="./front-end/styles/assignment.css">
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"/>
-        <title>Document</title>
-    </head>
-    <body>
-        <div class="classroom-navbar">
-            <div class="left-classroom-navbar">
-                <div id="burgerIcon" class="icon burger-icon">
-                    <i class="fa-solid fa-bars fa-lg burger-icon"></i>
-                </div>
-                <div class="classroom-data">
-                    <div class="classroom-name">Test 2</div>
-                    <p class="classroom-section">section</p>
-                </div>
-            </div>
-            <div class="right-classroom-navbar">
-                <!-- <div class="settings-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./front-end/styles/index.css" />
+    <link rel="stylesheet" href="./front-end/styles/classroom.css" />
+    <link rel="stylesheet" href="./front-end/styles/assignment.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="classroom-navbar">
+      <div class="left-classroom-navbar">
+        <div id="burgerIcon" class="icon burger-icon">
+          <i class="fa-solid fa-bars fa-lg burger-icon"></i>
+        </div>
+        <div class="classroom-data">
+          <div class="classroom-name">Test 2</div>
+          <p class="classroom-section">section</p>
+        </div>
+      </div>
+      <div class="right-classroom-navbar">
+        <!-- <div class="settings-icon">
                     <i class="fa-solid fa-gear fa-lg"></i>
                 </div> -->
-                <div>
-                    <i class="fa-solid fa-border-none fa-lg"></i>
-                </div>
-                <div class="profile-pic">
-                    <img
-                        src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
-                        alt="profile picture">
-                </div>
-            </div>
+        <div>
+          <i class="fa-solid fa-border-none fa-lg"></i>
         </div>
-        <div class="main-assignment">
-            <div class="left-main-assignment">
-                <div class="icon">
-                    <i class="fa-solid fa-table-list"></i>
-                </div>
-                <div>
-                    <div class="assignment-details">
-                        <div>
-                            <div class="assignment-name">Expense Tracker</div>
-                            <div class="dots">
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </div>
-                        <div class="teacher-name-launch-date">
-                            <div class="teacher-name">Christopher Yammine</div>
-                            <div class="launch-date">Jul 18</div>
-                        </div>
-                        <div class="grades-due-date">
-                            <div class="grades">100 points</div>
-                            <div class="due-date">Due Jul 19, 5:00 PM</div>
-                        </div>
-                    </div>
-                    <div class="assignment-instructions">
-                        Your task is to implement a basic expense tracker using jQuery. An expense
-                        tracker is a tool that helps individuals or businesses keep track of their
-                        financial transactions. The expense tracker should have the following
-                        functionalities: Display a form with input fields for the expense name, amount.
-                    </div>
-                    <div class="assignment-public-comments">
-                        <div>
-                            <div>
-                                <i class="fa-solid fa-user-group"></i>
-                            </div>
-                            <div>Class comments</div>
-                        </div>
-                        <div>
-                            Add a class comment
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="right-main-assignment">
-                <div class="assignment-attachments">
-                    <div class="top">
-                        <div>Your work</div>
-                        <div>Assigned</div>
-                    </div>
-                    <div class="files">
-                        <div>
-                            <button>
-                                <div>+</div>
-                                <div>Add or create</div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mark-as-done">
-                        <button>Mark as done</button>
-                    </div>
-                </div>
-                <div class="assignment-private-comments">
-                    <div>
-                        <div>
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                        <div>Private comments</div>
-                    </div>
-                    <div>Add comment to Charbel Daoud</div>
-                </div>
-            </div>
+        <div class="profile-pic">
+          <img
+            src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=900&t=st=1689959898~exp=1689960498~hmac=24710ce7cf04054980189577c5643d038fc23a6b647b45454607e905f111cffb"
+            alt="profile picture"
+          />
         </div>
-        <script src="front-end/js/axios.min.js"></script>
-        <script src="front-end/js/script.js"></script>
-        <script>
-            pages.loadFor("assignment");
-        </script>
-    </body>
+      </div>
+    </div>
+    <div class="main-assignment">
+      <div class="left-main-assignment">
+        <div class="icon">
+          <i class="fa-solid fa-table-list"></i>
+        </div>
+        <div class="assignment-content">
+          <div class="assignment-details">
+            <div>
+              <div class="assignment-name"></div>
+              <div class="dots">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
+            </div>
+            <div class="teacher-name-launch-date">
+              <div class="teacher-name"></div>
+              <div class="launch-date"></div>
+            </div>
+            <div class="grades-due-date">
+              <div class="grades">100 points</div>
+              <div class="due-date"></div>
+            </div>
+          </div>
+          <div class="assignment-instructions"></div>
+          <div class="assignment-public-comments">
+            <div>
+              <div>
+                <i class="fa-solid fa-user-group"></i>
+              </div>
+              <div>Class comments</div>
+            </div>
+            <div>Add a class comment</div>
+          </div>
+        </div>
+      </div>
+      <div class="right-main-assignment">
+        <div class="assignment-attachments">
+          <div class="top">
+            <div>Your work</div>
+            <div>Assigned</div>
+          </div>
+          <div id="image" class="file-image">
+            <img src="" alt="" />
+          </div>
+          <form>
+            <div class="files">
+              <input type="file" style="display: none" id="file-input" />
+              <div>
+                <label for="file-input" class="add-create">
+                  <div>+</div>
+                  <div>Add or create</div>
+                </label>
+              </div>
+            </div>
+            <div class="mark-as-done">
+              <button type="submit">Mark as done</button>
+            </div>
+          </form>
+        </div>
+        <div class="assignment-private-comments">
+          <div>
+            <div>
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>Private comments</div>
+          </div>
+          <div>Add comment to Charbel Daoud</div>
+        </div>
+      </div>
+    </div>
+    <!-- <img id="my-image" src="" alt=""> -->
+    <script src="front-end/js/axios.min.js"></script>
+    <script src="front-end/js/script.js"></script>
+    <script>
+      pages.loadFor("assignment");
+    </script>
+  </body>
 </html>
